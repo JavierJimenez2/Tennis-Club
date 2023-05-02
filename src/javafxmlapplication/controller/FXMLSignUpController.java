@@ -29,9 +29,14 @@ public class FXMLSignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+<<<<<<< HEAD
 //jgdhabgi
 
 
+=======
+        BooleanProperty emailValid = new SimpleBooleanProperty(false);
+        BooleanProperty passwordValid = new SimpleBooleanProperty(false);
+>>>>>>> 2d296cec221c9995439de28dcbae14595c61da03
 
     }
 }
