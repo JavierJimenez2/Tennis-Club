@@ -29,7 +29,8 @@ public class FXMLSignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        get max widthhahsa
+//jgdhab
+
 
 
     }
