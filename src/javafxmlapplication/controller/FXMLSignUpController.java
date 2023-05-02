@@ -25,8 +25,12 @@ import java.util.ResourceBundle;
 public class FXMLSignUpController implements Initializable {
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+//        get max width
+
 
     }
 }
