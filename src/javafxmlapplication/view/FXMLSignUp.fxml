@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
-<Pane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.FXMLSignUpController">
+<Pane fx:id="pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.FXMLSignUpController">
    <children>
-      <BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;">
-         <center>
-            <ImageView fitHeight="470.0" fitWidth="796.0" opacity="0.57" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane fx:id="anchorPane" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="imagebg" fitHeight="468.0" fitWidth="714.0" opacity="0.57" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../icons/tennis-5782695_1920.jpg" />
+                  <Image url="@../../icons/sport-873361_1920.jpg" />
                </image>
             </ImageView>
-         </center>
-      </BorderPane>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor>
-      </VBox>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>
