@@ -48,8 +48,8 @@ public class FXMLSignUpController implements Initializable {
         imagebg.setPreserveRatio(true);
         imagebg.setSmooth(true);
         imagebg.setCache(true);
-        pane.setPrefWidth(600);
-        pane.setPrefHeight(400);
+//        pane.setPrefWidth(600);
+//        pane.setPrefHeight(400);
 
         pane.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
             imagebg.setX((pane.getWidth() - imagebg.getFitWidth())/2);
