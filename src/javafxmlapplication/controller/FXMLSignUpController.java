@@ -31,13 +31,6 @@ public class FXMLSignUpController implements Initializable {
 //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
-    @FXML
-    private AnchorPane anchorPane;
-
-    @FXML
-    private ImageView imagebg;
-
-    private Stage stage;
 
     @FXML
     private Pane pane;
@@ -45,40 +38,10 @@ public class FXMLSignUpController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        imagebg.setPreserveRatio(true);
-        imagebg.setSmooth(true);
-        imagebg.setCache(true);
-//        pane.setPrefWidth(600);
-//        pane.setPrefHeight(400);
 
-        pane.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-            imagebg.setX((pane.getWidth() - imagebg.getFitWidth())/2);
-            imagebg.setFitWidth(pane.getWidth()+100);
-            if (pane.getWidth() == MAXWIDTH) {
-                imagebg.setFitWidth(MAXWIDTH);
-                imagebg.setX((pane.getWidth() - imagebg.getFitWidth())/2);
-                imagebg.setY((pane.getHeight() - imagebg.getFitHeight())/2);
-
-
-            }
-
-        });
-        pane.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
-            imagebg.setY((pane.getHeight() - imagebg.getFitHeight())/2);
-//            imagebg.setY(0);
-            imagebg.setFitHeight(pane.getHeight()+100);
-            if (pane.getHeight() == MAXHEIGHT) {
-                imagebg.setFitHeight(MAXHEIGHT);
-                imagebg.setFitWidth(MAXWIDTH);
-
-            }
-        });
 
 
     }
 
-    public ImageView getImage(){
-        return imagebg;
-    }
 
 }
