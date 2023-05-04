@@ -9,10 +9,17 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafxmlapplication.controller.FXMLSignUpController;
+
+import java.util.Objects;
 
 
 public class JavaFXMLApplication extends Application {
+
+    Stage stage;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -27,6 +34,20 @@ public class JavaFXMLApplication extends Application {
         // 3- asiganación de la escena al Stage que recibe el metodo 
         //     - configuracion del stage
         //     - se muestra el stage de manera no modal mediante el metodo show()
+//        listener del stage width y height
+
+//        FXMLSignUpController controller = loader.getController();
+//        controller.setStage((Stage) root.getScene().getWindow());
+
+//        lock the stage resize a determinate size
+
+//        stage.
+//        stage min size to 200x400
+//        if maximaze button is cliked
+
+        stage.setMinWidth(600);
+        stage.setMinHeight(400);
+        scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         stage.setScene(scene);
         stage.setTitle("Sign Up");
         stage.show();
@@ -41,5 +62,8 @@ public class JavaFXMLApplication extends Application {
     }
 
 
-    
+    public Stage getStage() {
+        return stage;
+
+    }
 }

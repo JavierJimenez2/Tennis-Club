@@ -5,17 +5,21 @@
  */
 package javafxmlapplication.controller;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -24,19 +28,23 @@ import java.util.ResourceBundle;
  */
 public class FXMLSignUpController implements Initializable {
 
+//get pc screen size
+    private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
+    private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
+
+    @FXML
+    private Pane pane;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-<<<<<<< HEAD
-//jgdhabgi
 
-
-=======
         BooleanProperty emailValid = new SimpleBooleanProperty(false);
         BooleanProperty passwordValid = new SimpleBooleanProperty(false);
->>>>>>> 2d296cec221c9995439de28dcbae14595c61da03
+
 
     }
+
+
 }
