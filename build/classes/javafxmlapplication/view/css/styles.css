@@ -1,0 +1,33 @@
+#pane {
+    -fx-background-image: url('img/bg.jpg');
+    -fx-opacity: 0.8;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
+
+#intPane{
+    -fx-background-color: white;
+    -fx-background-position: center;
+    -fx-opacity: 1;
+
+    /*rounded*/
+    -fx-hgap: 20px;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    /*-fx-border-width: 5px;*/
+    /*-fx-border-color: black;*/
+    -fx-effect: dropshadow(three-pass-box,rgb(0,0,0,0.9),10,0,0,0);
+
+}
+
+
+#doneButton{
+    /*-fx-alignment: right;*/
+    -fx-hgap: 5px;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-background-color: green;
+    -fx-text-fill: white;
+
+}
