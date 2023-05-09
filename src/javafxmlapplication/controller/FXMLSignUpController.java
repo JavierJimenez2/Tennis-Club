@@ -36,8 +36,8 @@ public class FXMLSignUpController implements Initializable {
 
     @FXML
     private Pane pane;
-    private TextField username;
-    private TextField password;
+    private TextField emailValid;
+    private TextField passwordValid;
     private Button doneButton;
 
 
@@ -47,8 +47,8 @@ public class FXMLSignUpController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        BooleanProperty emailValid = new SimpleBooleanProperty(false);
-        BooleanProperty passwordValid = new SimpleBooleanProperty(false);
+        //emailValid = new SimpleBooleanProperty(false);
+        //passwordValid = new SimpleBooleanProperty(false);
 
 
     }
