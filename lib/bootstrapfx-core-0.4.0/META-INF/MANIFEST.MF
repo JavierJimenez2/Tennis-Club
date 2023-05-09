@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Created-By: Gradle 6.3
+Build-By: aalmiray
+Build-Jdk: 11.0.8 (Azul Systems, Inc. 11.0.8+10-LTS)
+Build-Os: Mac OS X (10.15.7; x86_64)
+Build-Date: 2020-11-28
+Build-Time: 14:16:09.081+0100
+Build-Revision: 5be545883a8455b44764d036301f701afc1d087c
+Implementation-Title: bootstrapfx
+Implementation-Version: 0.4.0
+Implementation-Vendor: Kordamp
+
