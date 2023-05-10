@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane fx:id="pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.FXMLSignUpController">
+<Pane fx:id="pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SignUpController">
    <children>
       <BorderPane fx:id="pane1">
          <center>
