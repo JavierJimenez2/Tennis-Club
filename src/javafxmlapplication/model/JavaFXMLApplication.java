@@ -9,12 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafxmlapplication.controller.FXMLSignUpController;
-
-import java.util.Objects;
 
 
 public class JavaFXMLApplication extends Application {
@@ -25,7 +20,7 @@ public class JavaFXMLApplication extends Application {
     public void start(Stage stage) throws Exception {
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("../view/FXMLSignUp.fxml"));
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("../view/SignUp.fxml"));
         Parent root = loader.load();
         //======================================================================
         // 2- creación de la escena con el nodo raiz del grafo de escena
@@ -45,10 +40,11 @@ public class JavaFXMLApplication extends Application {
 //        stage min size to 200x400
 //        if maximaze button is cliked
 
-        stage.setMinWidth(600);
-        stage.setMinHeight(400);
+        stage.setMinWidth(680);
+        stage.setMinHeight(500);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
+//        get the width and print it
         stage.setScene(scene);
         stage.setTitle("Sign Up");
         stage.show();
