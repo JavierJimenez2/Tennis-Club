@@ -11,8 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-//import javafxmlapplication.controller.FXMLSignUpController;
 
+
+import javafxmlapplication.controller.SignUpController;
+import  javafxmlapplication.controller.FXMLInicioController;
 
 import java.util.Objects;
 
