@@ -24,10 +24,10 @@
 
 #doneButton{
     /*-fx-alignment: right;*/
-    -fx-hgap: 5px;
-    -fx-border-radius: 50px;
-    -fx-background-radius: 50px;
-    -fx-background-color: green;
-    -fx-text-fill: white;
+    /*-fx-hgap: 5px;*/
+    /*-fx-border-radius: 50px;*/
+    /*-fx-background-radius: 50px;*/
+    /*-fx-background-color: green;*/
+    /*-fx-text-fill: white;*/
 
 }

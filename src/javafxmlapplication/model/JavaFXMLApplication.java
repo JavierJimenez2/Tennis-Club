@@ -48,6 +48,7 @@ public class JavaFXMLApplication extends Application {
         stage.setMinWidth(600);
         stage.setMinHeight(400);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
+        scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
         stage.setScene(scene);
         stage.setTitle("Sign Up");
         stage.show();
