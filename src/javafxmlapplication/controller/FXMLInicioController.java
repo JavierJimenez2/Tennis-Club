@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -48,13 +49,14 @@ public class FXMLInicioController implements Initializable {
     }
 
 
-    private void infoClick(ActionEvent event){
+
+    public void infoClick(javafx.scene.input.MouseEvent event) {
         infoLabel.setText("To make a resrvation first Log In, " +
                 "or Sign Up if you don't have an account ");
     }
-    private void infoRelease(ActionEvent event){
+
+    public void infoRelease(javafx.scene.input.MouseEvent event) {
         infoLabel.setText("");
+
     }
-
-
 }
