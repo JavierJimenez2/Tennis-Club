@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane fx:id="GlobalSplitPane" dividerPositions="0.1445358401880141" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="1079.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane fx:id="GlobalSplitPane" dividerPositions="0.1445358401880141" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="1079.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.view.FXMLReservationController">
   <items>
     <AnchorPane fx:id="SuperiorVPane" minHeight="0.0" minWidth="0.0" prefHeight="113.0" prefWidth="1200.0" style="-fx-background-color: #1f8918;">
          <children>
