@@ -29,8 +29,8 @@ public class LoginController implements Initializable {
 
     @FXML
     private Pane pane;
-    private TextField username;
-    private TextField password;
+    private TextField emailValid;
+    private TextField passwordValid;
     private Button doneButton;
 
 
@@ -38,6 +38,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
 
 
 

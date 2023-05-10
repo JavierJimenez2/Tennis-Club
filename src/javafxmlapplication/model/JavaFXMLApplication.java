@@ -10,6 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+<<<<<<< HEAD
+import javafxmlapplication.controller.FXMLSignUpController;
+import  javafxmlapplication.controller.FXMLInicioController;
+
+import java.util.Objects;
+=======
+>>>>>>> d73dbdcd2029b040aa6ef874559a858ca2c31873
 
 
 public class JavaFXMLApplication extends Application {
