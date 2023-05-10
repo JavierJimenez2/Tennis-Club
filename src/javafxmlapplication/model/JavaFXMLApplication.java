@@ -45,10 +45,11 @@ public class JavaFXMLApplication extends Application {
 //        stage min size to 200x400
 //        if maximaze button is cliked
 
-        stage.setMinWidth(600);
-        stage.setMinHeight(400);
+        stage.setMinWidth(680);
+        stage.setMinHeight(500);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
+//        get the width and print it
         stage.setScene(scene);
         stage.setTitle("Sign Up");
         stage.show();
