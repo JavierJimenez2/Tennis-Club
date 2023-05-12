@@ -31,6 +31,7 @@ public class LoginController implements Initializable {
     private Pane pane;
     private TextField emailValid;
     private TextField passwordValid;
+    @FXML
     private Button doneButton;
 
 
