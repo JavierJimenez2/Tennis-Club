@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
 import java.awt.event.ActionEvent;
@@ -27,13 +28,20 @@ public class FXMLInicioController implements Initializable {
 //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
+    public Text signUpText;
+    public Text Title;
 
     @FXML
     private Pane pane;
+    @FXML
     private Button reservationButton;
+    @FXML
     private Button logInButton;
+    @FXML
     private Button signUpButton;
+    @FXML
     private Button infoButton;
+    @FXML
     private Label infoLabel;
 
 
