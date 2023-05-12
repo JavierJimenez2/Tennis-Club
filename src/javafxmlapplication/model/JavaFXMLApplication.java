@@ -10,13 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-<<<<<<< HEAD
-import javafxmlapplication.controller.FXMLSignUpController;
+
+import javafxmlapplication.controller.SignUpController;
 import  javafxmlapplication.controller.FXMLInicioController;
+import javafxmlapplication.controller.FXMLReservationController;
 
 import java.util.Objects;
-=======
->>>>>>> d73dbdcd2029b040aa6ef874559a858ca2c31873
+
 
 
 public class JavaFXMLApplication extends Application {
@@ -27,7 +27,7 @@ public class JavaFXMLApplication extends Application {
     public void start(Stage stage) throws Exception {
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("../view/Singup.fxml"));
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("../view/FXMLInicio.fxml"));
         Parent root = loader.load();
         //======================================================================
         // 2- creación de la escena con el nodo raiz del grafo de escena
