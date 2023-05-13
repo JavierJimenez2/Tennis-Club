@@ -69,39 +69,55 @@ public class FXMLInicioController implements Initializable {
         }
     }
 
-    public void goReservations(MouseEvent event) throws IOException {
+    public void goReservations(MouseEvent event) {
         Stage currentStage = (Stage) reservationButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLReservation.fxml"));
         FXMLReservationController reservationController = new FXMLReservationController();
         loader.setController(reservationController);
-        Parent root = loader.load();
-        Scene newScene = new Scene(root);
-        currentStage.setScene(newScene);
-        currentStage.show();
+        FXMLReservationController sg = loader.getController();
+        System.out.println(sg);
+        try {
+            Parent root = loader.load();
+            Scene newScene = new Scene(root);
+            currentStage.setScene(newScene);
+            currentStage.show();
+        }catch (IOException ioException){
+            System.out.println("No stage loaded");
+        }
     }
 
-    public void goLogIn(MouseEvent event) throws IOException{
+    public void goLogIn(MouseEvent event) {
        /* Stage currentStage = (Stage) logInButton.getScene().getWindow();
         //switchToView(currentStage,"Login.fxml");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Login.fxml"));
         LogInController logInController = new LogInController();
         loader.setController(logInController);
+        try{
         Parent root = loader.load();
         Scene newScene = new Scene(root);
         currentStage.setScene(newScene);
-        currentStage.show();*/
+        currentStage.show();
+        }catch(IOEXception ioException){
+        System.out.println("No stage loaded");
+        }*/
     }
 
-    public void goSignUp(MouseEvent event) throws IOException{
+    public void goSignUp(MouseEvent event){
         Stage currentStage = (Stage) signUpButton.getScene().getWindow();
         //switchToView(currentStage,"SignUp.fxml");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SignUp.fxml"));
         SignUpController signUpController = new SignUpController();
         loader.setController(signUpController);
-        Parent root = loader.load();
-        Scene newScene = new Scene(root);
-        currentStage.setScene(newScene);
-        currentStage.show();
+       SignUpController sg = loader.getController();
+        System.out.println(sg);
+        try {
+            Parent root = loader.load();
+            Scene newScene = new Scene(root);
+            currentStage.setScene(newScene);
+            currentStage.show();
+        }catch (IOException ioException){
+            System.out.println("No stage loaded");
+        }
     }
 
     /*private void switchToView(Stage currentStage,String fxmlFile) throws IOException{
