@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 /**
  * @author svalero
  */
-public class LoginController implements Initializable {
+public class SignUpController implements Initializable {
 
 //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
