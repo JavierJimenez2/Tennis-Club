@@ -5,64 +5,34 @@
  */
 package javafxmlapplication.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class SingUpController implements Initializable {
+/**
+ * @author svalero
+ */
+public class LogIn implements Initializable {
 
 //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
+    public HBox buttonsZone;
 
     @FXML
-    private HBox buttonsZone;
-
+    private Pane pane;
+    private TextField emailValid;
+    private TextField passwordValid;
     @FXML
-    private TextField creditcard;
-
-    @FXML
-    private VBox intPane;
-
-    @FXML
-    private TextField lastname;
-
-    @FXML
-    private TextField name;
-
-    @FXML
-    private HBox pane;
-
-    @FXML
-    private TextField password;
-
-    @FXML
-    private ImageView profileImage;
-
-    @FXML
-    private Button register;
-
-    @FXML
-    private Button selection;
-
-    @FXML
-    private TextField telephone;
-
-    @FXML
-    private TextField username;
-
-
+    private Button doneButton;
 
 
 
@@ -73,17 +43,6 @@ public class SingUpController implements Initializable {
 
 
 
-
-    }
-
-
-    @FXML
-    void selectionButton(ActionEvent event) {
-
-    }
-
-    @FXML
-    void registerButton(ActionEvent event) {
 
     }
 

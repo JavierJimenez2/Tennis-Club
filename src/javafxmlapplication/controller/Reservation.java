@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-public class FXMLReservationController {
+public class Reservation {
 
     @FXML
     private ImageView AvatarLogo;

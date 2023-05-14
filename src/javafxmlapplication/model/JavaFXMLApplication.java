@@ -6,7 +6,9 @@
 package javafxmlapplication.model;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,12 +21,38 @@ public class JavaFXMLApplication extends Application {
     Stage stage;
     private static Scene scene;
     private static HashMap<String,Parent> roots = new HashMap<>(); //para link
-    
+
+    public static void setRoot(Parent root) {
+        scene.setRoot(root);
+    }
+
+    public static void changeScene(ActionEvent event, String s) {
+        FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("../view/"+s));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setMinWidth(680);
+        stage.setMinHeight(500);
+        scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
+        scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
+        stage.setTitle("Log In");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("../view/FXMLInicio.fxml"));
+        FXMLLoader loader= new  FXMLLoader(getClass().getResource("../view/Main.fxml"));
         Parent root = loader.load();
         //roots.put("inicio",root);  //add "FXMLInicio" to scenes map
         //======================================================================
@@ -40,7 +68,7 @@ public class JavaFXMLApplication extends Application {
         root = loader.load();
         roots.put("LogIn",root);
 
-        loader = new FXMLLoader(getClass().getResource("../view/FXMLReservation.fxml"));
+        loader = new FXMLLoader(getClass().getResource("../view/Reservation.fxml"));
         root = loader.load();
         roots.put("Reservation",root);*/
         //======================================================================
@@ -58,13 +86,14 @@ public class JavaFXMLApplication extends Application {
 //        stage min size to 200x400
 //        if maximaze button is cliked
 
+        this.stage = stage;
         stage.setMinWidth(680);
         stage.setMinHeight(500);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
 //        get the width and print it
         stage.setScene(scene);
-        stage.setTitle("Sign Up");
+        stage.setTitle("GreenBall");
         stage.show();
     }
 
@@ -92,6 +121,18 @@ public class JavaFXMLApplication extends Application {
 
     public Stage getStage() {
         return stage;
+
+    }
+
+    public void changeScene(String s) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/" + s));
+            Parent root = loader.load();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar la ventana");
+        }
 
     }
 }
