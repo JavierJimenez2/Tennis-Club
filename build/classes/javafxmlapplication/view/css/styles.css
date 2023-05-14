@@ -1,9 +1,10 @@
 #pane {
     -fx-background-image: url('img/bg.jpg');
     -fx-opacity: 0.8;
-    -fx-background-position: center;
+    -fx-background-position: top;
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
+    -fx-alignment: center;
 }
 
 #intPane{
@@ -15,6 +16,10 @@
     -fx-hgap: 20px;
     -fx-border-radius: 50px;
     -fx-background-radius: 50px;
+    /*-fx-fit-to-height: true;*/
+    /*-fx-fit-to-width: true;*/
+    -fx-alignment: center;
+    /*pane to be always in the center*/
     /*-fx-border-width: 5px;*/
     /*-fx-border-color: black;*/
     -fx-effect: dropshadow(three-pass-box,rgb(0,0,0,0.9),10,0,0,0);
@@ -24,10 +29,10 @@
 
 #doneButton{
     /*-fx-alignment: right;*/
-    -fx-hgap: 5px;
-    -fx-border-radius: 50px;
-    -fx-background-radius: 50px;
-    -fx-background-color: green;
-    -fx-text-fill: white;
+    /*-fx-hgap: 5px;*/
+    /*-fx-border-radius: 50px;*/
+    /*-fx-background-radius: 50px;*/
+    /*-fx-background-color: green;*/
+    /*-fx-text-fill: white;*/
 
 }
