@@ -21,7 +21,7 @@
             </Text>
             <ImageView fx:id="AvatarLogo" fitHeight="97.0" fitWidth="97.0" layoutX="905.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="27.0">
                <image>
-                  <Image url="@../../../build/classes/icons/avatar_icon.png" />
+                  <Image url="@css/img/icons/avatar_icon.png" />
                </image></ImageView>
          </children></AnchorPane>
     <AnchorPane fx:id="InferiorVPane" minHeight="0.0" minWidth="0.0" prefHeight="918.0" prefWidth="918.0">
@@ -39,32 +39,32 @@
                <children>
                   <ImageView fx:id="Court00" fitHeight="230.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../build/classes/icons/TennisCourt.jpg" />
+                        <Image url="@css/img/icons/TennisCourt.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="Court10" fitHeight="230.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../build/classes/icons/TennisCourt.jpg" />
+                        <Image url="@css/img/icons/TennisCourt.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="Court20" fitHeight="230.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../build/classes/icons/TennisCourt.jpg" />
+                        <Image url="@css/img/icons/TennisCourt.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="Court01" fitHeight="230.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../build/classes/icons/TennisCourt.jpg" />
+                        <Image url="@css/img/icons/TennisCourt.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="Court11" fitHeight="230.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../build/classes/icons/TennisCourt.jpg" />
+                        <Image url="@css/img/icons/TennisCourt.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="Court21" fitHeight="230.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../build/classes/icons/TennisCourt.jpg" />
+                        <Image url="@css/img/icons/TennisCourt.jpg" />
                      </image>
                   </ImageView>
                </children>
