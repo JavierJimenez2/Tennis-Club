@@ -46,17 +46,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="signUpButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Go" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="signUpButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#goSignUp" prefHeight="50.0" prefWidth="50.0" text="Go" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="logInButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Go" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="logInButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#goLogIn" prefHeight="50.0" prefWidth="50.0" text="Go" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="reservationButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Go" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Button fx:id="reservationButton" mnemonicParsing="false" onMouseClicked="#goReservations" prefHeight="50.0" prefWidth="50.0" text="Go" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -71,7 +71,7 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
-                  <Button fx:id="infoButton" alignment="CENTER" mnemonicParsing="false" onMousePressed="#infoClick" onMouseReleased="#infoRelease" prefHeight="27.0" prefWidth="40.0" text="info" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                  <Button fx:id="infoButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#infoClicked" prefHeight="23.0" prefWidth="54.0" text="show" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
@@ -84,6 +84,11 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
+                  <Label alignment="CENTER" text="info:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="15.0" right="20.0" />
+                     </GridPane.margin>
+                  </Label>
                </children>
             </GridPane>
          </children>
