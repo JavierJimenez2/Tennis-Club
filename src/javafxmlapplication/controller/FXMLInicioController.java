@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.Scene.*;
 import javafx.stage.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,9 +21,11 @@ import javafx.stage.Screen;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafxmlapplication.controller.*;
+import javafxmlapplication.model.JavaFXMLApplication;
 
 
 /**
@@ -33,6 +36,7 @@ public class FXMLInicioController implements Initializable {
     //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
+
     public Text signUpText;
     public Text Title;
     public int count = 0;
@@ -69,8 +73,18 @@ public class FXMLInicioController implements Initializable {
         }
     }
 
-    public void goReservations(MouseEvent event) {
-        Stage currentStage = (Stage) reservationButton.getScene().getWindow();
+
+
+    public void goReservations(MouseEvent event) throws IOException{
+      //JavaFXMLApplication.setRoot("Reservation");          //para link
+
+
+
+       /*FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLReservation.fxml"));
+       Parent root = loader.load();
+        JavaFXMLApplication.setRoot(root);*/
+
+        /*Stage currentStage = (Stage) reservationButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FXMLReservation.fxml"));
         FXMLReservationController reservationController = new FXMLReservationController();
         loader.setController(reservationController);
@@ -84,7 +98,7 @@ public class FXMLInicioController implements Initializable {
         }catch (IOException ioException){
             System.out.println("No stage loaded");
         }
-    }
+    */}
 
     public void goLogIn(MouseEvent event) {
        /* Stage currentStage = (Stage) logInButton.getScene().getWindow();
@@ -103,7 +117,7 @@ public class FXMLInicioController implements Initializable {
     }
 
     public void goSignUp(MouseEvent event){
-        Stage currentStage = (Stage) signUpButton.getScene().getWindow();
+        /*Stage currentStage = (Stage) signUpButton.getScene().getWindow();
         //switchToView(currentStage,"SignUp.fxml");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SignUp.fxml"));
         SignUpController signUpController = new SignUpController();
@@ -117,7 +131,7 @@ public class FXMLInicioController implements Initializable {
             currentStage.show();
         }catch (IOException ioException){
             System.out.println("No stage loaded");
-        }
+        }*/
     }
 
     /*private void switchToView(Stage currentStage,String fxmlFile) throws IOException{
