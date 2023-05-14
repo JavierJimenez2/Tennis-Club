@@ -5,14 +5,21 @@
  */
 package javafxmlapplication.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
+import javafxmlapplication.model.JavaFXMLApplication;
+import model.Club;
+import model.ClubDAOException;
+import model.Member;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,11 +33,12 @@ public class LogIn implements Initializable {
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     public HBox buttonsZone;
+    public PasswordField password;
 
     @FXML
     private Pane pane;
-    private TextField emailValid;
-    private TextField passwordValid;
+    @FXML
+    private TextField username;
     @FXML
     private Button doneButton;
 
@@ -42,9 +50,23 @@ public class LogIn implements Initializable {
 
 
 
-
-
     }
 
+
+
+    @FXML
+    public void loginButton(ActionEvent eventLog) throws ClubDAOException, IOException {
+        String user = username.getText();
+        String pass = password.getText();
+        Club club = Club.getInstance();
+        Member member = club.getMemberByCredentials(user, pass);
+        if (member != null) {
+            JavaFXMLApplication.changeScene(eventLog, "Reservation.fxml");
+        } else {
+            JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
+            username.setText("");
+            password.setText("");
+        }
+    }
 
 }

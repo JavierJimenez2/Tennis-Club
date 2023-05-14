@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
@@ -32,6 +33,31 @@ public class JavaFXMLApplication extends Application {
     public static void main(String[] args) {
         launch(args);
 
+    }
+
+    public static void dialogBox(String type, String title, String message) {
+        Alert alert;
+        switch (type) {
+            case "info":
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                break;
+            case "error":
+                alert = new Alert(Alert.AlertType.ERROR);
+                break;
+            case "warning":
+                alert = new Alert(Alert.AlertType.WARNING);
+                break;
+            case "success":
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                break;
+            default:
+                alert = new Alert(Alert.AlertType.NONE);
+                break;
+        }
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 

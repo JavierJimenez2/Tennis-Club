@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -11,7 +12,7 @@
 
 <HBox fx:id="pane" fillHeight="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogIn">
    <children>
-      <VBox fx:id="intPane" alignment="CENTER" fillWidth="false" minHeight="369.0" minWidth="600.0" prefHeight="516.0" prefWidth="801.0" HBox.hgrow="NEVER">
+      <VBox fx:id="intPane" alignment="CENTER" fillWidth="false" minHeight="369.0" minWidth="363.0" prefHeight="530.0" prefWidth="363.0" HBox.hgrow="NEVER">
          <children>
             <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="GreenBall" textAlignment="CENTER" wrappingWidth="598.7831211090088">
                <font>
@@ -21,7 +22,7 @@
                   <Insets />
                </VBox.margin>
             </Text>
-            <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="Slash" textAlignment="CENTER" wrappingWidth="598.7831211090088">
+            <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="Log In" textAlignment="CENTER" wrappingWidth="598.7831211090088">
                <font>
                   <Font name="Courier New Bold" size="28.0" />
                </font>
@@ -34,17 +35,17 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </TextField>
-            <TextField fx:id="password" promptText="Password">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
+            <PasswordField fx:id="password" promptText="Password">
                <VBox.margin>
                   <Insets bottom="30.0" left="50.0" right="50.0" top="20.0" />
                </VBox.margin>
-            </TextField>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </PasswordField>
             <HBox fx:id="buttonsZone" alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="doneButton" alignment="CENTER" mnemonicParsing="false" text="Log in" textFill="WHITE">
+                  <Button fx:id="login" alignment="CENTER" mnemonicParsing="false" onAction="#loginButton" text="Log in" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="50.0" />
                      </HBox.margin>

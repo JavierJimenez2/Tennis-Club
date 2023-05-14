@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<HBox fx:id="pane" fillHeight="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SingUp">
+<HBox fx:id="pane" fillHeight="false" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SingUp">
    <children>
       <VBox fx:id="intPane" alignment="CENTER" minHeight="369.0" minWidth="600.0" prefHeight="516.0" prefWidth="801.0" HBox.hgrow="NEVER">
          <children>
@@ -40,11 +33,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="191.0" prefWidth="160.0">
                            <children>
-                              <ImageView fx:id="profileImage" fitHeight="98.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@css/img/icons/user.png" />
-                                 </image>
-                              </ImageView>
+                              <ImageView fx:id="profileImage" fitHeight="98.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" />
                               <Button fx:id="selection" mnemonicParsing="false" onAction="#selectionButton" text="Select">
                                  <styleClass>
                                     <String fx:value="btn" />
@@ -93,14 +82,14 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="password" promptText="Password">
+                        <PasswordField fx:id="password" promptText="Password">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
-                        </TextField>
+                        </PasswordField>
                         <TextField fx:id="telephone" promptText="Telephone Number">
                            <font>
                               <Font name="System Bold" size="12.0" />
