@@ -18,41 +18,29 @@ import java.util.HashMap;
 
 public class JavaFXMLApplication extends Application {
 
-    Stage stage;
     private static Scene scene;
-    private static HashMap<String,Parent> roots = new HashMap<>(); //para link
+    private static HashMap<String, Parent> roots = new HashMap<>(); //para link
 
     public static void setRoot(Parent root) {
         scene.setRoot(root);
     }
 
-    public static void changeScene(ActionEvent event, String s) {
-        FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("../view/"+s));
-        Parent root = null;
 
-        try {
-            root = loader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
 
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setMinWidth(680);
-        stage.setMinHeight(500);
-        scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
-        scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
-        stage.setTitle("Log In");
-        stage.setScene(scene);
-        stage.show();
     }
+
+
 
     @Override
     public void start(Stage stage) throws Exception {
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader= new  FXMLLoader(getClass().getResource("../view/Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
         Parent root = loader.load();
         //roots.put("inicio",root);  //add "FXMLInicio" to scenes map
         //======================================================================
@@ -72,7 +60,7 @@ public class JavaFXMLApplication extends Application {
         root = loader.load();
         roots.put("Reservation",root);*/
         //======================================================================
-        // 3- asiganación de la escena al Stage que recibe el metodo 
+        // 3- asiganación de la escena al Stage que recibe el metodo
         //     - configuracion del stage
         //     - se muestra el stage de manera no modal mediante el metodo show()
 //        listener del stage width y height
@@ -86,7 +74,7 @@ public class JavaFXMLApplication extends Application {
 //        stage min size to 200x400
 //        if maximaze button is cliked
 
-        this.stage = stage;
+//        listener for know if the stage is maximazed
         stage.setMinWidth(680);
         stage.setMinHeight(500);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
@@ -98,41 +86,32 @@ public class JavaFXMLApplication extends Application {
     }
 
 
-   /* static void setRoot(Parent root){       //para link
-        scene.setRoot(root);
-    }
-    public static void setRoot(String key){
-        Parent root = roots.get(key);
-        if(root != null){
-            setRoot(root);
-        } else{
-            System.err.printf("Scene not found", key);
-        }
-    }*/
+    public static void changeScene(ActionEvent event, String s) {
+        FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("../view/" + s));
+        Parent root = null;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-        
-    }
-
-
-    public Stage getStage() {
-        return stage;
-
-    }
-
-    public void changeScene(String s) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/" + s));
-            Parent root = loader.load();
-            stage.setScene(new Scene(root));
-            stage.show();
+            root = loader.load();
         } catch (Exception e) {
-            System.out.println("No se pudo cargar la ventana");
+            e.printStackTrace();
         }
 
+
+
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        double width = stage.getWidth();
+        double height = stage.getHeight();
+        stage.setMinWidth(680);
+        stage.setMinHeight(500);
+        scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
+        scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
+        stage.setTitle("Log In");
+        stage.setScene(scene);
+        stage.setWidth(width);
+        stage.setHeight(height);
+        stage.show();
     }
+
 }

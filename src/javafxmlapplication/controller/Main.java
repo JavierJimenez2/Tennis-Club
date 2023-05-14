@@ -73,7 +73,6 @@ public class Main implements Initializable {
 
     public void goLogIn(ActionEvent event) throws IOException {
         JavaFXMLApplication.changeScene(event, "LogIn.fxml");
-
     }
 
     public void goSignUp(ActionEvent event) throws IOException {
