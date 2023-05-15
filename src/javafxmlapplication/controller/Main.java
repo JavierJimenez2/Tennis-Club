@@ -55,9 +55,12 @@ public class Main implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         infoLabel.setWrapText(true);
-        Image image = new Image("javafxmlapplication/view/css/img/icons/info.png");
+        /*Image image = new Image("javafxmlapplication/view/css/img/icons/info.jpg");
         ImageView iv = new ImageView(image);
-        infoButton.setGraphic(iv);
+        iv.setFitHeight(23);
+        iv.setFitWidth(52);
+        infoButton.setGraphic(iv);*/
+
 
     }
 
@@ -66,10 +69,10 @@ public class Main implements Initializable {
         count++;
         if (count % 2 == 0) {
             infoLabel.setText("");
-            infoButton.setText("Show");
+            //infoButton.setText("Show");
         } else {
             infoLabel.setText("To make a resrvation first Log In, or Sign Up if you don't have an account ");
-            infoButton.setText("Hide");
+            //infoButton.setText("Hide");
         }
     }
 
