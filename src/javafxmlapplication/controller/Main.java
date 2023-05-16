@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -16,6 +18,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafxmlapplication.model.JavaFXMLApplication;
 
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,6 +55,12 @@ public class Main implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         infoLabel.setWrapText(true);
+        /*Image image = new Image("javafxmlapplication/view/css/img/icons/info.jpg");
+        ImageView iv = new ImageView(image);
+        iv.setFitHeight(23);
+        iv.setFitWidth(52);
+        infoButton.setGraphic(iv);*/
+
 
     }
 
@@ -59,10 +69,10 @@ public class Main implements Initializable {
         count++;
         if (count % 2 == 0) {
             infoLabel.setText("");
-            infoButton.setText("Show");
+            //infoButton.setText("Show");
         } else {
             infoLabel.setText("To make a resrvation first Log In, or Sign Up if you don't have an account ");
-            infoButton.setText("Hide");
+            //infoButton.setText("Hide");
         }
     }
 

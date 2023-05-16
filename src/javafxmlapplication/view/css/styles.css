@@ -36,3 +36,52 @@
     /*-fx-text-fill: white;*/
 
 }
+
+#infoButton{
+-fx-background-radius: 50;
+-fx-background-color: #0756DF;
+
+}
+#signUpButton{
+-fx-background-radius: 20;
+-fx-background-color: #77F609;
+-fx-radius: 20%;
+
+}
+#signUpButton:hover {
+   -fx-background-color: #A0E564;
+}
+
+
+#logInButton{
+-fx-background-radius: 20;
+-fx-background-color: #77F609;
+-fx-radius: 20%;
+
+}
+#logInButton:hover {
+   -fx-background-color: #A0E564;
+}
+
+
+
+#reservationButton{
+-fx-background-radius: 20;
+-fx-background-color: #77F609;
+-fx-radius: 20%;
+
+}
+#reservationButton:hover {
+   -fx-background-color: #A0E564;
+}
+
+
+
+
+
+#Title{
+
+    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, lime 0%, green 50%);
+    /*-fx-stroke: black;
+    -fx-stroke-width: 1;*/
+}
