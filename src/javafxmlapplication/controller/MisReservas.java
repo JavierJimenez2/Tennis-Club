@@ -57,7 +57,7 @@ public class MisReservas implements Initializable {
         listView.setItems(myObservableBookingList);
 
         //Modify cell factory to display object Booking
-        listView.setCellFactory(c -> new bookingListCell<>());
+        listView.setCellFactory(c -> new bookingListCell());
 
         //in case of nothing selected disable delete
         deleteButton.disableProperty().bind(

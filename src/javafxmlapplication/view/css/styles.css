@@ -7,7 +7,7 @@
     -fx-alignment: center;
 }
 
-#intPane{
+#intPane {
     -fx-background-color: white;
     -fx-background-position: center;
     -fx-opacity: 1;
@@ -22,11 +22,11 @@
     /*pane to be always in the center*/
     /*-fx-border-width: 5px;*/
     /*-fx-border-color: black;*/
-    -fx-effect: dropshadow(three-pass-box,rgb(0,0,0,0.9),10,0,0,0);
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0, 0.9), 10, 0, 0, 0);
 }
 
 
-#doneButton{
+#doneButton {
     /*-fx-alignment: right;*/
     /*-fx-hgap: 5px;*/
     /*-fx-border-radius: 50px;*/
@@ -36,52 +36,37 @@
 
 }
 
-#infoButton{
--fx-background-radius: 50;
--fx-background-color: #0756DF;
-}
-#infoButton: hover{
--fx-background-color: #739EE8;
+#infoButton {
+    -fx-background-radius: 50;
+    -fx-background-color: #0756DF;
 }
 
-#signUpButton{
--fx-background-radius: 20;
--fx-background-color: #77F609;
--fx-radius: 20%;
-}
-#signUpButton:hover {
-   -fx-background-color: #A0E564;
+#infoButton:hover {
+    -fx-background-color: #739EE8;
 }
 
-
-#logInButton{
--fx-background-radius: 20;
--fx-background-color: #77F609;
--fx-radius: 20%;
-}
-#logInButton:hover {
-   -fx-background-color: #A0E564;
+.Buttons {
+    -fx-background-radius: 20;
+    -fx-background-color: #469f01;
+    -fx-radius: 20%;
+    -fx-text-fill: white;
 }
 
-
-
-#reservationButton{
--fx-background-radius: 20;
--fx-background-color: #77F609;
--fx-radius: 20%;
-}
-
-#reservationButton:hover {
-   -fx-background-color: #A0E564;
+.Buttons:hover {
+    -fx-background-color: #285700;
+    -fx-font: 14px "Segoe UI Semibold";
 }
 
 
 
 
 
-#Title{
+
+
+#Title {
 
     -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, lime 0%, green 50%);
-    /*-fx-stroke: black;
-    -fx-stroke-width: 1;*/
+    /*-fx-stroke: black;*/
+    /*-fx-stroke-width: 1;*/
+    -fx-font-family: "Segoe UI ";
 }
