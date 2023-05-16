@@ -17,12 +17,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafxmlapplication.model.JavaFXMLApplication;
-import model.Booking;
+
 import javafx.beans.binding.Bindings;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import model.Booking;
+import model.Club;
 
 
 /**
@@ -54,7 +57,7 @@ public class MisReservas implements Initializable {
         listView.setItems(myObservableBookingList);
 
         //Modify cell factory to display object Booking
-        listView.setCellFactory(c -> new ListCell<>());
+        listView.setCellFactory(c -> new bookingListCell<>());
 
         //in case of nothing selected disable delete
         deleteButton.disableProperty().bind(
@@ -73,5 +76,43 @@ public class MisReservas implements Initializable {
    }
 
 
+    public void deleteAction(ActionEvent actionEvent) {
+        showConfirmationWindow();
+    }
 
+    private void showConfirmationWindow(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Dialog");
+        alert.setHeaderText("Are you sure you want to delete?");
+        alert.setContentText("Click OK to confirm.");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+
+        alert.showAndWait().ifPresent(buttonType -> {
+            if(buttonType == buttonTypeYes) {
+                System.out.println("Confirmed!");
+                myObservableBookingList.remove(listView.getSelectionModel().getSelectedItem());  //removes booking from listView
+                //Club.removeBooking(Booking b);  //removes booking from database
+            } else if(buttonType == buttonTypeNo){
+                System.out.println("Canceled.");
+            }
+        });
+    }
+
+    class bookingListCell extends ListCell<Booking>{
+        @Override
+        protected  void updateItem(Booking booking, boolean empty){
+            super.updateItem(booking,empty);
+            if(empty || booking == null){
+                setText(null);
+            }else{
+                setText("By: " +booking.getMember().toString() + ".Date: " + booking.getBookingDate().toString() + ", "
+                + booking.getFromTime().toString());
+            }
+
+        }
+    }
 }
