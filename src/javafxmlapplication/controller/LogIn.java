@@ -60,6 +60,7 @@ public class LogIn implements Initializable {
         String pass = password.getText();
         Club club = Club.getInstance();
         Member member = club.getMemberByCredentials(user, pass);
+        JavaFXMLApplication.setCurrentMember(member);
         if (member != null) {
             JavaFXMLApplication.changeScene(eventLog, "Reservation.fxml");
         } else {
