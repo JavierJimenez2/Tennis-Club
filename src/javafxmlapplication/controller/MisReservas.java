@@ -52,11 +52,11 @@ public class MisReservas implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //set User's profile image
-        //profilePic.setImage(Member.getImage());
+        profilePic.setImage(JavaFXMLApplication.getCurrentMember().getImage());
 
 
 
-        ArrayList<Booking> bookingData = new ArrayList<>();
+        ArrayList<Booking> bookingData = new ArrayList<>(); ///////!!!!! cambiar !!!!!! por getUserBookings de Club calss !!!!!
 
         //create observable list using FXCollections
         myObservableBookingList = FXCollections.observableArrayList(bookingData);
