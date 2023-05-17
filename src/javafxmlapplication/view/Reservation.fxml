@@ -173,7 +173,7 @@
                                     </font>
                                 </Text>
                                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                                <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: 74be43;" GridPane.rowIndex="2" />
+                                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
                                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
                                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
                                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />

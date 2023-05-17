@@ -49,10 +49,13 @@ public class Reservation {
     @FXML
     void initialize() {
 
-        if ( JavaFXMLApplication.getCurrentMember().getImage() != null ){
-            AvatarLogo.setImage(JavaFXMLApplication.getCurrentMember().getImage());
+        if ( JavaFXMLApplication.getCurrentMember() != null ) {
+            if ( JavaFXMLApplication.getCurrentMember().getImage() != null ) {
+                AvatarLogo.setImage(JavaFXMLApplication.getCurrentMember().getImage());
+            }
+
         }
     }
 
 
-}
+    }
