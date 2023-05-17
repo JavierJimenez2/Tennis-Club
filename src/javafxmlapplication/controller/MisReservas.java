@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -26,6 +27,7 @@ import java.util.ResourceBundle;
 
 import model.Booking;
 import model.Club;
+import model.Member;
 
 
 /**
@@ -40,6 +42,7 @@ public class MisReservas implements Initializable {
     public SplitPane intPane;
     public Pane pane;
     public ListView<Booking> listView;
+    public ImageView profilePic;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //listView observable
@@ -48,6 +51,11 @@ public class MisReservas implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //set User's profile image
+        //profilePic.setImage(Member.getImage());
+
+
+
         ArrayList<Booking> bookingData = new ArrayList<>();
 
         //create observable list using FXCollections
