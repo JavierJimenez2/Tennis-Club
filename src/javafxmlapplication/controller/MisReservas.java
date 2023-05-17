@@ -109,8 +109,8 @@ public class MisReservas implements Initializable {
             if(empty || booking == null){
                 setText(null);
             }else{
-                setText("By: " +booking.getMember().toString() + ".Date: " + booking.getBookingDate().toString() + ", "
-                + booking.getFromTime().toString());
+                setText("By: " + booking.getMember().toString() + ".Date: " + booking.getBookingDate().toString() + ". Paid: " +
+                        booking.getPaid());
             }
 
         }
