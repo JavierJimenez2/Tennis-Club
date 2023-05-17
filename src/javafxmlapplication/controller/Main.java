@@ -66,14 +66,17 @@ public class Main implements Initializable {
 
 
     public void infoClicked(MouseEvent event) {
-        count++;
-        if (count % 2 == 0) {
-            infoLabel.setText("");
-            //infoButton.setText("Show");
-        } else {
-            infoLabel.setText("To make a resrvation first Log In, or Sign Up if you don't have an account ");
-            //infoButton.setText("Hide");
-        }
+//        count++;
+//        if (count % 2 == 0) {
+//            infoLabel.setText("");
+//            //infoButton.setText("Show");
+//        } else {
+//            infoLabel.setText(" ");
+//            //infoButton.setText("Hide");
+//        }
+
+//        Dialog window
+        JavaFXMLApplication.dialogBox("info","Information","To make a resrvation first Log In, or Sign Up if you don't have an account");
     }
 
 
