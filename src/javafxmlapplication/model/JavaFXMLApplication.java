@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import model.Member;
 
 import java.util.HashMap;
 
@@ -20,6 +21,7 @@ import java.util.HashMap;
 public class JavaFXMLApplication extends Application {
 
     private static Scene scene;
+    private static Member member;
     private static HashMap<String, Parent> roots = new HashMap<>(); //para link
 
     public static void setRoot(Parent root) {
@@ -27,6 +29,13 @@ public class JavaFXMLApplication extends Application {
     }
 
 
+    public static Member getCurrentMember(){
+        return member;
+    }
+
+    public static void setCurrentMember(Member member){
+        JavaFXMLApplication.member = member;
+    }
     /**
      * @param args the command line arguments
      */
@@ -109,6 +118,7 @@ public class JavaFXMLApplication extends Application {
         stage.setScene(scene);
         stage.setTitle("GreenBall");
         stage.show();
+
     }
 
 
