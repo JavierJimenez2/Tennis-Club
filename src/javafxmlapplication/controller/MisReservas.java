@@ -43,6 +43,7 @@ public class MisReservas implements Initializable {
     public Pane pane;
     public ListView<Booking> listView;
     public ImageView profilePic;
+    public Button returnButton;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //listView observable
@@ -56,7 +57,7 @@ public class MisReservas implements Initializable {
 
 
 
-        ArrayList<Booking> bookingData = new ArrayList<>(); ///////!!!!! cambiar !!!!!! por getUserBookings de Club calss !!!!!
+        ArrayList<Booking> bookingData = JavaFXMLApplication.getCurrentClub().getBookings();
 
         //create observable list using FXCollections
         myObservableBookingList = FXCollections.observableArrayList(bookingData);
@@ -108,6 +109,10 @@ public class MisReservas implements Initializable {
                 System.out.println("Canceled.");
             }
         });
+    }
+
+    public void returnAction(ActionEvent actionEvent) {
+        JavaFXMLApplication.returnScene(actionEvent);
     }
 
     class bookingListCell extends ListCell<Booking>{
