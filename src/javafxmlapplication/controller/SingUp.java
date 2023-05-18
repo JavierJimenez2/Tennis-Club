@@ -34,6 +34,7 @@ public class SingUp implements Initializable {
     //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
+    public Button returnButton;
 
     @FXML
     private HBox buttonsZone;
@@ -114,5 +115,10 @@ public class SingUp implements Initializable {
             JavaFXMLApplication.changeScene(eventReg, "SingUp.fxml");
         }
 
+    }
+
+    public void returnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        JavaFXMLApplication.returnScene(stage);
     }
 }

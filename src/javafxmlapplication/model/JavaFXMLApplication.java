@@ -163,9 +163,9 @@ public class JavaFXMLApplication extends Application {
         stage.show();
     }
 
-    public static void returnScene(ActionEvent event){   //method to be called from returnButtonAction method to return to scene
+    public static void returnScene(Stage stage){   //method to be called from returnButtonAction method to return to scene
         if(!sceneStack.isEmpty()){
-            changeScene(event,sceneStack.pop().toString());
+            stage.setScene(sceneStack.pop());
         }
 
     }
