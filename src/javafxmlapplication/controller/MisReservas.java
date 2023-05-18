@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -26,6 +27,7 @@ import java.util.ResourceBundle;
 
 import model.Booking;
 import model.Club;
+import model.Member;
 
 
 /**
@@ -40,6 +42,8 @@ public class MisReservas implements Initializable {
     public SplitPane intPane;
     public Pane pane;
     public ListView<Booking> listView;
+    public ImageView profilePic;
+    public Button returnButton;
 
     ////////////////////////////////////////////////////////////////////////////////////
     //listView observable
@@ -48,7 +52,12 @@ public class MisReservas implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Booking> bookingData = new ArrayList<>();
+        //set User's profile image
+        profilePic.setImage(JavaFXMLApplication.getCurrentMember().getImage());
+
+
+
+        ArrayList<Booking> bookingData = JavaFXMLApplication.getCurrentClub().getBookings();
 
         //create observable list using FXCollections
         myObservableBookingList = FXCollections.observableArrayList(bookingData);
@@ -102,6 +111,10 @@ public class MisReservas implements Initializable {
         });
     }
 
+    public void returnAction(ActionEvent actionEvent) {
+        JavaFXMLApplication.returnScene(actionEvent);
+    }
+
     class bookingListCell extends ListCell<Booking>{
         @Override
         protected  void updateItem(Booking booking, boolean empty){
@@ -109,8 +122,8 @@ public class MisReservas implements Initializable {
             if(empty || booking == null){
                 setText(null);
             }else{
-                setText("By: " +booking.getMember().toString() + ".Date: " + booking.getBookingDate().toString() + ", "
-                + booking.getFromTime().toString());
+                setText("By: " + booking.getMember().toString() + ".Date: " + booking.getBookingDate().toString() + ". Paid: " +
+                        booking.getPaid());
             }
 
         }

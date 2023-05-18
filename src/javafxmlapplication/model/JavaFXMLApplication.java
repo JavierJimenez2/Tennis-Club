@@ -13,20 +13,41 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import model.Club;
+import model.Member;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 
 public class JavaFXMLApplication extends Application {
 
     private static Scene scene;
-    private static HashMap<String, Parent> roots = new HashMap<>(); //para link
+    private static Member member;
+    private static Club club;
+    private static Stack<Scene> sceneStack;    //cambio de pantalla (return)
 
     public static void setRoot(Parent root) {
         scene.setRoot(root);
     }
 
 
+    public static Member getCurrentMember(){
+        return member;
+    }
+
+    public static void setCurrentMember(Member member){
+        JavaFXMLApplication.member = member;
+    }
+
+
+    public static Club getCurrentClub(){
+        return club;
+    }
+
+    public static void setCurrentMember(Club club){
+        JavaFXMLApplication.club = club;
+    }
     /**
      * @param args the command line arguments
      */
@@ -109,6 +130,11 @@ public class JavaFXMLApplication extends Application {
         stage.setScene(scene);
         stage.setTitle("GreenBall");
         stage.show();
+
+
+
+        sceneStack = new Stack<>();   //inisialisation of Stack for saving previous scenes
+
     }
 
 
@@ -121,9 +147,6 @@ public class JavaFXMLApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
 
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -139,5 +162,16 @@ public class JavaFXMLApplication extends Application {
         stage.setHeight(height);
         stage.show();
     }
+
+    public static void returnScene(ActionEvent event){   //method to be called from returnButtonAction method to return to scene
+        if(!sceneStack.isEmpty()){
+            changeScene(event,sceneStack.pop().toString());
+        }
+
+    }
+    public static void saveScene(Scene scene){    //method to be called when jumping to anth scene by means of a button
+        sceneStack.push(scene);                    //to be placed in every buttonOnAction that takes you to other scene
+    }
+
 
 }

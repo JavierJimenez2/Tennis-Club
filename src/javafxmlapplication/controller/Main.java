@@ -16,11 +16,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
+
 import javafxmlapplication.model.JavaFXMLApplication;
+import javafxmlapplication.model.Reservations;
 
 
 import java.awt.*;
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -52,28 +58,15 @@ public class Main implements Initializable {
     private Label infoLabel;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         infoLabel.setWrapText(true);
-        /*Image image = new Image("javafxmlapplication/view/css/img/icons/info.jpg");
-        ImageView iv = new ImageView(image);
-        iv.setFitHeight(23);
-        iv.setFitWidth(52);
-        infoButton.setGraphic(iv);*/
-
-
     }
 
 
     public void infoClicked(MouseEvent event) {
-//        count++;
-//        if (count % 2 == 0) {
-//            infoLabel.setText("");
-//            //infoButton.setText("Show");
-//        } else {
-//            infoLabel.setText(" ");
-//            //infoButton.setText("Hide");
-//        }
+//
 
 //        Dialog window
         JavaFXMLApplication.dialogBox("info","Information","To make a resrvation first Log In, or Sign Up if you don't have an account");
@@ -81,7 +74,11 @@ public class Main implements Initializable {
 
 
     public void goReservations(ActionEvent event) throws IOException {
-        JavaFXMLApplication.changeScene(event, "Reservation.fxml");
+//        JavaFXMLApplication.changeScene(event, "Reservation.fxml");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        JavaFXMLApplication.saveScene(//currentScene);
+        Reservations reservations = new Reservations();
+        reservations.start(stage);
     }
 
     public void goLogIn(ActionEvent event) throws IOException {

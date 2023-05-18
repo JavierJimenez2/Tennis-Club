@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafxmlapplication.model.JavaFXMLApplication;
 
 public class Reservation {
 
@@ -45,4 +46,16 @@ public class Reservation {
     @FXML
     private AnchorPane SuperiorVPane;
 
-}
+    @FXML
+    void initialize() {
+
+        if ( JavaFXMLApplication.getCurrentMember() != null ) {
+            if ( JavaFXMLApplication.getCurrentMember().getImage() != null ) {
+                AvatarLogo.setImage(JavaFXMLApplication.getCurrentMember().getImage());
+            }
+
+        }
+    }
+
+
+    }
