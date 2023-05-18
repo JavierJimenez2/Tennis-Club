@@ -148,9 +148,6 @@ public class JavaFXMLApplication extends Application {
             e.printStackTrace();
         }
 
-
-
-
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         double width = stage.getWidth();

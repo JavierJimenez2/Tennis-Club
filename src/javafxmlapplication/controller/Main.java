@@ -21,6 +21,7 @@ import javafx.scene.Node;
 
 
 import javafxmlapplication.model.JavaFXMLApplication;
+import javafxmlapplication.model.Reservations;
 
 
 import java.awt.*;
@@ -73,9 +74,11 @@ public class Main implements Initializable {
 
 
     public void goReservations(ActionEvent event) throws IOException {
-      /*  JavaFXMLApplication.changeScene(event, "Reservation.fxml");
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow()
-        JavaFXMLApplication.saveScene(//currentScene);*/
+//        JavaFXMLApplication.changeScene(event, "Reservation.fxml");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        JavaFXMLApplication.saveScene(//currentScene);
+        Reservations reservations = new Reservations();
+        reservations.start(stage);
     }
 
     public void goLogIn(ActionEvent event) throws IOException {
