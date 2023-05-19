@@ -23,6 +23,7 @@ import model.Club;
 import model.ClubDAOException;
 import model.Member;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +36,7 @@ public class SingUp implements Initializable {
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     public Button returnButton;
+    private static boolean correctFormat = true;
 
     @FXML
     private HBox buttonsZone;
@@ -105,6 +107,28 @@ public class SingUp implements Initializable {
         String creditcard = this.creditcard.getText();
         int svc = 123;
         String telephone = this.telephone.getText();
+
+        if(!name.matches("[a-zA-Z]*") || name.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Name Field. Remember to write just characters.");
+            this.name.setText("");
+            return;
+        }
+        if(!lastname.matches("[a-zA-Z]*") || lastname.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Last Name Field. Remember to write just characters.");
+            this.lastname.setText("");
+            return;
+        }
+        /*if(){
+
+        }
+        if(){
+
+        }
+        if(){
+
+        }*/
+
+
         Club club = Club.getInstance();
         Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, svc, profileImage.getImage());
         if (result != null) {
