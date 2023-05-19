@@ -113,10 +113,10 @@ public class MisReservas implements Initializable {
         });
     }
 
-    public void returnAction(ActionEvent actionEvent) {
+    /*public void returnAction(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         JavaFXMLApplication.returnScene(stage);
-    }
+    }*/
 
     class bookingListCell extends ListCell<Booking>{
         @Override

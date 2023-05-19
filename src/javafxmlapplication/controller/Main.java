@@ -78,7 +78,7 @@ public class Main implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Reservations reservations = new Reservations();
         reservations.start(stage);
-        JavaFXMLApplication.saveScene(stage.getScene());
+        //JavaFXMLApplication.saveScene(stage.getScene());
     }
 
     public void goLogIn(ActionEvent event) throws IOException {

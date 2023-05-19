@@ -118,7 +118,6 @@ public class SingUp implements Initializable {
     }
 
     public void returnAction(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        JavaFXMLApplication.returnScene(stage);
+        JavaFXMLApplication.changeScene(actionEvent, "Main.fxml");
     }
 }

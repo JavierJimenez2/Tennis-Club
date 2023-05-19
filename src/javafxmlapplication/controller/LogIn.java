@@ -34,6 +34,7 @@ public class LogIn implements Initializable {
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     public HBox buttonsZone;
     public PasswordField password;
+    public Button returnButton;
 
     @FXML
     private Pane pane;
@@ -70,4 +71,7 @@ public class LogIn implements Initializable {
         }
     }
 
+    public void returnAction(ActionEvent actionEvent) {
+        JavaFXMLApplication.changeScene(actionEvent,"Main.fxml");
+    }
 }
