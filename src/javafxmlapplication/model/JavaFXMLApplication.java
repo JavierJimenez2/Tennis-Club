@@ -85,6 +85,8 @@ public class JavaFXMLApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        club = Club.getInstance();
+
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));

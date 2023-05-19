@@ -106,7 +106,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="creditcard" promptText="Credit Card Number">
+                        <TextField fx:id="creditcard" promptText="Credit Card Number (Optional)">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
