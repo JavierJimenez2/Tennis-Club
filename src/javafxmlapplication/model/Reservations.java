@@ -35,10 +35,12 @@ public class Reservations extends Application {
 //        change the variables of the css file
 
 
+
+
         BorderPane root = new BorderPane();
         root.getStyleClass().add("background");
 
-
+        // MenuBar
         HBox menuBar = new HBox();
         menuBar.getStyleClass().add("menu-bar");
         menuBar.setPadding(new Insets(20));
@@ -111,6 +113,11 @@ public class Reservations extends Application {
 //        menuBar.getChildren().add(avatar);
         root.setTop(menuBar);
 
+
+        // End of Menu
+
+
+
         BootstrapPane root1 = makeView();
         root.setCenter(root1);
         root.getStylesheets().add(
@@ -121,9 +128,11 @@ public class Reservations extends Application {
         scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+        double width = primaryStage.getWidth();
+        double height = primaryStage.getHeight();
+        primaryStage.close();
         primaryStage.setTitle("Reservations");
-        primaryStage.setScene(new Scene(scrollPane, 800, 600));
-        primaryStage.setMaximized(true);
+        primaryStage.setScene(new Scene(scrollPane, width, height));
 
         primaryStage.getIcons().add(new Image(
                 Objects.requireNonNull(getClass().getResourceAsStream("./layouts/img/EdenCodingIcon.png"))

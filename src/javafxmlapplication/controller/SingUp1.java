@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -30,12 +29,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class SingUp implements Initializable {
+public class SingUp1 implements Initializable {
 
     //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
-    public Button returnButton;
 
     @FXML
     private HBox buttonsZone;
@@ -116,9 +114,5 @@ public class SingUp implements Initializable {
             JavaFXMLApplication.changeScene(eventReg, "SingUp.fxml");
         }
 
-    }
-
-    public void returnAction(ActionEvent actionEvent) {
-        JavaFXMLApplication.changeScene(actionEvent, "Main.fxml");
     }
 }
