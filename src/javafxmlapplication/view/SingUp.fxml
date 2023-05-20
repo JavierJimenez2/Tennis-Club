@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<HBox fx:id="pane" fillHeight="false" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SingUp">
+<HBox fx:id="pane" fillHeight="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SingUp">
    <children>
       <VBox fx:id="intPane" alignment="CENTER" minHeight="369.0" minWidth="600.0" prefHeight="516.0" prefWidth="801.0" HBox.hgrow="NEVER">
          <children>
+            <Button fx:id="returnButton" mnemonicParsing="false" onAction="#returnAction" text="Return" />
             <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="GreenBall" textAlignment="CENTER" wrappingWidth="598.7831211090088">
                <font>
                   <Font name="Courier New Bold" size="43.0" />
@@ -98,7 +106,7 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="creditcard" promptText="Credit Card Number">
+                        <TextField fx:id="creditcard" promptText="Credit Card Number (Optional)">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

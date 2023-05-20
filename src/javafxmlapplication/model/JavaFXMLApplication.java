@@ -25,7 +25,7 @@ public class JavaFXMLApplication extends Application {
     private static Scene scene;
     private static Member member;
     private static Club club;
-    private static Stack<Scene> sceneStack;    //cambio de pantalla (return)
+    //private static Stack<Scene> sceneStack;    //cambio de pantalla (return)
 
     public static void setRoot(Parent root) {
         scene.setRoot(root);
@@ -85,6 +85,8 @@ public class JavaFXMLApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        club = Club.getInstance();
+
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
@@ -133,7 +135,7 @@ public class JavaFXMLApplication extends Application {
 
 
 
-        sceneStack = new Stack<>();   //inisialisation of Stack for saving previous scenes
+        //sceneStack = new Stack<>();   //inisialisation of Stack for saving previous scenes
 
     }
 
@@ -156,22 +158,14 @@ public class JavaFXMLApplication extends Application {
         stage.setMinHeight(500);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
-        stage.setTitle("Log In");
+        stage.setTitle(s.replace(".fxml",""));
         stage.setScene(scene);
         stage.setWidth(width);
         stage.setHeight(height);
         stage.show();
     }
 
-    public static void returnScene(ActionEvent event){   //method to be called from returnButtonAction method to return to scene
-        if(!sceneStack.isEmpty()){
-            changeScene(event,sceneStack.pop().toString());
-        }
 
-    }
-    public static void saveScene(Scene scene){    //method to be called when jumping to anth scene by means of a button
-        sceneStack.push(scene);                    //to be placed in every buttonOnAction that takes you to other scene
-    }
 
 
 }

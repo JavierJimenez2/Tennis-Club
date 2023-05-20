@@ -11,12 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
 
 import javafx.beans.binding.Bindings;
@@ -111,9 +113,10 @@ public class MisReservas implements Initializable {
         });
     }
 
-    public void returnAction(ActionEvent actionEvent) {
-        JavaFXMLApplication.returnScene(actionEvent);
-    }
+    /*public void returnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        JavaFXMLApplication.returnScene(stage);
+    }*/
 
     class bookingListCell extends ListCell<Booking>{
         @Override
