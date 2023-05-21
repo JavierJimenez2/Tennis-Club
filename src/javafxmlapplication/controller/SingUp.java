@@ -181,7 +181,8 @@ public class SingUp implements Initializable {
             return;
         }
 
-        int csc = Integer.parseInt(Scsc);
+            int csc = Integer.parseInt(Scsc);
+
         Club club = Club.getInstance();
         Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, csc, profileImage.getImage());
         if (result != null) {
