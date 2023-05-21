@@ -183,8 +183,8 @@ public class SingUp implements Initializable {
 
             int csc = Integer.parseInt(Scsc);
 
-        Club club = Club.getInstance();
-        Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, csc, profileImage.getImage());
+        //Club club = Club.getInstance();
+        Member result = JavaFXMLApplication.getCurrentClub().registerMember(name, lastname, telephone, username, password, creditcard, csc, profileImage.getImage());
         if (result != null) {
             JavaFXMLApplication.dialogBox("success", "Success", "You have been registered successfully");
             JavaFXMLApplication.changeScene(eventReg, "LogIn.fxml");
