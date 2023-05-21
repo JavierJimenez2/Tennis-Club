@@ -62,7 +62,7 @@ public class LogIn implements Initializable {
     public void loginButton(ActionEvent eventLog) throws ClubDAOException, IOException {
         String user = username.getText();
         String pass = password.getText();
-        Club club = Club.getInstance();
+        Club club = JavaFXMLApplication.getCurrentClub();
         Member member = club.getMemberByCredentials(user, pass);
         JavaFXMLApplication.setCurrentMember(member);
         if (member != null) {

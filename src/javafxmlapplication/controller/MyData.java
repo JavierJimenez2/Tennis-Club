@@ -19,6 +19,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
 import model.Booking;
+import model.ClubDAOException;
 import model.Member;
 
 import java.io.File;
@@ -36,6 +37,8 @@ public class MyData implements Initializable {
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     private static boolean correctFormat = true;
+    private static boolean check = false;
+    private static File selectedFile = null;
     public ImageView profilePic;
     public Button returnButton;
     public ImageView profileImage;
@@ -61,6 +64,10 @@ public class MyData implements Initializable {
     username.setText(JavaFXMLApplication.getCurrentMember().getNickName());
     password.setText(JavaFXMLApplication.getCurrentMember().getPassword());
     telephone.setText(JavaFXMLApplication.getCurrentMember().getTelephone());
+    if(!JavaFXMLApplication.getCurrentMember().getCreditCard().isEmpty()){
+        creditcard.setText(JavaFXMLApplication.getCurrentMember().getCreditCard());
+        csc.setText(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()));
+    }
    }
 
 
@@ -96,10 +103,8 @@ public class MyData implements Initializable {
         fileChooser.setTitle("Select an image");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-        File selectedFile = fileChooser.showOpenDialog((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
-        if (selectedFile != null) {
-            profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
-        }
+        selectedFile = fileChooser.showOpenDialog((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
+
     }
 
     public void modifyButton(ActionEvent actionEvent) {
@@ -134,10 +139,12 @@ public class MyData implements Initializable {
         }
 
         /////////////////////username checkings///////////////////////////////////////////////////////////
-        if(JavaFXMLApplication.getCurrentClub().existsLogin(username)){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Username Field. Username already in use.");
-            this.username.setText("");
-            correctFormat = false;
+        if(!JavaFXMLApplication.getCurrentMember().getNickName().equals(username)) {
+            if (JavaFXMLApplication.getCurrentClub().existsLogin(username)) {
+                JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Username already in use.");
+                this.username.setText("");
+                correctFormat = false;
+            }
         }
         if(username.matches(".*\\s.*")){
             JavaFXMLApplication.dialogBox("error","Error","Error in Username Field. Remember it can't contain spaces.");
@@ -183,5 +190,65 @@ public class MyData implements Initializable {
         if(!correctFormat){
             return;
         }
+        //confirmation Window
+        showConfirmationWindowMD();
+        if(!check){
+            return;
+        }
+
+
+
+
+       //update of the fields
+        if(!name.equals(JavaFXMLApplication.getCurrentMember().getName())){
+            JavaFXMLApplication.getCurrentMember().setName(name);
+        }
+        if(!lastname.equals(JavaFXMLApplication.getCurrentMember().getSurname())){
+            JavaFXMLApplication.getCurrentMember().setSurname(lastname);
+        }
+        if(!telephone.equals(JavaFXMLApplication.getCurrentMember().getTelephone())){
+            JavaFXMLApplication.getCurrentMember().setTelephone(telephone);
+        }
+        if(!username.equals(JavaFXMLApplication.getCurrentMember().getNickName())){
+            JavaFXMLApplication.getCurrentMember().setNickName(username);
+        }
+        if(!password.equals(JavaFXMLApplication.getCurrentMember().getPassword())){
+            JavaFXMLApplication.getCurrentMember().setPassword(password);
+        }
+        if (!creditcard.equals(JavaFXMLApplication.getCurrentMember().getCreditCard())){
+            JavaFXMLApplication.getCurrentMember().setCreditCard(creditcard);
+        }
+
+        if(!Scsc.equals(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()))){
+            JavaFXMLApplication.getCurrentMember().setSvc(Integer.parseInt(Scsc));
+        }
+
+        if (selectedFile != null) {
+            profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+        }
+
+    }
+
+    private void showConfirmationWindowMD(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Dialog");
+        alert.setHeaderText("Are you sure you want to make these changes?");
+        alert.setContentText("Click OK to confirm.");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+
+        alert.showAndWait().ifPresent(buttonType -> {
+            if(buttonType == buttonTypeYes) {
+                System.out.println("Confirmed!");
+               check = true;
+
+            } else if(buttonType == buttonTypeNo){
+                System.out.println("Canceled.");
+                check = false;
+            }
+        });
     }
 }
