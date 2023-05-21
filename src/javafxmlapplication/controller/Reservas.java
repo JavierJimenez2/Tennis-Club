@@ -1,12 +1,17 @@
 package javafxmlapplication.controller;
 
 
+import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+//import color.Color;
+import javafx.beans.binding.Bindings;
+import java.awt.Color;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +19,8 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
@@ -22,6 +29,9 @@ import javafxmlapplication.model.layouts.BootstrapColumn;
 import javafxmlapplication.model.layouts.BootstrapPane;
 import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
+
+import static java.awt.Color.BLACK;
+import static java.awt.Color.black;
 
 public class Reservas implements Initializable {
 
@@ -137,7 +147,7 @@ public class Reservas implements Initializable {
 
     private BootstrapColumn createTitleColumn() {
         Label title = new Label("Courts available");
-        title.setTextFill(Color.BLACK);
+        title.setTextFill(BLACK);
 
         //style
         title.getStyleClass().add("app-title2");
@@ -199,7 +209,7 @@ public class Reservas implements Initializable {
 
         item.getChildren().addAll(left, right);
         item.setOnMouseClicked(event -> {
-//            TODO
+//            TODO tio va reservar
             if ( todo.free ) {
                 todo.free = false;
                 item.getStyleClass().remove("free");
@@ -224,7 +234,7 @@ public class Reservas implements Initializable {
         RowReservation[] rowReservations = new RowReservation[hours.length];
         int i = 0;
         while (i < hours.length) {
-//
+// TODO Restricciones
 //
             rowReservations[i] = new RowReservation(hours[i], LocalDate.now(), true);
             i++;
