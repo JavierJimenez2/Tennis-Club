@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
 
 import model.Booking;
 import model.Club;
+import model.ClubDAOException;
 import model.Member;
 
 
@@ -106,7 +107,9 @@ public class MisReservas implements Initializable {
             if(buttonType == buttonTypeYes) {
                 System.out.println("Confirmed!");
                 myObservableBookingList.remove(listView.getSelectionModel().getSelectedItem());  //removes booking from listView
-                //Club.removeBooking(Booking b);  //removes booking from database
+               try {
+                   JavaFXMLApplication.getCurrentClub().removeBooking(listView.getSelectionModel().getSelectedItem());  //removes booking from database
+               }catch (ClubDAOException e){System.out.println("Error removing teh booking.");}
             } else if(buttonType == buttonTypeNo){
                 System.out.println("Canceled.");
             }

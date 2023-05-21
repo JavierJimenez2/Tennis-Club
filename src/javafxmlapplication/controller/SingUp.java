@@ -24,6 +24,7 @@ import model.Club;
 import model.ClubDAOException;
 import model.Member;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +37,8 @@ public class SingUp implements Initializable {
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     public Button returnButton;
+    private static boolean correctFormat = true;
+    public TextField csc;
 
     @FXML
     private HBox buttonsZone;
@@ -104,10 +107,83 @@ public class SingUp implements Initializable {
         String username = this.username.getText();
         String password = this.password.getText();
         String creditcard = this.creditcard.getText();
-        int svc = 123;
+        String Scsc = this.csc.getText();
         String telephone = this.telephone.getText();
+
+
+        ///////////////////name checkings/////////////////////////////////////////////////////////////
+        if(!name.matches("[a-zA-Z]*") || name.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Name Field. Remember to write just characters.");
+            this.name.setText("");
+            correctFormat = false;
+        }
+
+        ///////////////////lastname checkings/////////////////////////////////////////////////////////////
+        if(!lastname.matches("[a-zA-Z]*") || lastname.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Last Name Field. Remember to write just characters.");
+            this.lastname.setText("");
+            correctFormat = false;
+        }
+
+        ///////////////////telephone checkings/////////////////////////////////////////////////////////////
+        if(!telephone.matches("^[0-9]+$") || telephone.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Telephone Number Field. Remember to write just numbers.");
+        }
+
+        /////////////////////username checkings///////////////////////////////////////////////////////////
+        if(JavaFXMLApplication.getCurrentClub().existsLogin(username)){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Username Field. Username already in use.");
+            this.username.setText("");
+            correctFormat = false;
+        }
+        if(username.matches(".*\\s.*")){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Username Field. Remember it can't contain spaces.");
+            this.username.setText("");
+            correctFormat = false;
+        }
+
+        /////////////////////password checkings///////////////////////////////////////////////////////////
+        if(password.length() < 6){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Password Field. Remember it should contain at least 6 characters.");
+            this.password.setText("");
+            correctFormat = false;
+        }
+        /////////////////////credit card checkings///////////////////////////////////////////////////////////
+        if(creditcard.length() != 16 && !creditcard.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember it should contain 16 numb ers.");
+            this.creditcard.setText("");
+            correctFormat = false;
+        }
+        if(!creditcard.matches("\\d+") && !creditcard.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember it should contain 16 numbers.");
+            this.creditcard.setText("");
+            correctFormat = false;
+        }
+
+        if((Scsc.length() != 3 || !Scsc.matches("^[0-9]+$")) && !Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember it should contain 3 digits.");
+            this.csc.setText("");
+            correctFormat = false;
+        }
+
+        if(!creditcard.isEmpty() && Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember to write the CSC.");
+            correctFormat = false;
+        }
+        if(creditcard.isEmpty() && !Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember to write the Credit Card.");
+            correctFormat = false;
+        }
+
+
+
+        if(!correctFormat){
+            return;
+        }
+
+        int csc = Integer.parseInt(Scsc);
         Club club = Club.getInstance();
-        Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, svc, profileImage.getImage());
+        Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, csc, profileImage.getImage());
         if (result != null) {
             JavaFXMLApplication.dialogBox("success", "Success", "You have been registered successfully");
             JavaFXMLApplication.changeScene(eventReg, "LogIn.fxml");
