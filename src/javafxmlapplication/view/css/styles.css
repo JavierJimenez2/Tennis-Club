@@ -70,3 +70,161 @@
     /*-fx-stroke-width: 1;*/
     -fx-font-family: "Segoe UI ";
 }
+
+
+@font-face{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    /*src: url('https://edencoding.com/wp-content/uploads/2021/02/GloriousFree-dBR6.ttf') format('truetype');*/
+}
+
+/*crear variables*/
+/*https://www.w3schools.com/css/css3_variables.asp*/
+* {
+    -fx-green: #08861d;
+}
+
+.menu-bar{
+    -fx-background-color: -fx-green;
+    -fx-background-radius: 0px;
+    -fx-background-insets: 0px;
+    -fx-padding: 0px;
+    -fx-spacing: 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+
+
+.background{
+    /*-fx-background-color: linear-gradient(to bottom right, #0f0c29 24%, #302b63 50%, #24243e 74%);*/
+    -fx-alignment: center;
+    -fx-background-image: url('/javafxmlapplication/view/css/img/bg.jpg');
+    -fx-opacity: 0.8;
+    -fx-background-position: top;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+
+}
+
+
+
+.label{
+    -fx-text-fill: white;
+}
+
+.app-title{
+    -fx-font: 36px 'Segoe UI';
+    -fx-text-fill: #eeeeee;
+    -fx-max-width: 100000;
+    -fx-alignment: left;
+    -fx-padding: 10px;
+}
+
+.widget{
+    -fx-background-color: derive(#08861d, 10%);
+    -fx-background-radius: 5px;
+    -fx-background-insets: 5px;
+    -fx-padding: 5px;
+    -fx-spacing: 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+
+.widget .label{
+    -fx-font-weight: bold;
+    -fx-font-size: 1.2em;
+    -fx-max-width: 100000;
+    -fx-alignment: center;
+}
+.titleWidget{
+    -fx-font-size: 1.7em;
+}
+
+
+
+.item{
+    -fx-padding: 5px;
+    -fx-alignment: center-left;
+    -fx-spacing: 10px;
+}
+
+.free:hover{
+    -fx-background-color: derive(#08861d, 60%);
+    /*-fx-background-radius: 10px;*/
+    -fx-font-weight: bold;
+    /*    change the pointer*/
+    -fx-cursor: hand;
+}
+
+.item .label{
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+.text-field {
+    -fx-border-color: grey;
+    -fx-border-width: 0 0 0 0;
+    -fx-background-color: transparent;
+}
+
+.text-field:hover {
+    -fx-border-color: -fx-focus-color;
+}
+
+.free{
+    -fx-background-color: green;
+}
+.reserved{
+    -fx-background-color: gray;
+}
+
+.app-title{
+    -fx-font: 36px 'Segoe UI';
+    -fx-text-fill: #eeeeee;
+    -fx-max-width: 100000;
+    -fx-alignment: center-left;
+    -fx-padding: 20px;
+    -fx-font-weight: bold;
+
+}
+
+.app-title2{
+    -fx-font: 36px 'Segoe UI';
+    -fx-text-fill: #eeeeee;
+    -fx-max-width: 100000;
+    -fx-alignment: center;
+    -fx-padding: 20px;
+    -fx-font-weight: bold;
+
+}
+
+.avatar{
+    -fx-font-size: 10px;
+    -fx-padding: 20px;
+}
+
+.choice-box{
+    -fx-background-color: black;
+    -fx-border-width: 0 0 0 0;
+    -fx-font-size: 1.2em;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10px;
+}
+
+
+.list-cell{
+    /*-fx-border-radius: 5px;*/
+    /*-fx-background-radius: 10px;*/
+    -fx-background-color: #2b542c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 1.4em;
+}
+
+.list-cell:hover{
+    -fx-background-color: #08861d;
+    -fx-text-fill: white;
+}
+
