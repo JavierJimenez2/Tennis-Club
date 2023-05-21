@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="pane" prefWidth="836.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SingUp">
+<BorderPane fx:id="pane" prefWidth="836.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Reservas">
    <center>
-      <TabPane fx:id="intPane" prefHeight="554.0" prefWidth="796.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="554.0" prefWidth="796.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="ReservasTab" text="Reservar">
             <content>
-                  <VBox>
+                  <VBox fx:id="root">
                      <children>
                         <HBox alignment="CENTER_LEFT">
                            <children>
@@ -59,7 +59,7 @@
                         <Image url="@css/img/icons/avatar_icon.png" />
                      </image>
                   </ImageView>
-                  <ComboBox fx:id="choice" maxWidth="222.0" opacity="0.0" prefHeight="42.0" prefWidth="16.0" styleClass="choice-box" />
+                  <ComboBox fx:id="choice" maxWidth="222.0" onMouseEntered="#ChoiceBoxHover" opacity="0.0" prefHeight="42.0" prefWidth="16.0" styleClass="choice-box" />
                </children>
             </StackPane>
          </children>
