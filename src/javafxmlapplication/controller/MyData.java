@@ -10,13 +10,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
 import model.Booking;
+import model.Member;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -30,6 +35,7 @@ public class MyData implements Initializable {
     //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
+    private static boolean correctFormat = true;
     public ImageView profilePic;
     public Button returnButton;
     public ImageView profileImage;
@@ -43,10 +49,18 @@ public class MyData implements Initializable {
     public TextField csc;
     public Button modify;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+     profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
 
 
+
+    name.setText(JavaFXMLApplication.getCurrentMember().getName());
+    lastname.setText(JavaFXMLApplication.getCurrentMember().getSurname());
+    username.setText(JavaFXMLApplication.getCurrentMember().getNickName());
+    password.setText(JavaFXMLApplication.getCurrentMember().getPassword());
+    telephone.setText(JavaFXMLApplication.getCurrentMember().getTelephone());
    }
 
 
@@ -78,8 +92,96 @@ public class MyData implements Initializable {
     }
 
     public void selectionButton(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
+        if (selectedFile != null) {
+            profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+        }
     }
 
     public void modifyButton(ActionEvent actionEvent) {
+        String name = this.name.getText();
+        String lastname = this.lastname.getText();
+        String username = this.username.getText();
+        String password = this.password.getText();
+        String creditcard = this.creditcard.getText();
+        String Scsc = this.csc.getText();
+        String telephone = this.telephone.getText();
+
+
+
+
+        ///////////////////name checkings/////////////////////////////////////////////////////////////
+        if(!name.matches("[a-zA-Z]*") || name.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Name Field. Remember to write just characters.");
+            this.name.setText("");
+            correctFormat = false;
+        }
+
+        ///////////////////lastname checkings/////////////////////////////////////////////////////////////
+        if(!lastname.matches("[a-zA-Z]*") || lastname.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Last Name Field. Remember to write just characters.");
+            this.lastname.setText("");
+            correctFormat = false;
+        }
+
+        ///////////////////telephone checkings/////////////////////////////////////////////////////////////
+        if(!telephone.matches("^[0-9]+$") || telephone.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Telephone Number Field. Remember to write just numbers.");
+        }
+
+        /////////////////////username checkings///////////////////////////////////////////////////////////
+        if(JavaFXMLApplication.getCurrentClub().existsLogin(username)){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Username Field. Username already in use.");
+            this.username.setText("");
+            correctFormat = false;
+        }
+        if(username.matches(".*\\s.*")){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Username Field. Remember it can't contain spaces.");
+            this.username.setText("");
+            correctFormat = false;
+        }
+
+        /////////////////////password checkings///////////////////////////////////////////////////////////
+        if(password.length() < 6){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Password Field. Remember it should contain at least 6 characters.");
+            this.password.setText("");
+            correctFormat = false;
+        }
+        /////////////////////credit card checkings///////////////////////////////////////////////////////////
+        if(creditcard.length() != 16 && !creditcard.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember it should contain 16 numb ers.");
+            this.creditcard.setText("");
+            correctFormat = false;
+        }
+        if(!creditcard.matches("\\d+") && !creditcard.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember it should contain 16 numbers.");
+            this.creditcard.setText("");
+            correctFormat = false;
+        }
+
+        if((Scsc.length() != 3 || !Scsc.matches("^[0-9]+$")) && !Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember it should contain 3 digits.");
+            this.csc.setText("");
+            correctFormat = false;
+        }
+
+        if(!creditcard.isEmpty() && Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember to write the CSC.");
+            correctFormat = false;
+        }
+        if(creditcard.isEmpty() && !Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember to write the Credit Card.");
+            correctFormat = false;
+        }
+
+
+
+        if(!correctFormat){
+            return;
+        }
     }
 }

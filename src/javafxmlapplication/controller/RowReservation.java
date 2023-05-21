@@ -2,17 +2,19 @@ package javafxmlapplication.controller;
 
 import javafx.scene.paint.Color;
 
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 
-public class ToDo {
+public class RowReservation {
     String title;
-    LocalDate dueBy;
+    String user;
     Color status;
     boolean free;
+    String id;
 
-    ToDo(String title, LocalDate dueBy, boolean free) {
+    RowReservation(String title, String user, boolean free) {
         this.title = title;
-        this.dueBy = dueBy;
+        this.user = user;
         this.free = free;
         if ( !free ) {
             this.status = Color.RED;
@@ -20,4 +22,6 @@ public class ToDo {
             this.status = Color.GREEN;
         }
     }
+
+
 }

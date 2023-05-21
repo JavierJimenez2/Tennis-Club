@@ -1,34 +1,35 @@
 package javafxmlapplication.controller;
 
 
-import java.awt.event.MouseEvent;
+import java.awt.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+//import color.Color;
+import javafx.beans.binding.Bindings;
+import java.awt.Color;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafxmlapplication.model.layouts.BootstrapColumn;
 import javafxmlapplication.model.layouts.BootstrapPane;
 import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
+
 
 public class Reservas implements Initializable {
 
@@ -68,6 +69,15 @@ public class Reservas implements Initializable {
     @FXML
     private VBox root;
 
+    @FXML
+    public ScrollPane scrollPane;
+
+    @FXML
+    private AnchorPane anchorPane;
+
+    @FXML
+    private TabPane tabPane;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -98,37 +108,33 @@ public class Reservas implements Initializable {
     @FXML
     public void ChoiceBoxHover(javafx.scene.input.MouseEvent mouseEvent) {
         choice.show();
-
     }
 
     public void courtView(){
-        BootstrapPane root1 = makeView();
-        root.getChildren().add(root1);
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
 
-        ScrollPane scrollPane = new ScrollPane(root);
+        root.getChildren().add(makeView());
+
+        scrollPane.setContent(root);
+
+
+//        scrollPane = new ScrollPane(root);
+//        set root as the content of the scrollpane
+//        scrollPane.setContent(root);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
+//        scrollPane.setPannable(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
-//        double width = primaryStage.getWidth();
-//        double height = primaryStage.getHeight();
-//        primaryStage.close();
-//        primaryStage.setTitle("Reservation");
-//        primaryStage.setScene(new Scene(scrollPane, width, height));
-//
-//        primaryStage.getIcons().add(new Image(
-//                Objects.requireNonNull(getClass().getResourceAsStream("./layouts/img/EdenCodingIcon.png"))
-//        ));
-//
-//
-//        primaryStage.show();
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
     }
 
 
     private BootstrapPane makeView() {
         BootstrapPane bootstrapPane = new BootstrapPane();
-        bootstrapPane.setPadding(new Insets(20));
+//        bootstrapPane.setPadding(new Insets(20));
         int gap = 25;
         bootstrapPane.setVgap(gap);
         bootstrapPane.setHgap(gap);
@@ -136,9 +142,9 @@ public class Reservas implements Initializable {
 
         BootstrapRow row = new BootstrapRow();
 
-        row.addColumn(createTitleColumn());
+//        row.addColumn(createTitleColumn());
         for ( int i = 1; i <= 6; i++ ) {
-            row.addColumn(createColumn(createWidget("Court " + i, seedImportant())));
+            row.addColumn(createColumn(createWidget("Court " + i, courtSlots())));
         }
 
         bootstrapPane.addRow(row);
@@ -147,7 +153,7 @@ public class Reservas implements Initializable {
 
     private BootstrapColumn createTitleColumn() {
         Label title = new Label("Courts available");
-        title.setTextFill(Color.BLACK);
+        title.setAlignment(Pos.CENTER);
 
         //style
         title.getStyleClass().add("app-title2");
@@ -168,7 +174,7 @@ public class Reservas implements Initializable {
         return column;
     }
 
-    private Node createWidget(String title, List<ToDo> items) {
+    private Node createWidget(String title, List<RowReservation> items) {
         VBox widget = new VBox();
         widget.getStyleClass().add("widget");
         HBox titleLabel = new HBox();
@@ -178,16 +184,19 @@ public class Reservas implements Initializable {
         widget.getChildren().add(titleLabel);
         widget.getChildren().add(new Separator(Orientation.HORIZONTAL));
 
-        for ( ToDo todo : items ) {
+//        Aqui se agregan los items de row reservation
+        for ( RowReservation todo : items ) {
             widget.getChildren().add(createItem(todo));
+
         }
         return widget;
     }
 
-    private Node createItem(ToDo todo) {
+    private Node createItem(RowReservation row) {
         HBox item = new HBox();
+        item.setAlignment(Pos.CENTER);
         item.getStyleClass().add("item");
-        if ( todo.free ) {
+        if ( row.free ) {
             item.getStyleClass().add("free");
         } else {
             item.getStyleClass().add("reserved");
@@ -195,21 +204,40 @@ public class Reservas implements Initializable {
 
         HBox left = new HBox();
         HBox.setHgrow(left, Priority.ALWAYS);
-        left.getChildren().add(new Label(todo.title));
+        left.getChildren().add(new Label(row.title));
 
         HBox right = new HBox();
         right.setSpacing(15);
         right.setMinWidth(80);
         right.setAlignment(Pos.CENTER_RIGHT);
-        HBox.setHgrow(right, Priority.NEVER);
-        right.getChildren().add(new Label(todo.dueBy.format(DateTimeFormatter.ofPattern("dd-MMM"))));
-        right.getChildren().add(new Circle(5, todo.status));
+        HBox.setHgrow(right, Priority.ALWAYS);
+        HBox.setHgrow(left, Priority.NEVER);
+        if ( row.free ){
+            right.getChildren().add(new Label("Free"));
+        }else {
+            Label user = new Label("@" + row.user);
+            user.setStyle("-fx-font-size: 10px;");
+            right.getChildren().add(user);
+        }
+        right.getChildren().add(new Circle(5, row.status));
 
         item.getChildren().addAll(left, right);
+        item.setOnMouseClicked(event -> {
+//            TODO tio va reservar
+            if ( row.free ) {
+                row.free = false;
+                item.getStyleClass().remove("free");
+                item.getStyleClass().add("reserved");
+            } else {
+                row.free = true;
+                item.getStyleClass().remove("reserved");
+                item.getStyleClass().add("free");
+            }
+        });
         return item;
     }
 
-    private List<ToDo> seedImportant() {
+    private List<RowReservation> courtSlots() {
         String[] hours = new String[13];
         int f = 9;
         for ( int i = 0; i < 13; i++ ) {
@@ -217,18 +245,15 @@ public class Reservas implements Initializable {
             f++;
         }
 
-        ToDo[] toDos = new ToDo[hours.length];
+        RowReservation[] rowReservations = new RowReservation[hours.length];
         int i = 0;
         while (i < hours.length) {
-            toDos[i] = new ToDo(hours[i], LocalDate.now(), true);
+
+            rowReservations[i] = new RowReservation(hours[i], "esteban",false );
             i++;
-            if ( i < hours.length ) {
-                toDos[i] = new ToDo(hours[i], LocalDate.now(), false);
-                i++;
-            }
         }
 
-        return Arrays.asList(toDos);
+        return Arrays.asList(rowReservations);
     }
     
 }
