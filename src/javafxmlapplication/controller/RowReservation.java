@@ -17,7 +17,7 @@ public class RowReservation extends Booking {
     private Court court;
 
     private Member member;
-    protected static boolean reserved;
+    protected boolean reserved;
 
     public RowReservation(LocalDateTime bookingDate, LocalDate madeForDay, LocalTime fromHour, boolean paid,
                           Court court, Member member) {

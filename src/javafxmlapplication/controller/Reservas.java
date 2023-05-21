@@ -1,80 +1,65 @@
 package javafxmlapplication.controller;
 
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-//import color.Color;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafxmlapplication.model.JavaFXMLApplication;
 import javafxmlapplication.model.layouts.BootstrapColumn;
 import javafxmlapplication.model.layouts.BootstrapPane;
 import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
-import model.*;
+import model.Club;
+import model.Court;
+import model.Member;
+
+import java.awt.*;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class Reservas implements Initializable {
 
     @FXML
+    public ScrollPane scrollPane;
+    @FXML
     private DatePicker DatePicker;
-
     @FXML
     private Tab MisReservasTab;
-
     @FXML
     private Tab ReservasTab;
-
     @FXML
     private Label appTitle;
-
     @FXML
     private ImageView avatar;
-
     @FXML
     private ComboBox<Label> choice;
-
     @FXML
     private TabPane intPane;
-
     @FXML
     private HBox menuBar;
-
     @FXML
     private BorderPane pane;
-
     @FXML
     private StackPane stackPane;
-
     @FXML
     private Text textDate;
-
     @FXML
     private VBox root;
-
-    @FXML
-    public ScrollPane scrollPane;
-
     @FXML
     private AnchorPane anchorPane;
 
@@ -85,7 +70,6 @@ public class Reservas implements Initializable {
     private Club club;
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Club club = null;
@@ -94,7 +78,7 @@ public class Reservas implements Initializable {
         } catch (Exception ignored) {
         }
         assert club != null;
-        member = club.getMemberByCredentials("jjr","1234");
+        member = club.getMemberByCredentials("jjr", "1234");
 
         choice.getItems().addAll(
                 new Label("Profile"),
@@ -110,7 +94,7 @@ public class Reservas implements Initializable {
                 public void updateItem(LocalDate date, boolean empty) {
                     super.updateItem(date, empty);
                     LocalDate today = LocalDate.now();
-                    setDisable(empty || date.compareTo(today) < 0 );
+                    setDisable(empty || date.compareTo(today) < 0);
                 }
             };
         });
@@ -126,7 +110,7 @@ public class Reservas implements Initializable {
         choice.show();
     }
 
-    public void courtView(){
+    public void courtView() {
         VBox root = new VBox();
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
@@ -212,12 +196,12 @@ public class Reservas implements Initializable {
         HBox item = new HBox();
         item.setAlignment(Pos.CENTER);
         item.getStyleClass().add("item");
-        Color circle=Color.green;
+        Color circle = Color.green;
 
 
-        if ( !row.isReserved()) {
+        if ( !row.isReserved() ) {
             item.getStyleClass().add("free");
-            
+
         } else {
             item.getStyleClass().add("reserved");
             circle = Color.red;
@@ -236,9 +220,9 @@ public class Reservas implements Initializable {
         right.setAlignment(Pos.CENTER_RIGHT);
         HBox.setHgrow(right, Priority.ALWAYS);
         HBox.setHgrow(left, Priority.NEVER);
-        if ( row.isReserved() ){
+        if ( row.isReserved() ) {
             right.getChildren().add(new Label("Free"));
-        }else {
+        } else {
             Label user = new Label("@" + row.getMember().getNickName());
             user.setStyle("-fx-font-size: 10px;");
             right.getChildren().add(user);
@@ -274,27 +258,11 @@ public class Reservas implements Initializable {
 //        ArrayList<Booking> ar = (ArrayList<Booking>) club.getCourtBookings(court.getName(), DatePicker.getValue());
 
 
-
         RowReservation[] rowReservations = new RowReservation[hours.length];
-        int i=0;
+        int i = 0;
         while (i < hours.length) {
-
-//
-//            if ( !(ar == null) ) {
-//                for ( Booking booking : ar ) {
-//                    if ( booking.getFromTime().equals(hours[i]) ) {
-//                        rowReservations[i].setReserved(true);
-//                        break;
-//                    }
-//                }
-//            }
-            if ( true ) {
-                rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
-                        true,court, member);
-            }else {
-                rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
-                        false,court, member);
-            }
+            rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
+                    true, court, member);
             i++;
         }
 
@@ -302,5 +270,4 @@ public class Reservas implements Initializable {
     }
 
 
-    
 }
