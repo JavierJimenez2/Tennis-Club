@@ -228,3 +228,13 @@
     -fx-text-fill: white;
 }
 
+.tabPane{
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 0 0 0 0;
+}
+
+#scrollPane{
+    -fx-background-color: transparent;
+}

@@ -7,14 +7,14 @@ import java.time.LocalDate;
 
 public class RowReservation {
     String title;
-    LocalDate dueBy;
+    String user;
     Color status;
     boolean free;
     String id;
 
-    RowReservation(String title, LocalDate dueBy, boolean free) {
+    RowReservation(String title, String user, boolean free) {
         this.title = title;
-        this.dueBy = dueBy;
+        this.user = user;
         this.free = free;
         if ( !free ) {
             this.status = Color.RED;

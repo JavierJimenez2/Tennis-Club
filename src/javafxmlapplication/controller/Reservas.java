@@ -75,6 +75,9 @@ public class Reservas implements Initializable {
     @FXML
     private AnchorPane anchorPane;
 
+    @FXML
+    private TabPane tabPane;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -108,18 +111,23 @@ public class Reservas implements Initializable {
     }
 
     public void courtView(){
-        BootstrapPane root1 = makeView();
-        root.getChildren().add(root1);
+        VBox root = new VBox();
+        root.setSpacing(10);
+        root.setAlignment(Pos.CENTER);
 
-        anchorPane.getChildren().add(root);
+        root.getChildren().add(makeView());
+
+        scrollPane.setContent(root);
+
 
 //        scrollPane = new ScrollPane(root);
 //        set root as the content of the scrollpane
 //        scrollPane.setContent(root);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//        scrollPane.setPannable(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
     }
 
@@ -184,10 +192,11 @@ public class Reservas implements Initializable {
         return widget;
     }
 
-    private Node createItem(RowReservation todo) {
+    private Node createItem(RowReservation row) {
         HBox item = new HBox();
+        item.setAlignment(Pos.CENTER);
         item.getStyleClass().add("item");
-        if ( todo.free ) {
+        if ( row.free ) {
             item.getStyleClass().add("free");
         } else {
             item.getStyleClass().add("reserved");
@@ -195,25 +204,32 @@ public class Reservas implements Initializable {
 
         HBox left = new HBox();
         HBox.setHgrow(left, Priority.ALWAYS);
-        left.getChildren().add(new Label(todo.title));
+        left.getChildren().add(new Label(row.title));
 
         HBox right = new HBox();
         right.setSpacing(15);
         right.setMinWidth(80);
         right.setAlignment(Pos.CENTER_RIGHT);
-        HBox.setHgrow(right, Priority.NEVER);
-        right.getChildren().add(new Label(todo.dueBy.format(DateTimeFormatter.ofPattern("dd-MMM"))));
-        right.getChildren().add(new Circle(5, todo.status));
+        HBox.setHgrow(right, Priority.ALWAYS);
+        HBox.setHgrow(left, Priority.NEVER);
+        if ( row.free ){
+            right.getChildren().add(new Label("Free"));
+        }else {
+            Label user = new Label("@" + row.user);
+            user.setStyle("-fx-font-size: 10px;");
+            right.getChildren().add(user);
+        }
+        right.getChildren().add(new Circle(5, row.status));
 
         item.getChildren().addAll(left, right);
         item.setOnMouseClicked(event -> {
 //            TODO tio va reservar
-            if ( todo.free ) {
-                todo.free = false;
+            if ( row.free ) {
+                row.free = false;
                 item.getStyleClass().remove("free");
                 item.getStyleClass().add("reserved");
             } else {
-                todo.free = true;
+                row.free = true;
                 item.getStyleClass().remove("reserved");
                 item.getStyleClass().add("free");
             }
@@ -232,9 +248,8 @@ public class Reservas implements Initializable {
         RowReservation[] rowReservations = new RowReservation[hours.length];
         int i = 0;
         while (i < hours.length) {
-// TODO Restricciones
-//
-            rowReservations[i] = new RowReservation(hours[i], LocalDate.now(), true);
+
+            rowReservations[i] = new RowReservation(hours[i], "esteban",false );
             i++;
         }
 
