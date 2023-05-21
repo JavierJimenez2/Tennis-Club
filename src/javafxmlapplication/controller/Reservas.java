@@ -78,6 +78,18 @@ public class Reservas implements Initializable {
                 new Label("Logout")
         );
 
+//      Code for disabling the past days.
+        DatePicker.setDayCellFactory((DatePicker picker) -> {
+            return new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty) {
+                    super.updateItem(date, empty);
+                    LocalDate today = LocalDate.now();
+                    setDisable(empty || date.compareTo(today) < 0 );
+                }
+            };
+        });
+
 //        get the stage
 
         courtView();
@@ -134,7 +146,8 @@ public class Reservas implements Initializable {
     }
 
     private BootstrapColumn createTitleColumn() {
-        Label title = new Label("Reservation");
+        Label title = new Label("Courts available");
+        title.setTextFill(Color.BLACK);
 
         //style
         title.getStyleClass().add("app-title2");
