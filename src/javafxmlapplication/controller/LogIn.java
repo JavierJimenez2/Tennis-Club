@@ -8,13 +8,16 @@ package javafxmlapplication.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
+import javafxmlapplication.model.Reservations;
 import model.Club;
 import model.ClubDAOException;
 import model.Member;
@@ -63,7 +66,12 @@ public class LogIn implements Initializable {
         Member member = club.getMemberByCredentials(user, pass);
         JavaFXMLApplication.setCurrentMember(member);
         if (member != null) {
-            JavaFXMLApplication.changeScene(eventLog, "Reservation.fxml");
+            // No usamos el "Reservation.fxml".
+            // JavaFXMLApplication.changeScene(eventLog, "Reservation.fxml");
+
+            Stage stage = (Stage) ((Node) eventLog.getSource()).getScene().getWindow();
+            Reservations reservations = new Reservations();
+            reservations.start(stage);
         } else {
             JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
             username.setText("");

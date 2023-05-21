@@ -44,7 +44,7 @@ public class Reservations extends Application {
         menuBar.setPadding(new Insets(20));
         menuBar.setSpacing(10);
         menuBar.setAlignment(Pos.CENTER_LEFT);
-        Label AppTitle = new Label("GreenBall");
+        Label AppTitle = new Label("Slash");
         AppTitle.getStyleClass().add("app-title");
         ImageView avatar = new ImageView(new Image(
                 Objects.requireNonNull(getClass().getResourceAsStream("/javafxmlapplication/view/css/img/icons/avatar_icon.png"))
@@ -78,8 +78,8 @@ public class Reservations extends Application {
             }
         });
 
-//        on hover open the choice box
-        choiceBox.setOnMouseEntered(event -> {
+//        on click, open the choice box
+        choiceBox.setOnMouseClicked(event -> {
             choiceBox.show();
         });
 //        choiceBox.setOnMouseExited(event -> {
@@ -113,6 +113,9 @@ public class Reservations extends Application {
 
         BootstrapPane root1 = makeView();
         root.setCenter(root1);
+
+
+        // SI ESTÁ COMENTADO EL ESTILO, ES PARA QUE SE VEA MÁS VISUAL EL LAYOUT EN DESARROLLO.
         root.getStylesheets().add(
                 Objects.requireNonNull(getClass().getResource("./layouts/css/styles.css")).toExternalForm());
 
@@ -126,7 +129,7 @@ public class Reservations extends Application {
         primaryStage.setMaximized(true);
 
         primaryStage.getIcons().add(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("./layouts/img/EdenCodingIcon.png"))
+                Objects.requireNonNull(getClass().getResourceAsStream("./layouts/img/tennisBallIcon.png"))
         ));
 
 

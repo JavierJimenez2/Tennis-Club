@@ -69,7 +69,7 @@ public class Main implements Initializable {
 //
 
 //        Dialog window
-        JavaFXMLApplication.dialogBox("info","Information","To make a resrvation first Log In, or Sign Up if you don't have an account");
+        JavaFXMLApplication.dialogBox("info","Information","To make a reservation first Log In, or Sign Up if you don't have an account");
     }
 
 
