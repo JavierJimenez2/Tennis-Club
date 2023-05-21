@@ -89,7 +89,7 @@ public class JavaFXMLApplication extends Application {
         club.setName("Slash");
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Reservas.fxml"));
         Parent root = loader.load();
         //roots.put("inicio",root);  //add "FXMLInicio" to scenes map
         //======================================================================
