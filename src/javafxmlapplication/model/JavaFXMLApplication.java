@@ -89,7 +89,7 @@ public class JavaFXMLApplication extends Application {
         club.setName("Slash");
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Reservas.fxml"));
         Parent root = loader.load();
         //roots.put("inicio",root);  //add "FXMLInicio" to scenes map
         //======================================================================
@@ -128,9 +128,11 @@ public class JavaFXMLApplication extends Application {
         stage.setMinHeight(500);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
+        scene.getStylesheets().add("javafxmlapplication/model/layouts/css/styles.css");
 //        get the width and print it
         stage.setScene(scene);
         stage.setTitle("GreenBall");
+        stage.setMaximized(true);
         stage.show();
 
 

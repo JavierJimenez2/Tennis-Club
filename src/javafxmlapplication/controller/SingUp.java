@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -37,6 +38,7 @@ public class SingUp implements Initializable {
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     public Button returnButton;
     private static boolean correctFormat = true;
+    public TextField csc;
 
     @FXML
     private HBox buttonsZone;
@@ -105,7 +107,7 @@ public class SingUp implements Initializable {
         String username = this.username.getText();
         String password = this.password.getText();
         String creditcard = this.creditcard.getText();
-        int svc = 123;
+        String Scsc = this.csc.getText();
         String telephone = this.telephone.getText();
 
 
@@ -158,11 +160,20 @@ public class SingUp implements Initializable {
             correctFormat = false;
         }
 
-        /*if(svc.length() != 3){
+        if((Scsc.length() != 3 || !Scsc.matches("^[0-9]+$")) && !Scsc.isEmpty()){
             JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember it should contain 3 digits.");
-            this.svc.setText("");
+            this.csc.setText("");
             correctFormat = false;
-        }*/
+        }
+
+        if(!creditcard.isEmpty() && Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember to write the CSC.");
+            correctFormat = false;
+        }
+        if(creditcard.isEmpty() && !Scsc.isEmpty()){
+            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember to write the Credit Card.");
+            correctFormat = false;
+        }
 
 
 
@@ -170,9 +181,9 @@ public class SingUp implements Initializable {
             return;
         }
 
-
+        int csc = Integer.parseInt(Scsc);
         Club club = Club.getInstance();
-        Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, svc, profileImage.getImage());
+        Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, csc, profileImage.getImage());
         if (result != null) {
             JavaFXMLApplication.dialogBox("success", "Success", "You have been registered successfully");
             JavaFXMLApplication.changeScene(eventReg, "LogIn.fxml");

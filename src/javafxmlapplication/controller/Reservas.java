@@ -1,6 +1,17 @@
-package javafxmlapplication.model;
+package javafxmlapplication.controller;
 
-import javafx.application.Application;
+
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -12,138 +23,96 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafxmlapplication.model.layouts.BootstrapColumn;
 import javafxmlapplication.model.layouts.BootstrapPane;
 import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+public class Reservas implements Initializable {
 
-public class Reservations extends Application {
+    @FXML
+    private DatePicker DatePicker;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    @FXML
+    private Tab MisReservasTab;
+
+    @FXML
+    private Tab ReservasTab;
+
+    @FXML
+    private Label appTitle;
+
+    @FXML
+    private ImageView avatar;
+
+    @FXML
+    private ComboBox<Label> choice;
+
+    @FXML
+    private TabPane intPane;
+
+    @FXML
+    private HBox menuBar;
+
+    @FXML
+    private BorderPane pane;
+
+    @FXML
+    private StackPane stackPane;
+
+    @FXML
+    private Text textDate;
+
+    @FXML
+    private VBox root;
+
 
     @Override
-    public void start(Stage primaryStage) {
-//        change the variables of the css file
-
-
-
-
-        BorderPane root = new BorderPane();
-        root.getStyleClass().add("background");
-
-        // MenuBar
-        HBox menuBar = new HBox();
-        menuBar.getStyleClass().add("menu-bar");
-        menuBar.setPadding(new Insets(20));
-        menuBar.setSpacing(10);
-        menuBar.setAlignment(Pos.CENTER_LEFT);
-        Label AppTitle = new Label("Slash");
-        AppTitle.getStyleClass().add("app-title");
-        ImageView avatar = new ImageView(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("/javafxmlapplication/view/css/img/icons/avatar_icon.png"))
-        ));
-        avatar.setPreserveRatio(true);
-        avatar.getStyleClass().add("avatar");
-        avatar.setFitHeight(60);
-//        set the alignment of the avatar to the right
-        //set the apptitle to the left
-
-//        set a padding right to the avatar
-        HBox.setMargin(avatar, new Insets(0, 20, 0, 0));
-
-//      use the avatar as a choice box
-        ComboBox<Label> choiceBox = new ComboBox<>();
-//        ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll(
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        choice.getItems().addAll(
                 new Label("Profile"),
                 new Label("Settings"),
                 new Label("Dark Mode"),
                 new Label("Logout")
         );
 
-//
+//        get the stage
 
+        courtView();
+    }
 
-        choiceBox.setOnAction(event -> {
-            Label selectedItem = choiceBox.getSelectionModel().getSelectedItem();
-            if ( selectedItem != null ) {
-                System.out.println(selectedItem.getText());
-            }
-        });
+    @FXML
+    public void ChoiceBoxHover(javafx.scene.input.MouseEvent mouseEvent) {
+        choice.show();
 
-//        on click, open the choice box
-        choiceBox.setOnMouseClicked(event -> {
-            choiceBox.show();
-        });
-//        choiceBox.setOnMouseExited(event -> {
-//            choiceBox.hide();
-//        });
+    }
 
-
-
-//        get style class from the choice box
-        choiceBox.setPrefWidth(30);
-        choiceBox.setPrefHeight(30);
-        choiceBox.setPadding(new Insets(0, 0, 0, 0));
-        choiceBox.setOpacity(0);
-
-
-//        choicebox behind the avatar
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().addAll(avatar, choiceBox);
-        HBox.setMargin(stackPane, new Insets(0, 20, 0, 0));
-
-
-        HBox.setHgrow(AppTitle, Priority.ALWAYS);
-        HBox.setHgrow(stackPane, Priority.SOMETIMES);
-
-
-        menuBar.getChildren().add(AppTitle);
-        menuBar.getChildren().add(stackPane);
-
-//        menuBar.getChildren().add(avatar);
-        root.setTop(menuBar);
-
-
-        // End of Menu
-
-
-
+    public void courtView(){
         BootstrapPane root1 = makeView();
-        root.setCenter(root1);
-
-
-        // SI ESTÁ COMENTADO EL ESTILO, ES PARA QUE SE VEA MÁS VISUAL EL LAYOUT EN DESARROLLO.
-        root.getStylesheets().add(
-                Objects.requireNonNull(getClass().getResource("./layouts/css/styles.css")).toExternalForm());
+        root.getChildren().add(root1);
 
         ScrollPane scrollPane = new ScrollPane(root);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        double width = primaryStage.getWidth();
-        double height = primaryStage.getHeight();
-        primaryStage.close();
-        primaryStage.setTitle("Reservations");
-        primaryStage.setScene(new Scene(scrollPane, width, height));
+//        double width = primaryStage.getWidth();
+//        double height = primaryStage.getHeight();
+//        primaryStage.close();
+//        primaryStage.setTitle("Reservation");
+//        primaryStage.setScene(new Scene(scrollPane, width, height));
+//
+//        primaryStage.getIcons().add(new Image(
+//                Objects.requireNonNull(getClass().getResourceAsStream("./layouts/img/EdenCodingIcon.png"))
+//        ));
+//
+//
+//        primaryStage.show();
 
-        primaryStage.getIcons().add(new Image(
-                Objects.requireNonNull(getClass().getResourceAsStream("./layouts/img/tennisBallIcon.png"))
-        ));
-
-
-        primaryStage.show();
     }
+
 
     private BootstrapPane makeView() {
         BootstrapPane bootstrapPane = new BootstrapPane();
@@ -165,7 +134,7 @@ public class Reservations extends Application {
     }
 
     private BootstrapColumn createTitleColumn() {
-        Label title = new Label("Reservations");
+        Label title = new Label("Reservation");
 
         //style
         title.getStyleClass().add("app-title2");
@@ -248,22 +217,5 @@ public class Reservations extends Application {
 
         return Arrays.asList(toDos);
     }
-
-    private static class ToDo {
-        String title;
-        LocalDate dueBy;
-        Color status;
-        boolean free;
-
-        ToDo(String title, LocalDate dueBy, boolean free) {
-            this.title = title;
-            this.dueBy = dueBy;
-            this.free = free;
-            if ( !free ) {
-                this.status = Color.RED;
-            } else {
-                this.status = Color.GREEN;
-            }
-        }
-    }
+    
 }
