@@ -54,7 +54,7 @@
    <top>
       <HBox fx:id="menuBar" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="menu-bar" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="appTitle" styleClass="app-title" text="Slash" HBox.hgrow="ALWAYS" />
+            <Label fx:id="appTitle" styleClass="app-title" text="GreenBall" HBox.hgrow="ALWAYS" />
             <StackPane fx:id="stackPane" prefHeight="100.0" prefWidth="17.0" HBox.hgrow="SOMETIMES">
                <HBox.margin>
                   <Insets right="20.0" />

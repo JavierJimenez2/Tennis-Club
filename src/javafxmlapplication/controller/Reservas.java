@@ -30,8 +30,6 @@ import javafxmlapplication.model.layouts.BootstrapPane;
 import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
 
-import static java.awt.Color.BLACK;
-import static java.awt.Color.black;
 
 public class Reservas implements Initializable {
 
@@ -147,7 +145,7 @@ public class Reservas implements Initializable {
 
     private BootstrapColumn createTitleColumn() {
         Label title = new Label("Courts available");
-        title.setTextFill(BLACK);
+        title.setAlignment(Pos.CENTER);
 
         //style
         title.getStyleClass().add("app-title2");
