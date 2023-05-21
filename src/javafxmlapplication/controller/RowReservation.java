@@ -1,26 +1,27 @@
 package javafxmlapplication.controller;
 
 import javafx.scene.paint.Color;
+import model.Booking;
+import model.Court;
+import model.Member;
 
-import java.awt.event.MouseEvent;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
-public class RowReservation {
-    String title;
-    String user;
-    Color status;
-    boolean free;
-    String id;
+public class RowReservation extends Booking {
+    private LocalDateTime bookingDate;
+    private LocalDate madeForDay;
+    private LocalTime fromTime;
+    private Boolean paid;
+    private Court court;
 
-    RowReservation(String title, String user, boolean free) {
-        this.title = title;
-        this.user = user;
-        this.free = free;
-        if ( !free ) {
-            this.status = Color.RED;
-        } else {
-            this.status = Color.GREEN;
-        }
+    private Member member;
+    protected static boolean reserved;
+
+    public RowReservation(LocalDateTime bookingDate, LocalDate madeForDay, LocalTime fromHour, boolean paid,
+                          Court court, Member member) {
+        super(bookingDate, madeForDay, fromHour, paid, court, member);
     }
 
 
