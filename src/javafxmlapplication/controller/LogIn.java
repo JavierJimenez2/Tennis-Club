@@ -62,13 +62,12 @@ public class LogIn implements Initializable {
     public void loginButton(ActionEvent eventLog) throws ClubDAOException, IOException {
         String user = username.getText();
         String pass = password.getText();
-        Club club = JavaFXMLApplication.getCurrentClub();
-        Member member = club.getMemberByCredentials(user, pass);
-        JavaFXMLApplication.setCurrentMember(member);
-        if (member != null) {
+        //Club club = JavaFXMLApplication.getCurrentClub();
+        if(JavaFXMLApplication.getCurrentClub().existsLogin(user)){
+        Member member = JavaFXMLApplication.getCurrentClub().getMemberByCredentials(user, pass);
             // No usamos el "Reservation.fxml".
             // JavaFXMLApplication.changeScene(eventLog, "Reservation.fxml");
-
+            JavaFXMLApplication.setCurrentMember(member);
             Stage stage = (Stage) ((Node) eventLog.getSource()).getScene().getWindow();
             Reservations reservations = new Reservations();
             reservations.start(stage);

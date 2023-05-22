@@ -64,7 +64,7 @@ public class MyData implements Initializable {
     username.setText(JavaFXMLApplication.getCurrentMember().getNickName());
     password.setText(JavaFXMLApplication.getCurrentMember().getPassword());
     telephone.setText(JavaFXMLApplication.getCurrentMember().getTelephone());
-    if(!JavaFXMLApplication.getCurrentMember().getCreditCard().isEmpty()){
+    if(!JavaFXMLApplication.getCurrentMember().getCreditCard().isEmpty() && JavaFXMLApplication.getCurrentMember().getSvc() != 0){
         creditcard.setText(JavaFXMLApplication.getCurrentMember().getCreditCard());
         csc.setText(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()));
     }

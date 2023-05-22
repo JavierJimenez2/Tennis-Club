@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
+import javafxmlapplication.model.Reservations;
 import model.Club;
 import model.ClubDAOException;
 import model.Member;
@@ -109,6 +110,7 @@ public class SingUp implements Initializable {
         String creditcard = this.creditcard.getText();
         String Scsc = this.csc.getText();
         String telephone = this.telephone.getText();
+        int Icsc;
 
 
         ///////////////////name checkings/////////////////////////////////////////////////////////////
@@ -180,18 +182,19 @@ public class SingUp implements Initializable {
         if(!correctFormat){
             return;
         }
-
-            int csc = Integer.parseInt(Scsc);
-
+            if(!Scsc.isEmpty()) {
+                Icsc = Integer.parseInt(Scsc);          //hay que mandar un int al constructor aunque no haya targ/csc puesto
+            } else{                                     //asi que mando 0.    0 = null --> hay que hacer cambios convenientes al
+                 Icsc = 0;                              //al mostrar datos -> if 0 then show "".
+            }
         //Club club = Club.getInstance();
-        Member result = JavaFXMLApplication.getCurrentClub().registerMember(name, lastname, telephone, username, password, creditcard, csc, profileImage.getImage());
-        if (result != null) {
+       JavaFXMLApplication.getCurrentClub().registerMember(name, lastname, telephone, username, password, creditcard, Icsc, profileImage.getImage());
+
             JavaFXMLApplication.dialogBox("success", "Success", "You have been registered successfully");
-            JavaFXMLApplication.changeScene(eventReg, "LogIn.fxml");
-        } else {
-            JavaFXMLApplication.dialogBox("error", "Error", "You have not been registered successfully");
-            JavaFXMLApplication.changeScene(eventReg, "SingUp.fxml");
-        }
+            JavaFXMLApplication.changeScene(eventReg,"LogIn.fxml");
+
+
+
 
     }
 

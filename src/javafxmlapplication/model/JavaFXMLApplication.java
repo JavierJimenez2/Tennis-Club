@@ -22,6 +22,9 @@ import java.util.Stack;
 
 public class JavaFXMLApplication extends Application {
 
+    //si no quereis crear usuario --> usuario: mrg, contraseña: marc123
+
+
     private static Scene scene;
     private static Member member;
     private static Club club;
@@ -89,7 +92,7 @@ public class JavaFXMLApplication extends Application {
         club.setName("Slash");
         //======================================================================
         // 1- creación del grafo de escena a partir del fichero FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Reservas.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
         Parent root = loader.load();
         //roots.put("inicio",root);  //add "FXMLInicio" to scenes map
         //======================================================================
