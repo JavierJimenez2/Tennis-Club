@@ -1,6 +1,7 @@
 package javafxmlapplication.controller;
 
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
@@ -10,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafxmlapplication.model.layouts.BootstrapColumn;
@@ -193,46 +196,58 @@ public class Reservas implements Initializable {
     }
 
     private Node createItem(RowReservation row) {
-        HBox item = new HBox();
+        HBox item = new HBox(); //HBox containing at the same time HBox right and HBox left;
         item.setAlignment(Pos.CENTER);
         item.getStyleClass().add("item");
-        Color circle = Color.green;
+        Circle circle = new Circle(5.0); // Circle that indicates with its color if slot reserved or not.
+        javafx.scene.paint.Color circleColor;
 
+//  Labels for either free, or user that reserved the time slot if reserved.
 
+//  Free label:
+        Label freeLabel = new Label("Free");
+
+//  User Label:
+        Label userLabel = new Label("@" + row.getMember().getNickName());
+        userLabel.setStyle("-fx-font-size: 14px;");
+
+//  Sets the initial color of the ball depending on the state of the RowReservation object.
         if ( !row.isReserved() ) {
             item.getStyleClass().add("free");
+            circleColor = Color.DARKGREEN;
 
         } else {
             item.getStyleClass().add("reserved");
-            circle = Color.red;
+            circleColor = javafx.scene.paint.Color.RED;
         }
-
+//  HBox that contains the time slot.
         HBox left = new HBox();
         HBox.setHgrow(left, Priority.ALWAYS);
-//        time in 24h format e.g. 13:00 - 14:00
+
+//  time in 24h format e.g. 13:00 - 14:00
         LocalTime toTime = row.getFromTime().plusHours(1);
         String time = row.getFromTime().format(DateTimeFormatter.ofPattern("HH:mm")) + " - " + toTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         left.getChildren().add(new Label(time));
 
+//  Settings of the HBox containing the elements representing the RowReservation object.
         HBox right = new HBox();
         right.setSpacing(15);
         right.setMinWidth(80);
         right.setAlignment(Pos.CENTER_RIGHT);
         HBox.setHgrow(right, Priority.ALWAYS);
         HBox.setHgrow(left, Priority.NEVER);
-        if ( row.isReserved() ) {
-            right.getChildren().add(new Label("Free"));
+        if ( !row.isReserved() ) {
+            right.getChildren().add(freeLabel);
         } else {
-            Label user = new Label("@" + row.getMember().getNickName());
-            user.setStyle("-fx-font-size: 10px;");
-            right.getChildren().add(user);
+            right.getChildren().add(userLabel);
         }
+        right.getChildren().add(circle);
 
-
-        right.getChildren().add(new Circle(5.0));
+//  Set the color of the circle depending on isReserved():
+        circle.setFill(circleColor);
 
         item.getChildren().addAll(left, right);
-        item.setOnMouseClicked(event -> {
+        //item.setOnMouseClicked(event -> {
 //            TODO tio va reservar
 //            if ( row.free ) {
 //                row.free = false;
@@ -243,6 +258,20 @@ public class Reservas implements Initializable {
 //                item.getStyleClass().remove("reserved");
 //                item.getStyleClass().add("free");
 //            }
+        //});
+
+        item.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(!row.isReserved()) {
+                    row.setReserved(true);
+                    item.getStyleClass().remove("free");
+                    item.getStyleClass().add("reserved");
+                    right.getChildren().remove(freeLabel);
+                    right.getChildren().add(0,userLabel);
+                    circle.setFill(Color.RED);
+                }
+            }
         });
         return item;
     }
@@ -255,7 +284,7 @@ public class Reservas implements Initializable {
             f++;
         }
 
-//        ArrayList<Booking> ar = (ArrayList<Booking>) club.getCourtBookings(court.getName(), DatePicker.getValue());
+//  ArrayList<Booking> ar = (ArrayList<Booking>) club.getCourtBookings(court.getName(), DatePicker.getValue());
 
 
         RowReservation[] rowReservations = new RowReservation[hours.length];
@@ -263,6 +292,7 @@ public class Reservas implements Initializable {
         while (i < hours.length) {
             rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
                     true, court, member);
+            rowReservations[i].setReserved(false);
             i++;
         }
 
