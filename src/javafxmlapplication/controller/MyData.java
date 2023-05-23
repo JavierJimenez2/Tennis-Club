@@ -45,12 +45,13 @@ public class MyData implements Initializable {
     public Button selection;
     public TextField name;
     public TextField lastname;
-    public TextField username;
+
     public PasswordField password;
     public TextField telephone;
     public TextField creditcard;
     public TextField csc;
     public Button modify;
+    public TextField username;
 
 
     @Override
@@ -110,7 +111,6 @@ public class MyData implements Initializable {
     public void modifyButton(ActionEvent actionEvent) {
         String name = this.name.getText();
         String lastname = this.lastname.getText();
-        String username = this.username.getText();
         String password = this.password.getText();
         String creditcard = this.creditcard.getText();
         String Scsc = this.csc.getText();
@@ -136,20 +136,6 @@ public class MyData implements Initializable {
         ///////////////////telephone checkings/////////////////////////////////////////////////////////////
         if(!telephone.matches("^[0-9]+$") || telephone.isEmpty()){
             JavaFXMLApplication.dialogBox("error","Error","Error in Telephone Number Field. Remember to write just numbers.");
-        }
-
-        /////////////////////username checkings///////////////////////////////////////////////////////////
-        if(!JavaFXMLApplication.getCurrentMember().getNickName().equals(username)) {
-            if (JavaFXMLApplication.getCurrentClub().existsLogin(username)) {
-                JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Username already in use.");
-                this.username.setText("");
-                correctFormat = false;
-            }
-        }
-        if(username.matches(".*\\s.*")){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Username Field. Remember it can't contain spaces.");
-            this.username.setText("");
-            correctFormat = false;
         }
 
         /////////////////////password checkings///////////////////////////////////////////////////////////
@@ -209,9 +195,7 @@ public class MyData implements Initializable {
         if(!telephone.equals(JavaFXMLApplication.getCurrentMember().getTelephone())){
             JavaFXMLApplication.getCurrentMember().setTelephone(telephone);
         }
-        if(!username.equals(JavaFXMLApplication.getCurrentMember().getNickName())){
-            JavaFXMLApplication.getCurrentMember().setNickName(username);
-        }
+
         if(!password.equals(JavaFXMLApplication.getCurrentMember().getPassword())){
             JavaFXMLApplication.getCurrentMember().setPassword(password);
         }

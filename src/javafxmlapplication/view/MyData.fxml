@@ -108,7 +108,7 @@
                                     </TextField>
                                  </children>
                               </GridPane>
-                              <TextField fx:id="username">
+                              <TextField fx:id="username" disable="true" editable="false">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -159,7 +159,7 @@
                   </HBox>
                   <HBox fx:id="buttonsZone" alignment="CENTER_RIGHT" layoutX="31.0" layoutY="268.0" prefHeight="54.0" prefWidth="500.0">
                      <children>
-                        <Button fx:id="modify" alignment="CENTER" mnemonicParsing="false" onAction="#modifyButton" text="Change" textFill="WHITE">
+                        <Button fx:id="modify" alignment="CENTER" mnemonicParsing="false" onAction="#modifyButton" text="Save" textFill="WHITE">
                            <HBox.margin>
                               <Insets right="15.0" />
                            </HBox.margin>
