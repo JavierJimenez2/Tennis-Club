@@ -91,13 +91,13 @@ public class Reservas implements Initializable {
             member = club.getMemberByCredentials("jjr", "1234");
         }
 
-        if ( guest ) {
-            appTitle.setText("Guest");
-            avatar.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon.png"));
-        } else {
-            appTitle.setText(member.getName());
-            avatar.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/profiles/" + member.getImage()));
-        }
+//        if ( guest ) {
+//            appTitle.setText("Guest");
+//            avatar.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon.png"));
+//        } else {
+//            appTitle.setText(member.getName());
+//            avatar.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/profiles/" + member.getImage()));
+//        }
         Label profile = new Label("Profile");
         Label settings = new Label("Settings");
         Label logout = new Label("Logout");
@@ -121,6 +121,8 @@ public class Reservas implements Initializable {
                 alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
                 Optional<ButtonType> result = alert.showAndWait();
                 if ( result.get() == buttonTypeOne ) {
+                    member = JavaFXMLApplication.getCurrentMember();
+                    JavaFXMLApplication.setCurrentMember((Member) null);
                     changeScene("Login.fxml");
                 }
             }
@@ -310,6 +312,7 @@ public class Reservas implements Initializable {
                         alert1.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
                         Optional<ButtonType> result = alert1.showAndWait();
                         if ( result.get() == buttonTypeOne ) {
+                            JavaFXMLApplication.setCurrentMember((Member) null);
                             changeScene("Login.fxml");
                         }
                         return;
