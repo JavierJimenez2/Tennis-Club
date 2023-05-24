@@ -9,24 +9,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 
 
 import javafxmlapplication.model.JavaFXMLApplication;
-import javafxmlapplication.model.Reservations;
 
 
-import java.awt.*;
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -79,15 +72,15 @@ public class Main implements Initializable {
 ////        JavaFXMLApplication.saveScene(//currentScene);
 //        Reservations reservations = new Reservations();
 //        reservations.start(stage);
-        JavaFXMLApplication.changeScene(event, "Reservas.fxml");
+        JavaFXMLApplication.changeScene("Reservas.fxml");
     }
 
     public void goLogIn(ActionEvent event) throws IOException {
-        JavaFXMLApplication.changeScene(event, "LogIn.fxml");
+        JavaFXMLApplication.changeScene("LogIn.fxml");
     }
 
     public void goSignUp(ActionEvent event) throws IOException {
-        JavaFXMLApplication.changeScene(event, "SingUp.fxml");
+        JavaFXMLApplication.changeScene("SingUp.fxml");
     }
 
     public void infoClick(MouseEvent mouseEvent) {

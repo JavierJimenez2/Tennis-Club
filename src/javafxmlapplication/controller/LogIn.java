@@ -8,17 +8,13 @@ package javafxmlapplication.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
-import javafxmlapplication.model.Reservations;
-import model.Club;
 import model.ClubDAOException;
 import model.Member;
 
@@ -32,7 +28,7 @@ import java.util.ResourceBundle;
  */
 public class LogIn implements Initializable {
 
-//get pc screen size
+    //get pc screen size
     private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
     private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     public HBox buttonsZone;
@@ -47,15 +43,11 @@ public class LogIn implements Initializable {
     private Button doneButton;
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-
     }
-
 
 
     @FXML
@@ -63,14 +55,10 @@ public class LogIn implements Initializable {
         String user = username.getText();
         String pass = password.getText();
         //Club club = JavaFXMLApplication.getCurrentClub();
-        if(JavaFXMLApplication.getCurrentClub().existsLogin(user)){
-        Member member = JavaFXMLApplication.getCurrentClub().getMemberByCredentials(user, pass);
-            // No usamos el "Reservation.fxml".
-            // JavaFXMLApplication.changeScene(eventLog, "Reservation.fxml");
+        if ( JavaFXMLApplication.getCurrentClub().existsLogin(user) ) {
+            Member member = JavaFXMLApplication.getCurrentClub().getMemberByCredentials(user, pass);
             JavaFXMLApplication.setCurrentMember(member);
-            Stage stage = (Stage) ((Node) eventLog.getSource()).getScene().getWindow();
-            Reservations reservations = new Reservations();
-            reservations.start(stage);
+            JavaFXMLApplication.changeScene("Reservas.fxml");
         } else {
             JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
             username.setText("");
@@ -79,6 +67,6 @@ public class LogIn implements Initializable {
     }
 
     public void returnAction(ActionEvent actionEvent) {
-        JavaFXMLApplication.changeScene(actionEvent,"Main.fxml");
+        JavaFXMLApplication.changeScene("Main.fxml");
     }
 }

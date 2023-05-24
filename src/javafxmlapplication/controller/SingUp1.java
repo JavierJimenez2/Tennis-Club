@@ -108,10 +108,10 @@ public class SingUp1 implements Initializable {
         Member result = club.registerMember(name, lastname, telephone, username, password, creditcard, svc, profileImage.getImage());
         if (result != null) {
             JavaFXMLApplication.dialogBox("success", "Success", "You have been registered successfully");
-            JavaFXMLApplication.changeScene(eventReg, "LogIn.fxml");
+            JavaFXMLApplication.changeScene("LogIn.fxml");
         } else {
             JavaFXMLApplication.dialogBox("error", "Error", "You have not been registered successfully");
-            JavaFXMLApplication.changeScene(eventReg, "SingUp.fxml");
+            JavaFXMLApplication.changeScene("SingUp.fxml");
         }
 
     }
