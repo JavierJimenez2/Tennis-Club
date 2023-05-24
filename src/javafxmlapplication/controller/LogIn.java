@@ -20,10 +20,15 @@ import javafxmlapplication.model.JavaFXMLApplication;
 import javafxmlapplication.model.Reservations;
 import model.Club;
 import model.ClubDAOException;
+import model.Court;
 import model.Member;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -71,6 +76,11 @@ public class LogIn implements Initializable {
             Stage stage = (Stage) ((Node) eventLog.getSource()).getScene().getWindow();
             Reservations reservations = new Reservations();
             reservations.start(stage);
+
+            //String s = JavaFXMLApplication.getCurrentClub().getCourts().get(3).getName();
+
+            //JavaFXMLApplication.getCurrentClub().registerBooking(LocalDateTime.now(), LocalDate.of(2023, 5, 30), LocalTime.of(10, 0),false,JavaFXMLApplication.getCurrentClub().getCourt(s),JavaFXMLApplication.getCurrentMember());
+           // JavaFXMLApplication.changeScene(eventLog,"MisReservas.fxml");
         } else {
             JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
             username.setText("");

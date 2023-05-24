@@ -25,6 +25,7 @@ import model.Court;
 import model.Member;
 
 import java.awt.*;
+import java.awt.Button;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,7 +51,7 @@ public class Reservas implements Initializable {
     @FXML
     private ImageView avatar;
     @FXML
-    private ComboBox<Label> choice;
+    private ComboBox<Button> choice;
     @FXML
     private TabPane intPane;
     @FXML
@@ -83,12 +84,20 @@ public class Reservas implements Initializable {
         assert club != null;
         member = club.getMemberByCredentials("jjr", "1234");
 
+
+         Button profile = new Button("Profile");
+         Button settings = new Button("Settings");
+         Button darkMode = new Button("Dark Mode");
+         Button logOut = new Button("Log Out");
+
         choice.getItems().addAll(
-                new Label("Profile"),
-                new Label("Settings"),
-                new Label("Dark Mode"),
-                new Label("Logout")
+                profile,
+                settings,
+                darkMode,
+                logOut
         );
+
+
 
 //      Code for disabling the past days.
         DatePicker.setDayCellFactory((DatePicker picker) -> {
