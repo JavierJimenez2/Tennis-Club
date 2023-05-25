@@ -75,6 +75,6 @@ public class LogIn implements Initializable {
     }
 
     public void returnAction(ActionEvent actionEvent) {
-        JavaFXMLApplication.changeScene(actionEvent,"Main.fxml");
+        JavaFXMLApplication.changeScene("Main.fxml");
     }
 }
