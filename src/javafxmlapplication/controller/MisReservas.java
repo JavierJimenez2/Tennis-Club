@@ -77,7 +77,7 @@ public class MisReservas implements Initializable {
         //in case of nothing selected disable delete
         deleteButton.disableProperty().bind(
                 Bindings.equal(-1,
-                      listView.getSelectionModel().selectedIndexProperty()));;
+                      listView.getSelectionModel().selectedIndexProperty()));
 
         //listView focus listener
     /* listView.focusedProperty().addListener((a, b, c) -> {
