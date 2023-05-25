@@ -88,7 +88,7 @@ public class Reservas implements Initializable {
         member = JavaFXMLApplication.getCurrentMember();
         if ( member == null ) {
             guest = true;
-            member = club.getMemberByCredentials("jjr", "1234");
+            member = club.getMemberByCredentials("jjr", "1234567");
         }
 
 //        if ( guest ) {

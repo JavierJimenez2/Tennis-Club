@@ -27,6 +27,8 @@ public class JavaFXMLApplication extends Application {
     private static Member member;
     private static Club club;
 
+    private static Parent root;
+
     private static Stage programStage;
 
     private static Member guestMember;
@@ -106,11 +108,10 @@ public class JavaFXMLApplication extends Application {
 
     public static void changeScene(String s) {
         FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("../view/" + s));
-        Parent root = null;
+        root = null;
         try {
             root = loader.load();
-            scene.setRoot(root);
-
+            setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
