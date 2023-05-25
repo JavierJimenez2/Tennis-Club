@@ -32,4 +32,8 @@ public class RowReservation extends Booking {
     public void setReserved(boolean reserved) {
         this.reserved = reserved;
     }
+
+    public String getDate() {
+        return madeForDay.toString();
+    }
 }

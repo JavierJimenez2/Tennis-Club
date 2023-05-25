@@ -213,17 +213,24 @@
     -fx-border-radius: 10px;
 }
 
+.list-view{
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color: #2b542c;
+}
 
 .list-cell{
-    /*-fx-border-radius: 5px;*/
-    /*-fx-background-radius: 10px;*/
-    -fx-background-color: #2b542c;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-font-size: 1.4em;
+    -fx-font-size: 1.2em;
 }
 
 .list-cell:hover{
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
     -fx-background-color: #08861d;
     -fx-text-fill: white;
 }
@@ -238,6 +245,156 @@
 #scrollPane{
     -fx-background-color: transparent;
 }
+
+.bootstrap-pane{
+    -fx-background-color: transparent;
+}
+
+/* Estilos para el DatePicker */
+.date-picker .popup-content {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: none;
+    -fx-z-index: -1;
+}
+
+.date-picker {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-background-color: lightgray;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-radius: 20px;
+}
+
+.date-picker .popup-content .arrow {
+    -fx-background-color: #08861d;
+    -fx-background-radius: 20px;
+}
+
+
+.date-picker .arrow-button {
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #08861d;
+}
+.date-picker .arrow-button:pressed {
+    -fx-background-color: #08861d;
+}
+.date-picker .arrow-button:hover .arrow {
+    -fx-background-color: white;
+}
+
+.date-picker .arrow-button:pressed .arrow {
+    -fx-background-color: white;
+}
+
+.date-picker .day-cell {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+}
+
+/*cambiar el lunes martes...*/
+.date-picker .day-name-cell {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-text-fill: #008329;
+    -fx-font-family: "Segoe UI";
+}
+/*poner de un color los dias del mes actual*/
+
+
+
+.date-picker .day-cell:hover {
+    -fx-background-color: #53de71;
+
+}
+
+.date-picker .day-cell:disabled {
+    -fx-background-color: #8d8d8d;
+    -fx-text-fill: #ffffff;
+}
+
+
+.date-picker .month-year-pane {
+    -fx-background-color: #08861d;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+
+.date-picker .month-year-label {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.date-picker .month-year-label:hover {
+    -fx-text-fill: white;
+}
+
+.date-picker .weekday-header {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.date-picker .weekday-header:hover {
+    -fx-text-fill: white;
+}
+
+.date-picker .month-year-pane .arrow-button {
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+
+.date-picker .month-year-pane .arrow-button:hover {
+    -fx-background-color: #08861d;
+}
+
+.date-picker .month-year-pane .arrow-button:pressed {
+    -fx-background-color: #08861d;
+    -fx-font-weight: bold;
+}
+
+.date-picker .month-year-pane .arrow-button .arrow {
+    -fx-background-color: white;
+    -fx-border-radius: 20px;
+}
+
+.date-picker .weekday-header {
+    -fx-background-color: #08861d;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+
+.date-picker .week-number-cell {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.date-picker .day-cell:selected {
+    -fx-background-color: #2196f3;
+    -fx-text-fill: #fff;
+}
+
+/* Estilo para resaltar los días del mes seleccionado en el DatePicker */
+
+.date-picker .day-cell .month-days-pane{
+    -fx-background-color: #2196f3;
+    -fx-text-fill: #fff;
+}
+
+
 
 #returnButton{
  -fx-background-radius: 30;

@@ -1,14 +1,13 @@
 package javafxmlapplication.controller;
 
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,16 +15,13 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafxmlapplication.model.JavaFXMLApplication;
 import javafxmlapplication.model.layouts.BootstrapColumn;
 import javafxmlapplication.model.layouts.BootstrapPane;
 import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
-import model.Club;
-import model.Court;
-import model.Member;
+import model.*;
 
-import java.awt.*;
-import java.awt.Button;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,7 +29,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import static javafxmlapplication.model.JavaFXMLApplication.changeScene;
 
 
 public class Reservas implements Initializable {
@@ -51,7 +50,7 @@ public class Reservas implements Initializable {
     @FXML
     private ImageView avatar;
     @FXML
-    private ComboBox<Button> choice;
+    private ComboBox<Label> choice;
     @FXML
     private TabPane intPane;
     @FXML
@@ -73,31 +72,61 @@ public class Reservas implements Initializable {
     private Member member;
     private Club club;
 
+    private boolean guest;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Club club = null;
+        guest = false;
+        club = null;
         try {
             club = Club.getInstance();
         } catch (Exception ignored) {
         }
         assert club != null;
-        member = club.getMemberByCredentials("jjr", "1234");
 
+        member = JavaFXMLApplication.getCurrentMember();
+        if ( member == null ) {
+            guest = true;
+            member = club.getMemberByCredentials("jjr", "1234");
+        }
 
-         Button profile = new Button("Profile");
-         Button settings = new Button("Settings");
-         Button darkMode = new Button("Dark Mode");
-         Button logOut = new Button("Log Out");
+//        if ( guest ) {
+//            appTitle.setText("Guest");
+//            avatar.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon.png"));
+//        } else {
+//            appTitle.setText(member.getName());
+//            avatar.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/profiles/" + member.getImage()));
+//        }
+        Label profile = new Label("Profile");
+        Label settings = new Label("Settings");
+        Label logout = new Label("Logout");
 
-        choice.getItems().addAll(
-                profile,
-                settings,
-                darkMode,
-                logOut
-        );
+        choice.getItems().addAll(profile, settings, logout);
 
+        choice.setOnAction((event) -> {
+            if ( choice.getValue() == profile ) {
+                changeScene("Profile.fxml");
+            } else if ( choice.getValue() == settings ) {
+                changeScene("SingUp.fxml");
+            } else if ( choice.getValue() == logout ) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+//                set graphic in css bi bi-exclamation-circle-fill
 
+                alert.setTitle("Logout");
+                alert.setHeaderText("Are you sure you want to logout?");
+                alert.setContentText("You will be redirected to the login page.");
+                ButtonType buttonTypeOne = new ButtonType("Logout");
+                ButtonType buttonTypeCancel = new ButtonType("Cancel");
+                alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+                Optional<ButtonType> result = alert.showAndWait();
+                if ( result.get() == buttonTypeOne ) {
+                    member = JavaFXMLApplication.getCurrentMember();
+                    JavaFXMLApplication.setCurrentMember((Member) null);
+                    changeScene("Login.fxml");
+                }
+            }
+        });
 
 //      Code for disabling the past days.
         DatePicker.setDayCellFactory((DatePicker picker) -> {
@@ -111,8 +140,13 @@ public class Reservas implements Initializable {
             };
         });
         DatePicker.setValue(LocalDate.now());
+//        do not show the week numbers
+        DatePicker.setShowWeekNumbers(false);
 
+//        set the date format
 //        get the stage
+//        No mostrar el año en el datepicker
+
 
         courtView();
     }
@@ -123,23 +157,26 @@ public class Reservas implements Initializable {
     }
 
     public void courtView() {
-        VBox root = new VBox();
-        root.setSpacing(10);
-        root.setAlignment(Pos.CENTER);
+        VBox vRoot = new VBox();
+        vRoot.setSpacing(10);
+        vRoot.setAlignment(Pos.CENTER);
 
-        root.getChildren().add(makeView());
-
-        scrollPane.setContent(root);
+        vRoot.getChildren().add(makeView());
 
 
 //        scrollPane = new ScrollPane(root);
 //        set root as the content of the scrollpane
 //        scrollPane.setContent(root);
+
+//        click on the button to scroll to the bottom
+        scrollPane.setVvalue(0);
+        scrollPane.setHvalue(0);
         scrollPane.setFitToWidth(true);
-        scrollPane.setFitToHeight(true);
-//        scrollPane.setPannable(true);
+//        scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setContent(vRoot);
+
 
     }
 
@@ -155,8 +192,11 @@ public class Reservas implements Initializable {
         BootstrapRow row = new BootstrapRow();
 
 //        row.addColumn(createTitleColumn());
-        for ( int i = 1; i <= 6; i++ ) {
-            row.addColumn(createColumn(createWidget("Court " + i, courtSlots(new Court("court " + i)))));
+        List<Court> courts = club.getCourts();
+        int i = 0;
+        for ( Court court : courts ) {
+            i++;
+            row.addColumn(createColumn(createWidget("Court " + i, courtSlots(court))));
         }
 
         bootstrapPane.addRow(row);
@@ -256,30 +296,80 @@ public class Reservas implements Initializable {
         circle.setFill(circleColor);
 
         item.getChildren().addAll(left, right);
-        //item.setOnMouseClicked(event -> {
-//            TODO tio va reservar
-//            if ( row.free ) {
-//                row.free = false;
-//                item.getStyleClass().remove("free");
-//                item.getStyleClass().add("reserved");
-//            } else {
-//                row.free = true;
-//                item.getStyleClass().remove("reserved");
-//                item.getStyleClass().add("free");
-//            }
-        //});
 
         item.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(!row.isReserved()) {
-                    row.setReserved(true);
-                    item.getStyleClass().remove("free");
-                    item.getStyleClass().add("reserved");
-                    right.getChildren().remove(freeLabel);
-                    right.getChildren().add(0,userLabel);
-                    circle.setFill(Color.RED);
+                if ( !row.isReserved() ) {
+                    //                            alert de informacion que me diga que para reservar debe iniciar sesión
+                    if ( guest ) {
+                        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert1.setTitle("Information");
+                        alert1.setHeaderText("You must be logged in to reserve");
+                        alert1.setContentText("Do you want to log in?");
+                        ButtonType buttonTypeOne = new ButtonType("Log in");
+                        ButtonType buttonTypeCancel = new ButtonType("Cancel");
+                        alert1.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+                        Optional<ButtonType> result = alert1.showAndWait();
+                        if ( result.get() == buttonTypeOne ) {
+                            JavaFXMLApplication.setCurrentMember((Member) null);
+                            changeScene("Login.fxml");
+                        }
+                        return;
+                    }
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText("Are you sure you want to reserve?");
+                    String content =
+                            "Date: " + DatePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
+                                    "Time" +
+                                    ": " + row.getFromTime() + " - " + row.getFromTime().plusHours(1) +
+                                    "\n" + "Court: " + row.getCourt().getName() + "\n" + "Member: " + row.getMember().getNickName() + "\n";
+                    alert.setContentText(content);
+//                    change the button names
+                    ButtonType buttonTypeOne = new ButtonType("Reserve");
+                    ButtonType buttonTypeCancel = new ButtonType("Cancel");
+                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if ( result.get() == buttonTypeOne ) {
+
+
+                        try {
+                            assert club != null;
+
+                            LocalDateTime now = LocalDateTime.now();
+                            LocalDate value = DatePicker.getValue();
+                            LocalTime fromTime = row.getFromTime();
+                            boolean paid = row.getPaid();
+                            Court court = row.getCourt();
+
+                            club.registerBooking(now, value, fromTime, paid, court, row.getMember());
+                            //
+                            row.setReserved(true);
+                            item.getStyleClass().remove("free");
+                            item.getStyleClass().add("reserved");
+                            right.getChildren().remove(freeLabel);
+                            right.getChildren().add(0, userLabel);
+                            circle.setFill(Color.RED);
+                        } catch (ClubDAOException e) {
+                            alert.close();
+                            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                            alert2.setTitle("Error");
+                            alert2.setHeaderText("Reservation could not be made");
+                            alert2.setContentText("Please try again later");
+                            alert2.showAndWait();
+                            e.printStackTrace();
+                        }
+
+
+                    } else {
+                        alert.close();
+                    }
                 }
+//
+
+
             }
         });
         return item;
@@ -293,15 +383,27 @@ public class Reservas implements Initializable {
             f++;
         }
 
-//  ArrayList<Booking> ar = (ArrayList<Booking>) club.getCourtBookings(court.getName(), DatePicker.getValue());
-
 
         RowReservation[] rowReservations = new RowReservation[hours.length];
+
+        List<Booking> courtBookings = club.getCourtBookings(court.getName(), DatePicker.getValue());
+        for ( Booking booking : courtBookings ) {
+            for ( int i = 0; i < rowReservations.length; i++ ) {
+                if ( booking.getFromTime().equals(hours[i]) ) {
+                    rowReservations[i] = new RowReservation(booking.getBookingDate(), booking.getMadeForDay(),
+                            booking.getFromTime(),
+                            booking.getPaid(), booking.getCourt(), booking.getMember());
+                    rowReservations[i].setReserved(true);
+                }
+            }
+        }
         int i = 0;
-        while (i < hours.length) {
-            rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
-                    true, court, member);
-            rowReservations[i].setReserved(false);
+        while (i < rowReservations.length) {
+            if ( rowReservations[i] == null ) {
+                rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
+                        true, court, member);
+                rowReservations[i].setReserved(false);
+            }
             i++;
         }
 
@@ -309,4 +411,8 @@ public class Reservas implements Initializable {
     }
 
 
+    public void datePickerAction(ActionEvent actionEvent) {
+//        when date is changed, the court slots are updated
+        courtView();
+    }
 }
