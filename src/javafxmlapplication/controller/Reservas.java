@@ -181,9 +181,9 @@ public class Reservas implements Initializable {
         listView.setCellFactory(c -> new bookingListCell());
 
         //in case of nothing selected disable delete
-        deleteButton.disableProperty().bind(
-                Bindings.equal(-1,
-                        listView.getSelectionModel().selectedIndexProperty()));
+//        deleteButton.disableProperty().bind(
+//                Bindings.equal(-1,
+//                        listView.getSelectionModel().selectedIndexProperty()));
     }
 
     //////////parte reservas///////////////////////////////////////////////////////////////////////////////////////////////
@@ -357,7 +357,6 @@ public class Reservas implements Initializable {
                             JavaFXMLApplication.setCurrentMember((Member) null);
                             changeScene("Login.fxml");
                         }
-                        return;
                     } else {
 
 
@@ -448,7 +447,7 @@ public class Reservas implements Initializable {
             }
             if ( rowReservations[i] == null ) {
                 rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
-                        true, court, (Member) null);
+                        true, court, member);
                 rowReservations[i].setReserved(false);
             }
 
