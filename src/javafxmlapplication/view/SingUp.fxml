@@ -7,149 +7,165 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <HBox fx:id="pane" fillHeight="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SingUp">
    <children>
-      <VBox alignment="CENTER" fillWidth="false" minHeight="369.0" minWidth="600.0" prefHeight="516.0" prefWidth="801.0" HBox.hgrow="NEVER">
+      <VBox fx:id="intPane" prefHeight="560.0" prefWidth="800.0">
          <children>
-            <VBox fx:id="intPane">
+            <StackPane VBox.vgrow="ALWAYS">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <VBox alignment="CENTER" fillWidth="false">
                      <children>
-                        <Button fx:id="returnButton" mnemonicParsing="false" onAction="#returnAction">
-                           <graphic>
-                              <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@css/img/icons/return.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="GreenBall" textAlignment="CENTER" wrappingWidth="598.7831211090088">
-                     <font>
-                        <Font name="Courier New Bold" size="43.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="Register" textAlignment="CENTER" wrappingWidth="598.7831211090088">
-                     <font>
-                        <Font name="Courier New Bold" size="28.0" />
-                     </font>
-                  </Text>
-                  <VBox prefHeight="360.0" prefWidth="703.0">
-                     <children>
-                        <HBox prefHeight="310.0" prefWidth="703.0" VBox.vgrow="ALWAYS">
+                        <VBox>
                            <children>
-                              <VBox fx:id="fieldsInputs" prefHeight="244.0" prefWidth="352.0" spacing="10.0">
-                                 <children>
-                                    <TextField id="text-field" fx:id="name" promptText="Name" styleClass="text-field">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField id="text-field" fx:id="lastname" promptText="Last Name" styleClass="text-field">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </TextField>
-                                    <TextField id="text-field" fx:id="username" promptText="Username">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <PasswordField id="password-field" fx:id="password" promptText="Password">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </PasswordField>
-                                    <Separator fx:id="separator" prefWidth="200.0" />
-                                    <TextField id="text-field" fx:id="telephone" promptText="Telephone Number">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField id="text-field" fx:id="creditcard" prefHeight="26.0" prefWidth="246.0" promptText="Credit Card Number (Optional)">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField id="text-field" fx:id="csc" prefHeight="26.0" prefWidth="221.0" promptText="CSC (optional)">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </TextField>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </VBox>
-                              <VBox alignment="CENTER" prefHeight="182.0" prefWidth="302.0">
-                                 <children>
-                                    <VBox alignment="CENTER" prefHeight="191.0" prefWidth="160.0">
-                                       <children>
-                                          <ImageView fx:id="profileImage" fitHeight="98.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" />
-                                          <Button id="selectButton" fx:id="selection" mnemonicParsing="false" onAction="#selectionButton" text="Select">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox fx:id="buttonsZone" alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="694.0" VBox.vgrow="NEVER">
-                           <children>
-                              <Button id="submitButton" fx:id="register" alignment="CENTER" mnemonicParsing="false" onAction="#registerButton" text="Submit" textFill="WHITE">
-                                 <HBox.margin>
-                                    <Insets right="10.0" />
-                                 </HBox.margin>
+                              <Text fx:id="Title" fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" text="GreenBall" textAlignment="CENTER" wrappingWidth="598.7831211090088">
                                  <font>
-                                    <Font name="System Bold" size="15.0" />
+                                    <Font name="Courier New Bold" size="43.0" />
                                  </font>
-                              </Button>
+                              </Text>
+                              <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="Register" textAlignment="CENTER" wrappingWidth="598.7831211090088">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="28.0" />
+                                 </font>
+                              </Text>
                            </children>
                            <VBox.margin>
-                              <Insets />
+                              <Insets bottom="20.0" />
                            </VBox.margin>
-                        </HBox>
+                        </VBox>
+                        <VBox prefHeight="360.0" prefWidth="703.0">
+                           <children>
+                              <HBox prefHeight="310.0" prefWidth="703.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox fx:id="fieldsInputs" prefHeight="244.0" prefWidth="352.0" spacing="10.0">
+                                       <children>
+                                          <TextField id="text-field" fx:id="name" promptText="Name*" styleClass="text-field">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField id="text-field" fx:id="lastname" promptText="Last Name*" styleClass="text-field">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField id="text-field" fx:id="username" promptText="Username*">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <PasswordField id="password-field" fx:id="password" promptText="Password*">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </PasswordField>
+                                          <Separator fx:id="separator" prefWidth="200.0" />
+                                          <TextField id="text-field" fx:id="telephone" promptText="Telephone Number*">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <GridPane hgap="10.0" vgap="10.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <TextField id="text-field" fx:id="creditcard" promptText="Credit Card Number">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField id="text-field" fx:id="csc" promptText="CSC" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="182.0" prefWidth="302.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="191.0" prefWidth="160.0">
+                                             <children>
+                                                <ImageView fx:id="profileImage" fitHeight="98.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true" />
+                                                <Button id="selectButton" fx:id="selection" mnemonicParsing="false" onAction="#selectionButton" text="Select">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="buttonsZone" alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="694.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Button id="submitButton" fx:id="register" alignment="CENTER" mnemonicParsing="false" onAction="#registerButton" text="Submit" textFill="WHITE">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="30.0" right="30.0" top="10.0" />
-                     </VBox.margin>
                   </VBox>
+                  <Button fx:id="returnButton" mnemonicParsing="false" onAction="#returnAction" StackPane.alignment="TOP_LEFT">
+                     <graphic>
+                        <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@css/img/icons/return.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <StackPane.margin>
+                        <Insets left="30.0" top="30.0" />
+                     </StackPane.margin>
+                  </Button>
                </children>
-            </VBox>
+            </StackPane>
          </children>
          <HBox.margin>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />

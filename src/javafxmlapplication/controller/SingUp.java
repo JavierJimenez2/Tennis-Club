@@ -142,7 +142,6 @@ public class SingUp implements Initializable {
 //        translate namePane in the border of the text field
                 fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
                 namePane.getChildren().addAll(name, nameLabel);
-
             } else {
 //                nameLabel.setVisible(false);
             }

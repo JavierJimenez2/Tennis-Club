@@ -3,7 +3,9 @@
     /*    variable*/
     -fx-primary: #08861d;
     -fx-primary-bold: #2b542c;
+    -fx-font-family: "Segoe UI";
 }
+
 
 #text-field, #password-field {
     -fx-border-color: #08861d;
@@ -55,12 +57,12 @@
 }
 
 
-#text-field:filled, #password-field:filled {
-    -fx-background-color: white;
-    -fx-background-radius: 50px;
-    -fx-border-radius: 50px;
-    -fx-font-weight: bold;
-}
+/*#text-field:filled, #password-field:filled {*/
+/*    -fx-background-color: white;*/
+/*    -fx-background-radius: 50px;*/
+/*    -fx-border-radius: 50px;*/
+/*    -fx-font-weight: bold;*/
+/*}*/
 
 
 /* move the prompt text up*/
@@ -116,17 +118,7 @@
     -fx-background-color: #739EE8;
 }
 
-.Buttons {
-    -fx-background-radius: 20;
-    -fx-background-color: #469f01;
-    -fx-radius: 20%;
-    -fx-text-fill: white;
-}
 
-.Buttons:hover {
-    -fx-background-color: #285700;
-    -fx-font: 14px "Segoe UI Semibold";
-}
 
 
 #Title {
@@ -134,16 +126,17 @@
     -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, lime 0%, green 50%);
     /*-fx-stroke: black;*/
     /*-fx-stroke-width: 1;*/
-    -fx-font-family: "Segoe UI ";
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: bold;
 }
 
 
-@font-face {
-    font-family: 'Segoe UI';
-    font-style: normal;
-    font-weight: 400;
-    /*src: url('https://edencoding.com/wp-content/uploads/2021/02/GloriousFree-dBR6.ttf') format('truetype');*/
-}
+/*@font-face {*/
+/*    font-family: 'Segoe UI';*/
+/*    font-style: normal;*/
+/*    font-weight: 400;*/
+/*    !*src: url('https://edencoding.com/wp-content/uploads/2021/02/GloriousFree-dBR6.ttf') format('truetype');*!*/
+/*}*/
 
 /*crear variables*/
 /*https://www.w3schools.com/css/css3_variables.asp*/
@@ -175,13 +168,16 @@
     -fx-text-fill: white;
 }
 
+
+
 .choice-box .list-view .label{
     -fx-text-fill: white;
 }
 
 .app-title {
     -fx-font: 36px 'Segoe UI';
-    -fx-text-fill: #eeeeee;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, lime 0%, green 50%);
+    /*-fx-text-fill: #eeeeee;*/
     -fx-max-width: 100000;
     -fx-alignment: left;
     -fx-padding: 10px;
@@ -189,9 +185,9 @@
 
 .widget {
     -fx-background-color: derive(-fx-primary, 10%);
-    -fx-background-radius: 5px;
-    -fx-background-insets: 5px;
-    -fx-padding: 5px;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0px;
+    -fx-padding: 3px;
     -fx-spacing: 0px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
@@ -216,8 +212,8 @@
 }
 
 .free:hover {
-    -fx-background-color: derive(-fx-primary, 60%);
-    /*-fx-background-radius: 10px;*/
+    -fx-background-color: derive(-fx-primary, 70%);
+    -fx-background-radius: 10px;
     -fx-font-weight: bold;
     /*    change the pointer*/
     -fx-cursor: hand;
@@ -238,12 +234,19 @@
     -fx-border-color: -fx-focus-color;
 }
 
+.date-picker .label{
+    -fx-font-fill: white;
+}
+
+
+
 .free {
-    -fx-background-color: green;
+    -fx-background-color: derive(-fx-primary,10%);
 }
 
 .reserved {
     -fx-background-color: gray;
+    -fx-padding: 5px;
 }
 
 .app-title {
@@ -302,12 +305,6 @@
     -fx-text-fill: white;
 }
 
-.tabPane {
-    -fx-background-color: white;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 0 0 0 0;
-}
 
 #scrollPane {
     -fx-background-color: transparent;
@@ -480,6 +477,7 @@
     -fx-font-size: 1.2em;
     -fx-font-weight: bold;
     -fx-padding: 12px;
+    -fx-font-family: "Segoe UI";
 
 }
 
@@ -501,7 +499,9 @@
     -fx-font-size: 1.2em;
     -fx-font-weight: bold;
     -fx-font-fill: white;
+    -fx-font-family: "Segoe UI";
 }
+
 
 #selectButton:hover{
     -fx-background-color: #0097f8;
@@ -517,7 +517,7 @@
 
 .tabPane{
     -fx-border-color: #f6f6f6;
-    -fx-border-width: 16px;
+    -fx-border-width: 10px;
     -fx-background-color: #f6f6f6;
     -fx-border-radius: 30px;
     -fx-background-radius: 30px;
@@ -560,4 +560,24 @@
 
 deleteButtonMR:pressed {
     -fx-background-color: #CC0000;
+}
+
+.Buttons {
+
+    -fx-background-color: #09b625;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: white;
+    -fx-font: 15px "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
+.Buttons:hover {
+    -fx-background-color: #08831e;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: white;
+    -fx-font: 15px "Segoe UI";
+    -fx-font-weight: bold;
 }

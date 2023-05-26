@@ -114,7 +114,11 @@ public class Reservas implements Initializable {
         Label logout = new Label("Logout");
         if ( guest ) logout.setText("Log In");
 
-        choice.getItems().addAll(profile, settings, logout);
+        if ( guest ) {
+            choice.getItems().addAll(logout);
+        } else {
+            choice.getItems().addAll(profile, logout);
+        }
 
         choice.setOnAction((event) -> {
             if ( choice.getValue() == profile ) {
@@ -223,11 +227,9 @@ public class Reservas implements Initializable {
         int gap = 25;
         bootstrapPane.setVgap(gap);
         bootstrapPane.setHgap(gap);
-//        set margin
 
         BootstrapRow row = new BootstrapRow();
 
-//        row.addColumn(createTitleColumn());
         List<Court> courts = club.getCourts();
         int i = 0;
         for ( Court court : courts ) {
@@ -239,19 +241,6 @@ public class Reservas implements Initializable {
         return bootstrapPane;
     }
 
-    private BootstrapColumn createTitleColumn() {
-        Label title = new Label("Courts available");
-        title.setAlignment(Pos.CENTER);
-
-        //style
-        title.getStyleClass().add("app-title2");
-
-        //add to column
-        BootstrapColumn titleColumn = new BootstrapColumn(title);
-        titleColumn.setBreakpointColumnWidth(Breakpoint.XSMALL, 13);
-
-        return titleColumn;
-    }
 
     private BootstrapColumn createColumn(Node widget) {
         BootstrapColumn column = new BootstrapColumn(widget);
@@ -264,6 +253,7 @@ public class Reservas implements Initializable {
 
     private Node createWidget(String title, List<RowReservation> items) {
         VBox widget = new VBox();
+//        set Hgrow
         widget.getStyleClass().add("widget");
         HBox titleLabel = new HBox();
         titleLabel.getStyleClass().add("titleWidget");

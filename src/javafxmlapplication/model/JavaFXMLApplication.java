@@ -10,6 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Club;
 import model.Member;
@@ -26,10 +29,6 @@ public class JavaFXMLApplication extends Application {
     private static Scene scene;
     private static Member member;
     private static Club club;
-
-    private static Parent root;
-
-    private static Stage programStage;
 
     private static Member guestMember;
     //private static Stack<Scene> sceneStack;    //cambio de pantalla (return)
@@ -107,15 +106,24 @@ public class JavaFXMLApplication extends Application {
     }
 
     public static void changeScene(String s) {
-        FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("../view/" + s));
-        root = null;
+        FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("/javafxmlapplication/view/" + s));
         try {
-            root = loader.load();
-            setRoot(root);
+            setRoot(loader.load());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public void changeScene1(String s) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("javafxmlapplication/view/" + s));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        scene.setRoot(root);
 
     }
 
@@ -124,23 +132,25 @@ public class JavaFXMLApplication extends Application {
         member = null;
         club = Club.getInstance();
         club.setName("GreenBall");
-        programStage = stage;
 
         //ToDo change to main
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Reservas.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
 
         Parent root = loader.load();
 
         scene = new Scene(root);
 
-        programStage.setMinWidth(800);
-        programStage.setMinHeight(500);
+        stage.setMinWidth(980);
+        stage.setMinHeight(600);
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
-        programStage.setScene(scene);
-        programStage.setTitle("GreenBall");
-        programStage.setMaximized(true);
-        programStage.show();
+        stage.setScene(scene);
+        stage.setTitle("GreenBall");
+        stage.setMaximized(true);
+//        set the icon of the application
+        stage.getIcons().add(new Image("/javafxmlapplication/view/css/img/icons/app-icon.png"));
+//  set the top bar of the application to the color of the background
+        stage.show();
 
 
         //sceneStack = new Stack<>();   //inisialisation of Stack for saving previous scenes

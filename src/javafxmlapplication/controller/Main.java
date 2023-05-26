@@ -29,10 +29,6 @@ import java.util.ResourceBundle;
  */
 public class Main implements Initializable {
 
-    //get pc screen size
-    private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
-    private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
-
     public Text signUpText;
     public Text Title;
     public int count = 0;
@@ -47,14 +43,11 @@ public class Main implements Initializable {
     private Button signUpButton;
     @FXML
     private Button infoButton;
-    @FXML
-    private Label infoLabel;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        infoLabel.setWrapText(true);
     }
 
 
@@ -66,20 +59,15 @@ public class Main implements Initializable {
     }
 
 
-    public void goReservations(ActionEvent event) throws IOException {
-////        JavaFXMLApplication.changeScene(event, "Reservation.fxml");
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-////        JavaFXMLApplication.saveScene(//currentScene);
-//        Reservations reservations = new Reservations();
-//        reservations.start(stage);
+    public void goReservations(ActionEvent event){
         JavaFXMLApplication.changeScene("Reservas.fxml");
     }
 
-    public void goLogIn(ActionEvent event) throws IOException {
+    public void goLogIn(ActionEvent event){
         JavaFXMLApplication.changeScene("Login.fxml");
     }
 
-    public void goSignUp(ActionEvent event) throws IOException {
+    public void goSignUp(ActionEvent event){
         JavaFXMLApplication.changeScene("SingUp.fxml");
     }
 

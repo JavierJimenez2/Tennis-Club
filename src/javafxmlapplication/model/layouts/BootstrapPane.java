@@ -25,7 +25,7 @@ public class BootstrapPane extends GridPane {
             if (newValue.doubleValue() > 576) newBreakpoint = Breakpoint.SMALL;
             if (newValue.doubleValue() > 768) newBreakpoint = Breakpoint.MEDIUM;
             if (newValue.doubleValue() > 992) newBreakpoint = Breakpoint.LARGE;
-            if (newValue.doubleValue() > 1200) newBreakpoint = Breakpoint.XLARGE;
+            if (newValue.doubleValue() > 1300) newBreakpoint = Breakpoint.XLARGE;
 
             if (newBreakpoint != currentWindowSize) {
                 currentWindowSize = newBreakpoint;
