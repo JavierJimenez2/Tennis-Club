@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -215,6 +216,8 @@ public class Reservas implements Initializable {
 //        scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+//        give the scroll a style class
+
         scrollPane.setContent(vRoot);
 
 
@@ -223,8 +226,9 @@ public class Reservas implements Initializable {
 
     private BootstrapPane makeView() {
         BootstrapPane bootstrapPane = new BootstrapPane();
-//        bootstrapPane.setPadding(new Insets(20));
-        int gap = 25;
+//        give a margin of 10px
+        bootstrapPane.setPadding(new Insets(10));
+        int gap = 23;
         bootstrapPane.setVgap(gap);
         bootstrapPane.setHgap(gap);
 
