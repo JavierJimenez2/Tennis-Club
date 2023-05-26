@@ -171,9 +171,13 @@
 }
 
 
-/*.label{*/
-/*    -fx-text-fill: white;*/
-/*}*/
+.scroll-pane .label{
+    -fx-text-fill: white;
+}
+
+.choice-box .list-view .label{
+    -fx-text-fill: white;
+}
 
 .app-title {
     -fx-font: 36px 'Segoe UI';
@@ -276,13 +280,13 @@
     -fx-border-radius: 10px;
 }
 
-.list-view {
+.choice-box .list-view {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary-bold;
 }
 
-.list-cell {
+.choice-box .list-cell {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: transparent;
@@ -291,7 +295,7 @@
     -fx-font-size: 1.2em;
 }
 
-.list-cell:hover {
+.choice-box .list-cell:hover {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary;
@@ -510,3 +514,24 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 
 }
+
+.tabPane{
+    -fx-border-color: #f6f6f6;
+    -fx-border-width: 16px;
+    -fx-background-color: #f6f6f6;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+
+/*.tabPane .tab{*/
+/*    -fx-background-color:white;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-background-radius: 20px;*/
+/*}*/
+
+/*.tabPane .tab:pressed{*/
+/*    -fx-background-color:white;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-background-radius: 20px;*/
+/*}*/

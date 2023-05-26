@@ -13,7 +13,7 @@
 
 <HBox fx:id="pane" fillHeight="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.LogIn">
    <children>
-      <VBox fx:id="intPane" alignment="CENTER" fillWidth="false" minHeight="369.0" minWidth="363.0" prefHeight="530.0" prefWidth="363.0" HBox.hgrow="NEVER">
+      <VBox fx:id="intPane" alignment="CENTER" fillWidth="false" minHeight="369.0" minWidth="363.0" prefHeight="574.0" prefWidth="778.0" HBox.hgrow="NEVER">
          <children>
             <HBox prefHeight="26.0" prefWidth="444.0" VBox.vgrow="NEVER">
                <children>
@@ -48,9 +48,9 @@
                   <Insets />
                </VBox.margin>
             </VBox>
-            <VBox fx:id="fieldsInputs" alignment="CENTER" prefHeight="98.0" prefWidth="359.0" spacing="20.0">
+            <VBox fx:id="fieldsInputs" alignment="CENTER" prefHeight="98.0" prefWidth="346.0" spacing="20.0">
                <children>
-                  <TextField id="text-field" fx:id="username" promptText="Username">
+                  <TextField id="text-field" fx:id="username" prefHeight="84.0" prefWidth="373.0" promptText="Username">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

@@ -31,7 +31,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static javafxmlapplication.model.JavaFXMLApplication.changeScene;
 
@@ -42,6 +45,10 @@ public class Reservas implements Initializable {
     ////////////////////////////////parte de reservas/////////////////////////////////////////////////////////////////////////////
     @FXML
     public ScrollPane scrollPane;
+    ///////////////////parte de MisReservas//////////////////////////////////////////////////////////////////////////////////////////
+    public Button deleteButton;
+    public ListView<Booking> listView;
+    public Button returnButton;
     @FXML
     private DatePicker DatePicker;
     @FXML
@@ -68,24 +75,16 @@ public class Reservas implements Initializable {
     private VBox root;
     @FXML
     private AnchorPane anchorPane;
-
     @FXML
     private TabPane tabPane;
-
     private Member member;
     private Club club;
-
     private boolean guest;
-
-    ///////////////////parte de MisReservas//////////////////////////////////////////////////////////////////////////////////////////
-    public Button deleteButton;
-    public ListView<Booking> listView;
-    public Button returnButton;
     private ObservableList<Booking> myObservableBookingList = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       /////////////////////////////////parte de reservas///////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////parte de reservas///////////////////////////////////////////////////////////////////////////////////
         guest = false;
         club = null;
         try {
@@ -98,6 +97,9 @@ public class Reservas implements Initializable {
         if ( member == null ) {
             guest = true;
             member = club.getMemberByCredentials("jjr", "1234567");
+            JavaFXMLApplication.setCurrentMember(member);
+            MisReservasTab.disableProperty().set(true);
+            MisReservasTab.tooltipProperty().set(new Tooltip("For view your bookings you need to Log In"));
         }
 
 //        if ( guest ) {
@@ -110,6 +112,7 @@ public class Reservas implements Initializable {
         Label profile = new Label("Profile");
         Label settings = new Label("Settings");
         Label logout = new Label("Logout");
+        if ( guest ) logout.setText("Log In");
 
         choice.getItems().addAll(profile, settings, logout);
 
@@ -119,19 +122,23 @@ public class Reservas implements Initializable {
             } else if ( choice.getValue() == settings ) {
                 changeScene("SingUp.fxml");
             } else if ( choice.getValue() == logout ) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
+                if(!guest){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
 //                set graphic in css bi bi-exclamation-circle-fill
 
-                alert.setTitle("Logout");
-                alert.setHeaderText("Are you sure you want to logout?");
-                alert.setContentText("You will be redirected to the login page.");
-                ButtonType buttonTypeOne = new ButtonType("Log Out");
-                ButtonType buttonTypeCancel = new ButtonType("Cancel");
-                alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-                Optional<ButtonType> result = alert.showAndWait();
-                if ( result.get() == buttonTypeOne ) {
-                    member = JavaFXMLApplication.getCurrentMember();
-                    JavaFXMLApplication.setCurrentMember((Member) null);
+                    alert.setTitle("Logout");
+                    alert.setHeaderText("Are you sure you want to logout?");
+                    alert.setContentText("You will be redirected to the login page.");
+                    ButtonType buttonTypeOne = new ButtonType("Log Out");
+                    ButtonType buttonTypeCancel = new ButtonType("Cancel");
+                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if ( result.get() == buttonTypeOne ) {
+                        member = JavaFXMLApplication.getCurrentMember();
+                        JavaFXMLApplication.setCurrentMember((Member) null);
+                        changeScene("Login.fxml");
+                    }
+                }else {
                     changeScene("Login.fxml");
                 }
             }
@@ -286,8 +293,14 @@ public class Reservas implements Initializable {
         Label freeLabel = new Label("Free");
 
 //  User Label:
-        Label userLabel = new Label("@" + row.getMember().getNickName());
+
+        Label userLabel = new Label("@");
+        if ( !(row.getMember() ==null) ){
+            userLabel.setText("@" + row.getMember().getNickName());
+        }
         userLabel.setStyle("-fx-font-size: 14px;");
+
+
 
 //  Sets the initial color of the ball depending on the state of the RowReservation object.
         if ( !row.isReserved() ) {
@@ -345,55 +358,57 @@ public class Reservas implements Initializable {
                             changeScene("Login.fxml");
                         }
                         return;
-                    }
-
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Confirmation");
-                    alert.setHeaderText("Are you sure you want to reserve?");
-                    String content =
-                            "Date: " + DatePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
-                                    "Time" +
-                                    ": " + row.getFromTime() + " - " + row.getFromTime().plusHours(1) +
-                                    "\n" + "Court: " + row.getCourt().getName() + "\n" + "Member: " + row.getMember().getNickName() + "\n";
-                    alert.setContentText(content);
-//                    change the button names
-                    ButtonType buttonTypeOne = new ButtonType("Reserve");
-                    ButtonType buttonTypeCancel = new ButtonType("Cancel");
-                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if ( result.get() == buttonTypeOne ) {
-
-
-                        try {
-                            assert club != null;
-
-                            LocalDateTime now = LocalDateTime.now();
-                            LocalDate value = DatePicker.getValue();
-                            LocalTime fromTime = row.getFromTime();
-                            boolean paid = row.getPaid();
-                            Court court = row.getCourt();
-
-                            club.registerBooking(now, value, fromTime, paid, court, row.getMember());
-                            //
-                            row.setReserved(true);
-                            item.getStyleClass().remove("free");
-                            item.getStyleClass().add("reserved");
-                            right.getChildren().remove(freeLabel);
-                            right.getChildren().add(0, userLabel);
-                            circle.setFill(Color.RED);
-                        } catch (ClubDAOException e) {
-                            alert.close();
-                            Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                            alert2.setTitle("Error");
-                            alert2.setHeaderText("Reservation could not be made");
-                            alert2.setContentText("Please try again later");
-                            alert2.showAndWait();
-                            e.printStackTrace();
-                        }
-
-
                     } else {
-                        alert.close();
+
+
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Confirmation");
+                        alert.setHeaderText("Are you sure you want to reserve?");
+                        String content =
+                                "Date: " + DatePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" +
+                                        "Time" +
+                                        ": " + row.getFromTime() + " - " + row.getFromTime().plusHours(1) +
+                                        "\n" + "Court: " + row.getCourt().getName() + "\n" + "Member: " + row.getMember().getNickName() + "\n";
+                        alert.setContentText(content);
+//                    change the button names
+                        ButtonType buttonTypeOne = new ButtonType("Reserve");
+                        ButtonType buttonTypeCancel = new ButtonType("Cancel");
+                        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if ( result.get() == buttonTypeOne ) {
+
+
+                            try {
+                                assert club != null;
+
+                                LocalDateTime now = LocalDateTime.now();
+                                LocalDate value = DatePicker.getValue();
+                                LocalTime fromTime = row.getFromTime();
+                                boolean paid = row.getPaid();
+                                Court court = row.getCourt();
+
+                                club.registerBooking(now, value, fromTime, paid, court, row.getMember());
+                                //
+                                row.setReserved(true);
+                                item.getStyleClass().remove("free");
+                                item.getStyleClass().add("reserved");
+                                right.getChildren().remove(freeLabel);
+                                right.getChildren().add(0, userLabel);
+                                circle.setFill(Color.RED);
+                            } catch (ClubDAOException e) {
+                                alert.close();
+                                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                                alert2.setTitle("Error");
+                                alert2.setHeaderText("Reservation could not be made");
+                                alert2.setContentText("Please try again later");
+                                alert2.showAndWait();
+                                e.printStackTrace();
+                            }
+
+
+                        } else {
+                            alert.close();
+                        }
                     }
                 }
 //
@@ -428,11 +443,15 @@ public class Reservas implements Initializable {
         }
         int i = 0;
         while (i < rowReservations.length) {
+            if ( guest ) {
+                member = null;
+            }
             if ( rowReservations[i] == null ) {
                 rowReservations[i] = new RowReservation(LocalDateTime.now(), DatePicker.getValue(), hours[i],
-                        true, court, member);
+                        true, court, (Member) null);
                 rowReservations[i].setReserved(false);
             }
+
             i++;
         }
 
@@ -447,13 +466,13 @@ public class Reservas implements Initializable {
 
     ////////////////////////////parte mis reservas///////////////////////////////////////////////////////////////////////
     public void deleteAction(ActionEvent actionEvent) {
-        if(!listView.getSelectionModel().getSelectedItem().isOlderForDay(LocalDate.now())){   //checks if booking was of a previous day
-            JavaFXMLApplication.dialogBox("error","Cancel Error","Court was already used. Can't cancel reservation.");
+        if ( !listView.getSelectionModel().getSelectedItem().isOlderForDay(LocalDate.now()) ) {   //checks if booking was of a previous day
+            JavaFXMLApplication.dialogBox("error", "Cancel Error", "Court was already used. Can't cancel reservation.");
             return;
         }
 
         //check if canceled reservation is in less than 24h
-        if(Duration.between(listView.getSelectionModel().getSelectedItem().getBookingDate(), LocalDateTime.now()).compareTo(Duration.ofHours(24)) <= 0){
+        if ( Duration.between(listView.getSelectionModel().getSelectedItem().getBookingDate(), LocalDateTime.now()).compareTo(Duration.ofHours(24)) <= 0 ) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setHeaderText("Are you sure you want to continue?");
@@ -462,12 +481,12 @@ public class Reservas implements Initializable {
             ButtonType buttonTypeYes = new ButtonType("Yes");
             ButtonType buttonTypeNo = new ButtonType("No");
 
-            alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
             alert.showAndWait().ifPresent(buttonType -> {
-                if(buttonType == buttonTypeYes) {
+                if ( buttonType == buttonTypeYes ) {
                     System.out.println("Confirmed!");
-                } else if(buttonType == buttonTypeNo){
+                } else if ( buttonType == buttonTypeNo ) {
                     System.out.println("Canceled.");
                     return;
                 }
@@ -478,7 +497,7 @@ public class Reservas implements Initializable {
         showConfirmationWindow();
     }
 
-    private void showConfirmationWindow(){
+    private void showConfirmationWindow() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Dialog");
         alert.setHeaderText("Are you sure you want to delete?");
@@ -487,29 +506,31 @@ public class Reservas implements Initializable {
         ButtonType buttonTypeYes = new ButtonType("Yes");
         ButtonType buttonTypeNo = new ButtonType("No");
 
-        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
         alert.showAndWait().ifPresent(buttonType -> {
-            if(buttonType == buttonTypeYes) {
+            if ( buttonType == buttonTypeYes ) {
                 System.out.println("Confirmed!");
                 myObservableBookingList.remove(listView.getSelectionModel().getSelectedItem());  //removes booking from listView
                 try {
                     JavaFXMLApplication.getCurrentClub().removeBooking(listView.getSelectionModel().getSelectedItem());  //removes booking from database
-                }catch (ClubDAOException e){System.out.println("Error removing the booking.");}
-            } else if(buttonType == buttonTypeNo){
+                } catch (ClubDAOException e) {
+                    System.out.println("Error removing the booking.");
+                }
+            } else if ( buttonType == buttonTypeNo ) {
                 System.out.println("Canceled.");
             }
         });
     }
 
-    class bookingListCell extends ListCell<Booking>{
+    class bookingListCell extends ListCell<Booking> {
         @Override
-        protected  void updateItem(Booking booking, boolean empty){
-            super.updateItem(booking,empty);
-            if(empty || booking == null){
+        protected void updateItem(Booking booking, boolean empty) {
+            super.updateItem(booking, empty);
+            if ( empty || booking == null ) {
                 setText(null);
-            }else{
-                setText( booking.getMadeForDay() + "          " +  booking.getCourt().getName() + "          " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "          " + booking.getPaid());
+            } else {
+                setText(booking.getMadeForDay() + "          " + booking.getCourt().getName() + "          " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "          " + booking.getPaid());
 
             }
 
