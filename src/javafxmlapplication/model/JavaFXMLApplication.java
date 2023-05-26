@@ -126,7 +126,7 @@ public class JavaFXMLApplication extends Application {
         club.setName("GreenBall");
         programStage = stage;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/SingUp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
 
         Parent root = loader.load();
 
