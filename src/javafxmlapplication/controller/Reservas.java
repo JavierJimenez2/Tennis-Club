@@ -447,7 +447,7 @@ public class Reservas implements Initializable {
 
     ////////////////////////////parte mis reservas///////////////////////////////////////////////////////////////////////
     public void deleteAction(ActionEvent actionEvent) {
-        if( listView.getSelectionModel().getSelectedItem().isOlderForDay(LocalDate.now())){   //checks if booking was of a previous day
+        if(!listView.getSelectionModel().getSelectedItem().isOlderForDay(LocalDate.now())){   //checks if booking was of a previous day
             JavaFXMLApplication.dialogBox("error","Cancel Error","Court was already used. Can't cancel reservation.");
             return;
         }
@@ -509,7 +509,8 @@ public class Reservas implements Initializable {
             if(empty || booking == null){
                 setText(null);
             }else{
-                setText( booking.getMadeForDay() + " " +  booking.getCourt() + " " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + " " + booking.getPaid());
+                setText( booking.getMadeForDay() + "          " +  booking.getCourt().getName() + "          " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "          " + booking.getPaid());
+
             }
 
         }

@@ -44,7 +44,7 @@
                      <children>
                         <AnchorPane id="InferiorVPane" minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="695.0">
                            <children>
-                              <ListView fx:id="listView" layoutX="23.0" layoutY="95.0" prefHeight="374.0" prefWidth="642.0">
+                              <ListView fx:id="listView" layoutX="23.0" layoutY="95.0" prefHeight="374.0" prefWidth="682.0">
                                  <padding>
                                     <Insets left="10.0" right="10.0" />
                                  </padding>
@@ -55,7 +55,7 @@
                               <Label layoutX="600.0" layoutY="77.0" text="Paid" />
                            </children>
                         </AnchorPane>
-                        <Button fx:id="deleteButton" layoutX="690.0" layoutY="442.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
+                        <Button fx:id="deleteButton" layoutX="710.0" layoutY="441.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
                      </children></AnchorPane>
             </content>
           </Tab>

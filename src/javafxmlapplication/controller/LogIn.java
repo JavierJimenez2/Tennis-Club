@@ -65,8 +65,14 @@ public class LogIn implements Initializable {
         //Club club = JavaFXMLApplication.getCurrentClub();
         if ( JavaFXMLApplication.getCurrentClub().existsLogin(user) ) {
             Member member = JavaFXMLApplication.getCurrentClub().getMemberByCredentials(user, pass);
-            JavaFXMLApplication.setCurrentMember(member);
-            JavaFXMLApplication.changeScene("Reservas.fxml");
+            if (member != null) {
+                JavaFXMLApplication.setCurrentMember(member);
+                JavaFXMLApplication.changeScene("Reservas.fxml");
+            }else {
+                JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
+                username.setText("");
+                password.setText("");
+            }
         } else {
             JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
             username.setText("");

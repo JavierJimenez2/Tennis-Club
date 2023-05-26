@@ -68,6 +68,9 @@ public class MyData implements Initializable {
     if(!JavaFXMLApplication.getCurrentMember().getCreditCard().isEmpty() && JavaFXMLApplication.getCurrentMember().getSvc() != 0){
         creditcard.setText(JavaFXMLApplication.getCurrentMember().getCreditCard());
         csc.setText(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()));
+    } else{
+        creditcard.setPromptText("Credit Card Number (Optional)");
+        csc.setPromptText("Credit Card Number (Optional)");
     }
    }
 
@@ -97,6 +100,7 @@ public class MyData implements Initializable {
 
 
     public void returnAction(ActionEvent actionEvent) {
+        JavaFXMLApplication.changeScene("Reservas.fxml");
     }
 
     public void selectionButton(ActionEvent actionEvent) {
@@ -203,8 +207,14 @@ public class MyData implements Initializable {
             JavaFXMLApplication.getCurrentMember().setCreditCard(creditcard);
         }
 
-        if(!Scsc.equals(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()))){
-            JavaFXMLApplication.getCurrentMember().setSvc(Integer.parseInt(Scsc));
+        if(JavaFXMLApplication.getCurrentMember().getSvc() == 0) {
+            if(!Scsc.isEmpty()){
+                JavaFXMLApplication.getCurrentMember().setSvc(Integer.parseInt(Scsc));
+            }
+        } else {
+            if (!Scsc.equals(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()))) {
+                JavaFXMLApplication.getCurrentMember().setSvc(Integer.parseInt(Scsc));
+            }
         }
 
         if (selectedFile != null) {
