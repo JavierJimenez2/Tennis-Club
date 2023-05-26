@@ -5,15 +5,20 @@
  */
 package javafxmlapplication.controller;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
@@ -72,6 +77,10 @@ public class SingUp implements Initializable {
     @FXML
     private TextField username;
 
+    @FXML
+    private VBox fieldsInputs;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,6 +88,65 @@ public class SingUp implements Initializable {
         profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
 
 
+
+//        only show above when focus
+        TextField[] textFields = {name, lastname, username, password, creditcard, csc, telephone};
+        for ( TextField textField : textFields ) {
+            extracted(textField.getPromptText(), textField);
+        }
+
+//        si ha entrado en name y no ha puesto nada
+        TextField[] requiredFields = {name, lastname, username, password,telephone};
+        for ( TextField requiredField : requiredFields ) {
+            correctFields(requiredField.getPromptText(), requiredField);
+        }
+
+
+    }
+
+    private void correctFields(String Prompt,TextField name) {
+        name.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            if ( !t1 && name.getText().isEmpty() ) {
+                name.getStyleClass().add("error");
+                correctFormat = false;
+                name.setStyle("-fx-border-color: red;-fx-prompt-text-fill: red;");
+                name.setPromptText(Prompt+" is required");
+            } else {
+                name.setPromptText("");
+                name.setStyle("-fx-border-color: #08861d;-fx-prompt-text-fill: #08861d;-fx-font-fill: #08861d;");
+                correctFormat = true;
+            }
+        });
+    }
+
+    private void extracted(String s, TextField name) {
+        Label nameLabel = new Label(s);
+        nameLabel.setVisible(false);
+        name.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            if ( t1 ) {
+                nameLabel.setVisible(true);
+                StackPane namePane = new StackPane();
+                namePane.setAlignment(nameLabel, Pos.TOP_LEFT);
+                nameLabel.paddingProperty().setValue(new javafx.geometry.Insets(1));
+                TranslateTransition translateTransition = new TranslateTransition();
+                translateTransition.setDuration(javafx.util.Duration.millis(200));
+                translateTransition.setNode(nameLabel);
+                translateTransition.setFromX(0);
+                translateTransition.setFromY(0);
+                translateTransition.setToX(0);
+                translateTransition.setToY(-9);
+                translateTransition.play();
+                nameLabel.getStyleClass().add("inputPane");
+                name.setPromptText("");
+
+//        translate namePane in the border of the text field
+                fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
+                namePane.getChildren().addAll(name, nameLabel);
+
+            } else {
+//                nameLabel.setVisible(false);
+            }
+        });
     }
 
 
@@ -118,6 +186,7 @@ public class SingUp implements Initializable {
         if ( !name.matches("[a-zA-Z]*") || name.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Name Field. Remember to write just characters.");
             this.name.setText("");
+            this.name.requestFocus();
             correctFormat = false;
         }
 
@@ -125,23 +194,28 @@ public class SingUp implements Initializable {
         if ( !lastname.matches("[a-zA-Z]*") || lastname.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Last Name Field. Remember to write just characters.");
             this.lastname.setText("");
+            this.lastname.requestFocus();
             correctFormat = false;
         }
 
         ///////////////////telephone checkings/////////////////////////////////////////////////////////////
         if ( !telephone.matches("^[0-9]+$") || telephone.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Telephone Number Field. Remember to write just numbers.");
+            this.telephone.setText("");
+            this.telephone.requestFocus();
         }
 
         /////////////////////username checkings///////////////////////////////////////////////////////////
         if ( JavaFXMLApplication.getCurrentClub().existsLogin(username) ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Username already in use.");
             this.username.setText("");
+            this.username.requestFocus();
             correctFormat = false;
         }
         if ( username.matches(".*\\s.*") ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Remember it can't contain spaces.");
             this.username.setText("");
+            this.username.requestFocus();
             correctFormat = false;
         }
 
@@ -149,33 +223,39 @@ public class SingUp implements Initializable {
         if ( password.length() < 6 ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Password Field. Remember it should contain at least 6 characters.");
             this.password.setText("");
+            this.password.requestFocus();
             correctFormat = false;
         }
         /////////////////////credit card checkings///////////////////////////////////////////////////////////
         if ( creditcard.length() != 16 && !creditcard.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Credit Card Field. Remember it should contain 16 numb ers.");
             this.creditcard.setText("");
+            this.creditcard.requestFocus();
             correctFormat = false;
         }
         if ( !creditcard.matches("\\d+") && !creditcard.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Credit Card Field. Remember it should contain 16 numbers.");
             this.creditcard.setText("");
+            this.creditcard.requestFocus();
             correctFormat = false;
         }
 
         if ( (Scsc.length() != 3 || !Scsc.matches("^[0-9]+$")) && !Scsc.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in CSC Field. Remember it should contain 3 digits.");
             this.csc.setText("");
+            this.csc.requestFocus();
             correctFormat = false;
         }
 
         if ( !creditcard.isEmpty() && Scsc.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in CSC Field. Remember to write the CSC.");
             correctFormat = false;
+            this.csc.requestFocus();
         }
         if ( creditcard.isEmpty() && !Scsc.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Credit Card Field. Remember to write the Credit Card.");
             correctFormat = false;
+            this.creditcard.requestFocus();
         }
 
 

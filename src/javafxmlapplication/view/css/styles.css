@@ -1,12 +1,72 @@
 
-*{
-/*    variable*/
+* {
+    /*    variable*/
     -fx-primary: #08861d;
     -fx-primary-bold: #2b542c;
 }
 
+#text-field, #password-field {
+    -fx-border-color: #08861d;
+    -fx-background-color: #eeeeee;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: lighter;
+    -fx-font-family: "Segoe UI";
+    -fx-prompt-text-fill: #2f2f2f;
+    -fx-font-fill: black;
+    -fx-padding: 10px;
+
+}
+
+#text-field:hover, #password-field:hover {
+    -fx-background-color: #d7d7d7;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-prompt-text-fill: black;
+}
+
+#text-field:focused, #password-field:focused {
+    -fx-background-color: white;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-border-width: 2px;
+    -fx-border-color: #08861d;
+    -fx-font-fill: black;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-prompt-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 0, 0, 0.9), 10, 0, 0, 0);
+}
+
+.inputPane {
+    -fx-background-color: white;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 10px;
+    -fx-border-color: #08861d;
+}
 
 
+#text-field:pressed, #password-field:pressed {
+    -fx-background-color: white;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-border-width: 2px;
+}
+
+
+#text-field:filled, #password-field:filled {
+    -fx-background-color: white;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-font-weight: bold;
+}
+
+
+/* move the prompt text up*/
+
+
+/*if something has error class the border must be red*/
 
 
 #pane {
@@ -69,11 +129,6 @@
 }
 
 
-
-
-
-
-
 #Title {
 
     -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, lime 0%, green 50%);
@@ -83,7 +138,7 @@
 }
 
 
-@font-face{
+@font-face {
     font-family: 'Segoe UI';
     font-style: normal;
     font-weight: 400;
@@ -94,7 +149,7 @@
 /*https://www.w3schools.com/css/css3_variables.asp*/
 
 
-.menu-bar{
+.menu-bar {
     -fx-background-color: -fx-primary;
     -fx-background-radius: 0px;
     -fx-background-insets: 0px;
@@ -104,8 +159,7 @@
 }
 
 
-
-.background{
+.background {
     /*-fx-background-color: linear-gradient(to bottom right, #0f0c29 24%, #302b63 50%, #24243e 74%);*/
     -fx-alignment: center;
     -fx-background-image: url('/javafxmlapplication/view/css/img/bg.jpg');
@@ -117,12 +171,11 @@
 }
 
 
+/*.label{*/
+/*    -fx-text-fill: white;*/
+/*}*/
 
-.label{
-    -fx-text-fill: white;
-}
-
-.app-title{
+.app-title {
     -fx-font: 36px 'Segoe UI';
     -fx-text-fill: #eeeeee;
     -fx-max-width: 100000;
@@ -130,7 +183,7 @@
     -fx-padding: 10px;
 }
 
-.widget{
+.widget {
     -fx-background-color: derive(-fx-primary, 10%);
     -fx-background-radius: 5px;
     -fx-background-insets: 5px;
@@ -140,25 +193,25 @@
 }
 
 
-.widget .label{
+.widget .label {
     -fx-font-weight: bold;
     -fx-font-size: 1.2em;
     -fx-max-width: 100000;
     -fx-alignment: center;
 }
-.titleWidget{
+
+.titleWidget {
     -fx-font-size: 1.7em;
 }
 
 
-
-.item{
+.item {
     -fx-padding: 5px;
     -fx-alignment: center-left;
     -fx-spacing: 10px;
 }
 
-.free:hover{
+.free:hover {
     -fx-background-color: derive(-fx-primary, 60%);
     /*-fx-background-radius: 10px;*/
     -fx-font-weight: bold;
@@ -166,29 +219,30 @@
     -fx-cursor: hand;
 }
 
-.item .label{
+.item .label {
     -fx-font-weight: bold;
     -fx-wrap-text: true;
 }
 
-.text-field {
+.date-picker .text-field {
     -fx-border-color: grey;
     -fx-border-width: 0 0 0 0;
     -fx-background-color: transparent;
 }
 
-.text-field:hover {
+.date-picker .text-field:hover {
     -fx-border-color: -fx-focus-color;
 }
 
-.free{
+.free {
     -fx-background-color: green;
 }
-.reserved{
+
+.reserved {
     -fx-background-color: gray;
 }
 
-.app-title{
+.app-title {
     -fx-font: 36px 'Segoe UI';
     -fx-text-fill: #eeeeee;
     -fx-max-width: 100000;
@@ -198,7 +252,7 @@
 
 }
 
-.app-title2{
+.app-title2 {
     -fx-font: 36px 'Segoe UI';
     -fx-text-fill: #eeeeee;
     -fx-max-width: 100000;
@@ -208,12 +262,12 @@
 
 }
 
-.avatar{
+.avatar {
     -fx-font-size: 10px;
     -fx-padding: 20px;
 }
 
-.choice-box{
+.choice-box {
     -fx-background-color: black;
     -fx-border-width: 0 0 0 0;
     -fx-font-size: 1.2em;
@@ -222,13 +276,13 @@
     -fx-border-radius: 10px;
 }
 
-.list-view{
+.list-view {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary-bold;
 }
 
-.list-cell{
+.list-cell {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: transparent;
@@ -237,25 +291,25 @@
     -fx-font-size: 1.2em;
 }
 
-.list-cell:hover{
+.list-cell:hover {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary;
     -fx-text-fill: white;
 }
 
-.tabPane{
+.tabPane {
     -fx-background-color: white;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-border-width: 0 0 0 0;
 }
 
-#scrollPane{
+#scrollPane {
     -fx-background-color: transparent;
 }
 
-.bootstrap-pane{
+.bootstrap-pane {
     -fx-background-color: transparent;
 }
 
@@ -292,9 +346,11 @@
 .date-picker .arrow-button:hover {
     -fx-background-color: -fx-primary;
 }
+
 .date-picker .arrow-button:pressed {
     -fx-background-color: -fx-primary;
 }
+
 .date-picker .arrow-button:hover .arrow {
     -fx-background-color: white;
 }
@@ -319,8 +375,8 @@
     -fx-text-fill: #008329;
     -fx-font-family: "Segoe UI";
 }
-/*poner de un color los dias del mes actual*/
 
+/*poner de un color los dias del mes actual*/
 
 
 .date-picker .day-cell:hover {
@@ -398,19 +454,59 @@
 
 /* Estilo para resaltar los días del mes seleccionado en el DatePicker */
 
-.date-picker .day-cell .month-days-pane{
+.date-picker .day-cell .month-days-pane {
     -fx-background-color: #2196f3;
     -fx-text-fill: #fff;
 }
 
 
-
-#returnButton{
- -fx-background-radius: 30;
+#returnButton {
+    -fx-background-radius: 30;
     -fx-background-color: #D3D94C;
 
 }
-#returnButton:hover{
- -fx-background-color: #E6EB6C;
+
+#returnButton:hover {
+    -fx-background-color: #E6EB6C;
+
+}
+#submitButton {
+    -fx-background-radius: 30;
+    -fx-background-color: -fx-primary;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-padding: 12px;
+
+}
+
+#submitButton:hover {
+    -fx-background-color: #08ab23;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+/*    efect of color the button but in in circular way*/
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+
+}
+
+#selectButton{
+    -fx-background-radius: 30;
+    -fx-background-color: lightblue;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-font-fill: white;
+}
+
+#selectButton:hover{
+    -fx-background-color: #0097f8;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    /*    efect of color the button but in in circular way*/
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 
 }
