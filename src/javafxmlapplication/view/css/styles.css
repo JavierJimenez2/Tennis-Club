@@ -1,3 +1,14 @@
+
+*{
+/*    variable*/
+    -fx-primary: #08861d;
+    -fx-primary-bold: #2b542c;
+}
+
+
+
+
+
 #pane {
     -fx-background-image: url('img/bg.jpg');
     -fx-opacity: 0.8;
@@ -81,12 +92,10 @@
 
 /*crear variables*/
 /*https://www.w3schools.com/css/css3_variables.asp*/
-* {
-    -fx-green: #08861d;
-}
+
 
 .menu-bar{
-    -fx-background-color: -fx-green;
+    -fx-background-color: -fx-primary;
     -fx-background-radius: 0px;
     -fx-background-insets: 0px;
     -fx-padding: 0px;
@@ -122,7 +131,7 @@
 }
 
 .widget{
-    -fx-background-color: derive(#08861d, 10%);
+    -fx-background-color: derive(-fx-primary, 10%);
     -fx-background-radius: 5px;
     -fx-background-insets: 5px;
     -fx-padding: 5px;
@@ -150,7 +159,7 @@
 }
 
 .free:hover{
-    -fx-background-color: derive(#08861d, 60%);
+    -fx-background-color: derive(-fx-primary, 60%);
     /*-fx-background-radius: 10px;*/
     -fx-font-weight: bold;
     /*    change the pointer*/
@@ -216,7 +225,7 @@
 .list-view{
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
-    -fx-background-color: #2b542c;
+    -fx-background-color: -fx-primary-bold;
 }
 
 .list-cell{
@@ -231,7 +240,7 @@
 .list-cell:hover{
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
     -fx-text-fill: white;
 }
 
@@ -269,7 +278,7 @@
 }
 
 .date-picker .popup-content .arrow {
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
     -fx-background-radius: 20px;
 }
 
@@ -281,10 +290,10 @@
 }
 
 .date-picker .arrow-button:hover {
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
 }
 .date-picker .arrow-button:pressed {
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
 }
 .date-picker .arrow-button:hover .arrow {
     -fx-background-color: white;
@@ -326,7 +335,7 @@
 
 
 .date-picker .month-year-pane {
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
 }
@@ -358,11 +367,11 @@
 }
 
 .date-picker .month-year-pane .arrow-button:hover {
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
 }
 
 .date-picker .month-year-pane .arrow-button:pressed {
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
     -fx-font-weight: bold;
 }
 
@@ -372,7 +381,7 @@
 }
 
 .date-picker .weekday-header {
-    -fx-background-color: #08861d;
+    -fx-background-color: -fx-primary;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
 }
