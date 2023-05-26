@@ -5,15 +5,20 @@
  */
 package javafxmlapplication.controller;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
@@ -24,6 +29,7 @@ import model.Member;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.cert.PolicyNode;
 import java.util.ResourceBundle;
 
 
@@ -45,15 +51,72 @@ public class LogIn implements Initializable {
     private TextField username;
     @FXML
     private Button doneButton;
-
-
+    private boolean correctFormat;
+    @FXML
+    private VBox fieldsInputs;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //        only show above when focus
+        TextField[] textFields = {username, password};
+        for ( TextField textField : textFields ) {
+            extracted(textField.getPromptText(), textField);
+        }
+
+//        si ha entrado en name y no ha puesto nada
+        TextField[] requiredFields =   {username, password};
+        for ( TextField requiredField : requiredFields ) {
+            correctFields(requiredField.getPromptText(), requiredField);
+        }
 
 
+    }
+
+    private void correctFields(String Prompt,TextField name) {
+        name.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            if ( !t1 && name.getText().isEmpty() ) {
+                name.getStyleClass().add("error");
+                correctFormat = false;
+                name.setStyle("-fx-border-color: red;-fx-prompt-text-fill: red;");
+                name.setPromptText(Prompt+" is required");
+            } else {
+                name.setPromptText("");
+                name.setStyle("-fx-border-color: #08861d;-fx-prompt-text-fill: #08861d;-fx-font-fill: #08861d;");
+                correctFormat = true;
+            }
+        });
+    }
+
+    private void extracted(String s, TextField name) {
+        Label nameLabel = new Label(s);
+        nameLabel.setVisible(false);
+        name.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            if ( t1 ) {
+                nameLabel.setVisible(true);
+                StackPane namePane = new StackPane();
+                namePane.setAlignment(nameLabel, Pos.TOP_LEFT);
+                nameLabel.paddingProperty().setValue(new javafx.geometry.Insets(1));
+                TranslateTransition translateTransition = new TranslateTransition();
+                translateTransition.setDuration(javafx.util.Duration.millis(200));
+                translateTransition.setNode(nameLabel);
+                translateTransition.setFromX(0);
+                translateTransition.setFromY(0);
+                translateTransition.setToX(0);
+                translateTransition.setToY(-9);
+                translateTransition.play();
+                nameLabel.getStyleClass().add("inputPane");
+                name.setPromptText("");
+
+//        translate namePane in the border of the text field
+                fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
+                namePane.getChildren().addAll(name, nameLabel);
+
+            } else {
+//                nameLabel.setVisible(false);
+            }
+        });
     }
 
 
