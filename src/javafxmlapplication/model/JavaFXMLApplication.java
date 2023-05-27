@@ -5,6 +5,7 @@
  */
 package javafxmlapplication.model;
 
+import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Club;
 import model.Member;
@@ -114,6 +116,7 @@ public class JavaFXMLApplication extends Application {
         }
 
     }
+
 
     public void changeScene1(String s) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("javafxmlapplication/view/" + s));
