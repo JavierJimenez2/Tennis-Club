@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -14,30 +13,21 @@
 <?import javafx.scene.text.Text?>
 
 
-<HBox fx:id="pane" fillHeight="false" prefHeight="472.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Main">
+<HBox fx:id="pane" alignment="CENTER" fillHeight="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Main">
    <children>
-      <VBox fx:id="intPane" prefHeight="369.0" prefWidth="538.0">
+      <VBox fx:id="intPane" alignment="CENTER" prefHeight="560.0" prefWidth="800.0" HBox.hgrow="NEVER">
          <children>
-            <Text fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Slash" wrappingWidth="538.9367370605469">
-               <font>
-                  <Font name="Courier New Bold" size="37.0" />
-               </font>
-            </Text>
-            <VBox prefHeight="403.0" prefWidth="539.0">
+            <VBox alignment="CENTER" prefHeight="403.0" prefWidth="539.0" VBox.vgrow="NEVER">
                <children>
-                  <Label fx:id="infoLabel" prefHeight="50.0" prefWidth="542.0">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                     <font>
-                        <Font size="9.0" />
-                     </font>
-                  </Label>
-                  <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Slash!" textAlignment="CENTER" wrappingWidth="539.8714904785156">
-                     <font>
-                        <Font name="Segoe UI Light" size="49.0" />
-                     </font>
-                  </Text>
+                  <HBox alignment="CENTER" prefHeight="182.0" prefWidth="720.0" VBox.vgrow="NEVER">
+                     <children>
+                        <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Slash!" textAlignment="CENTER" wrappingWidth="539.8714904785156" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Segoe UI Black" size="49.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
                   <GridPane alignment="CENTER" opacity="0.6" prefHeight="200.0" prefWidth="450.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.7999267578125" minWidth="10.0" prefWidth="133.80001220703124" />
@@ -81,8 +71,14 @@
                      </children>
                   </GridPane>
                </children>
+               <VBox.margin>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </VBox.margin>
             </VBox>
          </children>
+         <HBox.margin>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </HBox.margin>
       </VBox>
    </children>
 </HBox>

@@ -171,9 +171,15 @@
 }
 
 
-/*.label{*/
-/*    -fx-text-fill: white;*/
-/*}*/
+.scroll-pane .label{
+    -fx-text-fill: white;
+}
+
+
+
+.choice-box .list-view .label{
+    -fx-text-fill: white;
+}
 
 .app-title {
     -fx-font: 36px 'Segoe UI';
@@ -304,11 +310,6 @@
     -fx-border-radius: 10px;
     -fx-border-width: 0 0 0 0;
 }
-
-#scrollPane {
-    -fx-background-color: transparent;
-}
-
 .bootstrap-pane {
     -fx-background-color: transparent;
 }
