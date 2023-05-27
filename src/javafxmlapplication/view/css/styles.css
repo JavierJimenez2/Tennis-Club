@@ -3,7 +3,9 @@
     /*    variable*/
     -fx-primary: #08861d;
     -fx-primary-bold: #2b542c;
+    -fx-font-family: "Segoe UI";
 }
+
 
 #text-field, #password-field {
     -fx-border-color: #08861d;
@@ -171,13 +173,12 @@
 }
 
 
-.scroll-pane .label{
+.scroll-pane .label {
     -fx-text-fill: white;
 }
 
 
-
-.choice-box .list-view .label{
+.choice-box .list-view .label {
     -fx-text-fill: white;
 }
 
@@ -240,12 +241,19 @@
     -fx-border-color: -fx-focus-color;
 }
 
+.date-picker .label {
+    -fx-font-fill: white;
+}
+
+
 .free {
     -fx-background-color: green;
+    -fx-background-color: derive(-fx-primary, 10%);
 }
 
 .reserved {
     -fx-background-color: gray;
+    -fx-padding: 5px;
 }
 
 .app-title {
@@ -305,6 +313,27 @@
 }
 
 .tabPane {
+
+#scrollPane {
+    -fx-background-color: transparent;
+}
+
+/*give the scroll bar style*/
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -fx-primary-bold;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.scroll-pane .scroll-bar {
+    -fx-background-radius: 20px;
     -fx-background-color: white;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
@@ -484,15 +513,15 @@
     -fx-background-color: #08ab23;
     -fx-font-size: 1.2em;
     -fx-font-weight: bold;
-/*    efect of color the button but in in circular way*/
+    /*    efect of color the button but in in circular way*/
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 
 }
 
-#selectButton{
+#selectButton {
     -fx-background-radius: 30;
     -fx-background-color: lightblue;
     -fx-font-size: 1.2em;
@@ -500,7 +529,8 @@
     -fx-font-fill: white;
 }
 
-#selectButton:hover{
+
+#selectButton:hover {
     -fx-background-color: #0097f8;
     -fx-font-size: 1.2em;
     -fx-font-weight: bold;
@@ -508,22 +538,69 @@
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 
 }
 
+.tabPane {
+    -fx-border-color: #f6f6f6;
+    -fx-border-width: 10px;
+    -fx-background-color: #f6f6f6;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+
+/*.tabPane .tab{*/
+/*    -fx-background-color:white;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-background-radius: 20px;*/
+/*}*/
+
+/*.tabPane .tab:pressed{*/
+/*    -fx-background-color:white;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-background-radius: 20px;*/
+/*}*/
+/* cambiar lo que está detras de los tabs*/
+
+.tab-pane {
+    -fx-background-color: #f6f6f6;
+    -fx-border-color: #f6f6f6;
+    -fx-border-width: 10px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #dcdada;
+    -fx-border-color: #dcdada;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+/*change all the tab config in order to be border radius 10px*/
+.tab-pane .tab:top:selected .tab-container {
+    -fx-background-color: #f6f6f6;
+    -fx-border-color: #f6f6f6;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+
+#misResGP {
 #misResGP{
     -fx-background-color: #84B15C;
     -fx-border-color: black;
-   /* -fx-border-width: 1px;*/
-    -fx-background-radius: 10px 10px 10px 10px ;
-    -fx-border-radius: 10px 10px 10px 10px ;
+    /* -fx-border-width: 1px;*/
+    -fx-background-radius: 10px 10px 10px 10px;
+    -fx-border-radius: 10px 10px 10px 10px;
 
 
 }
 
-#deleteButtonMR{
--fx-background-color: #FF0000;
+#deleteButtonMR {
+    -fx-background-color: #FF0000;
     -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
     -fx-padding: 6px 12px;
@@ -534,6 +611,47 @@
 -fx-background-color: #FF3333;
 }
 
-deleteButtonMR: pressed {
+deleteButtonMR:pressed {
     -fx-background-color: #CC0000;
 }
+
+.Buttons {
+
+    -fx-background-color: #09b625;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: white;
+    -fx-font: 15px "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+}
+
+.Buttons:hover {
+    -fx-background-color: #08831e;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: white;
+    -fx-font: 15px "Segoe UI";
+    -fx-font-weight: bold;
+}
+
+#spinner {
+    -fx-background-color: black;
+    -fx-stroke-dash-array: 15;
+    /*make the stroke with border radius*/
+    -fx-stroke-line-cap: round;
+    -fx-stroke-dash-offset: 9;
+    -fx-stroke-width: 5;
+    -fx-stroke: #000;
+    -fx-fill: transparent;
+    -fx-rotate: 90;
+    -fx-translate-x: 0;
+    -fx-translate-y: 0;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-opacity: 1;
+    -fx-smooth: true;
+    -fx-cache: true;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+}
+

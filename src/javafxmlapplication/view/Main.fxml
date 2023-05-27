@@ -8,77 +8,81 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <HBox fx:id="pane" alignment="CENTER" fillHeight="false" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Main">
    <children>
-      <VBox fx:id="intPane" alignment="CENTER" prefHeight="560.0" prefWidth="800.0" HBox.hgrow="NEVER">
-         <children>
-            <VBox alignment="CENTER" prefHeight="403.0" prefWidth="539.0" VBox.vgrow="NEVER">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="182.0" prefWidth="720.0" VBox.vgrow="NEVER">
-                     <children>
-                        <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Slash!" textAlignment="CENTER" wrappingWidth="539.8714904785156" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font name="Segoe UI Black" size="49.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </HBox>
-                  <GridPane alignment="CENTER" opacity="0.6" prefHeight="200.0" prefWidth="450.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.7999267578125" minWidth="10.0" prefWidth="133.80001220703124" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.20007324218756" minWidth="10.0" prefWidth="134.00002441406247" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.20007324218756" minWidth="10.0" prefWidth="138.79997558593755" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Button fx:id="signUpButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goSignUp" onMouseClicked="#goSignUp" prefHeight="80.0" prefWidth="130.0" styleClass="Buttons" text="Sign Up" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="System Italic" size="21.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="logInButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goLogIn" onMouseClicked="#goLogIn" prefHeight="80.0" prefWidth="130.0" styleClass="Buttons" text="Log In" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="reservationButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goReservations" onMouseClicked="#goReservations" prefHeight="80.0" prefWidth="130.0" styleClass="Buttons" text="Reservations" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                           <font>
-                              <Font name="System Italic" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="infoButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#infoClicked" prefHeight="23.0" prefWidth="54.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" right="10.0" top="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@css/img/icons/information-icon.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </GridPane>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-               </VBox.margin>
-            </VBox>
-         </children>
+      <StackPane fx:id="stackPane" HBox.hgrow="NEVER">
          <HBox.margin>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </HBox.margin>
-      </VBox>
+         <children>
+            <VBox fx:id="intPane" alignment="CENTER" prefHeight="560.0" prefWidth="800.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="403.0" prefWidth="539.0" VBox.vgrow="NEVER">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="182.0" prefWidth="720.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Slash!" textAlignment="CENTER" wrappingWidth="539.8714904785156" HBox.hgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Segoe UI Black" size="49.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <GridPane alignment="CENTER" opacity="0.6" prefHeight="200.0" prefWidth="450.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.7999267578125" minWidth="10.0" prefWidth="133.80001220703124" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.20007324218756" minWidth="10.0" prefWidth="134.00002441406247" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.20007324218756" minWidth="10.0" prefWidth="138.79997558593755" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="signUpButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goSignUp" onMouseClicked="#goSignUp" prefHeight="80.0" prefWidth="130.0" styleClass="Buttons" text="Sign Up" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Italic" size="21.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="logInButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goLogIn" onMouseClicked="#goLogIn" prefHeight="80.0" prefWidth="130.0" styleClass="Buttons" text="Log In" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Italic" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="reservationButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goReservations" onMouseClicked="#goReservations" prefHeight="80.0" prefWidth="130.0" styleClass="Buttons" text="Reservations" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Italic" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="infoButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#infoClicked" prefHeight="23.0" prefWidth="54.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="10.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@css/img/icons/information-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </GridPane>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
    </children>
 </HBox>
