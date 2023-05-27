@@ -1,10 +1,10 @@
 package javafxmlapplication.controller;
 
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,8 +26,8 @@ import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
 import model.*;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -41,7 +41,7 @@ import java.util.ResourceBundle;
 import static javafxmlapplication.model.JavaFXMLApplication.changeScene;
 
 
-public class Reservas implements Initializable {
+public class Reservas1 implements Initializable {
 
 
     ////////////////////////////////parte de reservas/////////////////////////////////////////////////////////////////////////////
@@ -88,15 +88,8 @@ public class Reservas implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         /////////////////////////////////parte de reservas///////////////////////////////////////////////////////////////////////////////////
         guest = false;
-        try {
-            club = Club.getInstance();
-        } catch (ClubDAOException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        club = JavaFXMLApplication.getCurrentClub();
 
-        assert club != null;
         member = JavaFXMLApplication.getCurrentMember();
         if ( member == null ) {
             guest = true;
@@ -110,7 +103,7 @@ public class Reservas implements Initializable {
             appTitle.setText("Guest");
             avatar.setImage(new javafx.scene.image.Image("/javafxmlapplication/view/css/img/icons/avatar_icon.png"));
         } else {
-            appTitle.setText("GreenBall");
+            appTitle.setText(member.getName());
 //            avatar.setImage(new javafx.scene.image.Image("/javafxmlapplication/view/css/img/icons/avatar_icon.png"));
             avatar.setImage(member.getImage());
             System.out.println(member.getImage());
@@ -132,7 +125,7 @@ public class Reservas implements Initializable {
             } else if ( choice.getValue() == settings ) {
                 changeScene("SingUp.fxml");
             } else if ( choice.getValue() == logout ) {
-                if ( !guest ) {
+                if(!guest){
                     Alert alert = new Alert(Alert.AlertType.WARNING);
 //                set graphic in css bi bi-exclamation-circle-fill
 
@@ -148,7 +141,7 @@ public class Reservas implements Initializable {
                         JavaFXMLApplication.setCurrentMember((Member) null);
                         changeScene("Login.fxml");
                     }
-                } else {
+                }else {
                     changeScene("Login.fxml");
                 }
             }
@@ -179,7 +172,7 @@ public class Reservas implements Initializable {
 
         ///////////////////////////////parte de MisReservas////////////////////////////////////////////////////////////////
 
-//        myReservationsTab();
+        myReservationsTab();
     }
 
     private void myReservationsTab() {
@@ -244,7 +237,6 @@ public class Reservas implements Initializable {
 
         BootstrapRow row = new BootstrapRow();
 
-        club = JavaFXMLApplication.getCurrentClub();
         if ( club == null ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -304,7 +296,7 @@ public class Reservas implements Initializable {
 
 //  Free label:
         Label freeLabel = new Label("Free");
-        Label unavailableLabel = new Label("Not Free");
+        Label unavailableLabel = new Label("Not free");
 
 //  User Label:
 
@@ -313,6 +305,7 @@ public class Reservas implements Initializable {
             userLabel.setText("@" + row.getMember().getNickName());
         }
         userLabel.setStyle("-fx-font-size: 14px;");
+
 
 
 //  Sets the initial color of the ball depending on the state of the RowReservation object.
@@ -542,11 +535,11 @@ public class Reservas implements Initializable {
             });
         }
 
-        public void myReservationsAction (Event event){
+        public void myReservationsAction (MouseEvent event){
             myReservationsTab();
         }
 
-        public void reserveAction (Event event){
+        public void reserveAction (MouseEvent event){
             courtView();
         }
 

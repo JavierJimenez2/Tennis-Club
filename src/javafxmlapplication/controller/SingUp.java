@@ -85,7 +85,7 @@ public class SingUp implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        profileImage.setImage() is in javafxmlapplication/view/css/img/icons/user.png
-        profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
+        profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon.png"));
 
 
 

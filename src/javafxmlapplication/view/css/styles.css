@@ -252,7 +252,11 @@
 }
 
 .reserved {
-    -fx-background-color: gray;
+    -fx-background-color: #f14e4e;
+    -fx-padding: 5px;
+}
+.unavailable {
+    -fx-background-color: grey;
     -fx-padding: 5px;
 }
 
@@ -290,13 +294,13 @@
     -fx-border-radius: 10px;
 }
 
-.list-view {
+#choice .list-view {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary-bold;
 }
 
-.list-cell {
+#choice .list-cell {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: transparent;
@@ -305,7 +309,7 @@
     -fx-font-size: 1.2em;
 }
 
-.list-cell:hover {
+#choice .list-cell:hover {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary;
@@ -313,6 +317,8 @@
 }
 
 .tabPane {
+    -fx-background-color: transparent;
+}
 
 #scrollPane {
     -fx-background-color: transparent;
@@ -333,7 +339,6 @@
 }
 
 .scroll-pane .scroll-bar {
-    -fx-background-radius: 20px;
     -fx-background-color: white;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
@@ -589,6 +594,8 @@
 
 
 #misResGP {
+
+}
 #misResGP{
     -fx-background-color: #84B15C;
     -fx-border-color: black;
@@ -607,7 +614,7 @@
     -fx-border-radius: 5px;
 }
 
-#deleteButtonMR: hover{
+#deleteButtonMR:hover{
 -fx-background-color: #FF3333;
 }
 
