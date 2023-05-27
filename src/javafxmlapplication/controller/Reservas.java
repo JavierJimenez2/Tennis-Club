@@ -13,11 +13,14 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafxmlapplication.model.JavaFXMLApplication;
 import javafxmlapplication.model.layouts.BootstrapColumn;
@@ -64,7 +67,13 @@ public class Reservas implements Initializable {
     @FXML
     private ComboBox<Label> choice;
     @FXML
+    private Circle circleAvatar;
+    @FXML
     private TabPane intPane;
+    @FXML
+    private HBox frameTop;
+    @FXML
+    private Label userTopLabel;
     @FXML
     private HBox menuBar;
     @FXML
@@ -73,6 +82,8 @@ public class Reservas implements Initializable {
     private StackPane stackPane;
     @FXML
     private Text textDate;
+    @FXML
+    private HBox imageBox;
     @FXML
     private VBox root;
     @FXML
@@ -106,17 +117,33 @@ public class Reservas implements Initializable {
             MisReservasTab.tooltipProperty().set(new Tooltip("For view your bookings you need to Log In"));
         }
 
+//        Circle circle = new Circle(26, 30, 26);
+//        circle.setStroke(Color.WHITE);
+//        circle.setStrokeWidth(2);
+//        circle.setFill(Color.WHITE);
+        circleAvatar.setStroke(Color.WHITE);
+        avatar.setVisible(false);
         if ( guest ) {
-            appTitle.setText("Guest");
+            appTitle.setText("GreenBall");
             avatar.setImage(new javafx.scene.image.Image("/javafxmlapplication/view/css/img/icons/avatar_icon.png"));
+//            avatar.setClip(circle);
+            circleAvatar.setFill(new ImagePattern(new javafx.scene.image.Image("/javafxmlapplication/view/css/img" +
+                    "/icons/avatar_icon.png")));
+            userTopLabel.setText("Guest");
         } else {
             appTitle.setText("GreenBall");
-//            avatar.setImage(new javafx.scene.image.Image("/javafxmlapplication/view/css/img/icons/avatar_icon.png"));
             avatar.setImage(member.getImage());
-            System.out.println(member.getImage());
+//            avatar.setDisable(true);
+//            crop the image
+//            avatar.setClip(circle);
+//            crop the image into a square preserving the center and the ratio
+            ImageView imageView = new ImageView(member.getImage());
+            imageView.setPreserveRatio(true);
+            ImagePattern pattern = new ImagePattern(imageView.getImage());
+            circleAvatar.setFill(pattern);
+            userTopLabel.setText(member.getNickName());
         }
         Label profile = new Label("Profile");
-        Label settings = new Label("Settings");
         Label logout = new Label("Logout");
         if ( guest ) logout.setText("Log In");
 
@@ -129,8 +156,6 @@ public class Reservas implements Initializable {
         choice.setOnAction((event) -> {
             if ( choice.getValue() == profile ) {
                 changeScene("MyData.fxml");
-            } else if ( choice.getValue() == settings ) {
-                changeScene("SingUp.fxml");
             } else if ( choice.getValue() == logout ) {
                 if ( !guest ) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);

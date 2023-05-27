@@ -159,7 +159,6 @@ public class SingUp implements Initializable {
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
         if ( selectedFile != null ) {
-//make a copy of the image in the project folder
             String path = "src/javafxmlapplication/view/css/img/profiles/" + selectedFile.getName();
             JavaFXMLApplication.copyFile(selectedFile, new File(path));
             profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));

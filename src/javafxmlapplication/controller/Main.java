@@ -130,7 +130,7 @@ public class Main implements Initializable {
     }
 
     public void goLogIn(ActionEvent event){
-        JavaFXMLApplication.changeScene("Login.fxml");
+        JavaFXMLApplication.changeScene("LogIn.fxml");
     }
 
     public void goSignUp(ActionEvent event){
