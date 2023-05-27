@@ -32,6 +32,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -459,13 +460,14 @@ public class Reservas implements Initializable {
 
     ////////////////////////////parte mis reservas///////////////////////////////////////////////////////////////////////
     public void deleteAction(ActionEvent actionEvent) {
-        if ( !listView.getSelectionModel().getSelectedItem().isOlderForDay(LocalDate.now()) ) {   //checks if booking was of a previous day
+        long daysDifference = ChronoUnit.DAYS.between(listView.getSelectionModel().getSelectedItem().getMadeForDay(), LocalDate.now());
+        //
+        if (LocalDate.now().isAfter(listView.getSelectionModel().getSelectedItem().getMadeForDay()) || (LocalDate.now().isEqual(listView.getSelectionModel().getSelectedItem().getMadeForDay()) && (!listView.getSelectionModel().getSelectedItem().getFromTime().isAfter(LocalTime.now()) || !listView.getSelectionModel().getSelectedItem().getFromTime().plusHours(1).isAfter(LocalTime.now())))) {   //checks if booking was of a previous day
             JavaFXMLApplication.dialogBox("error", "Cancel Error", "Court was already used. Can't cancel reservation.");
-            return;
-        }
-
-        //check if canceled reservation is in less than 24h
-        if ( Duration.between(listView.getSelectionModel().getSelectedItem().getBookingDate(), LocalDateTime.now()).compareTo(Duration.ofHours(24)) <= 0 ) {
+            //return;
+            //check if canceled reservation is in less than 24h
+            //listView.getSelectionModel().getSelectedItem().getBookingDate(), LocalDateTime.now()
+        } else if ( (daysDifference == 1 && listView.getSelectionModel().getSelectedItem().getFromTime().isBefore(LocalTime.now())) || daysDifference < 1) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setHeaderText("Are you sure you want to continue?");
@@ -478,16 +480,18 @@ public class Reservas implements Initializable {
 
             alert.showAndWait().ifPresent(buttonType -> {
                 if ( buttonType == buttonTypeYes ) {
-                    System.out.println("Confirmed!");
+                    showConfirmationWindow();
                 } else if ( buttonType == buttonTypeNo ) {
-                    System.out.println("Canceled.");
-                    return;
+                    JavaFXMLApplication.dialogBox("info","Process Canceled","Reservation deletion canceled.");
+
                 }
             });
+        } else {
+            showConfirmationWindow();
         }
 
 
-        showConfirmationWindow();
+
     }
 
     private void showConfirmationWindow() {
@@ -503,15 +507,16 @@ public class Reservas implements Initializable {
 
         alert.showAndWait().ifPresent(buttonType -> {
             if ( buttonType == buttonTypeYes ) {
-                System.out.println("Confirmed!");
+
                 myObservableBookingList.remove(listView.getSelectionModel().getSelectedItem());  //removes booking from listView
                 try {
                     JavaFXMLApplication.getCurrentClub().removeBooking(listView.getSelectionModel().getSelectedItem());  //removes booking from database
+                    JavaFXMLApplication.dialogBox("success","Succes","Booking removed successfully.");
                 } catch (ClubDAOException e) {
-                    System.out.println("Error removing the booking.");
+                    JavaFXMLApplication.dialogBox("error","Error removing booking","Error trying to cancel booking.");
                 }
             } else if ( buttonType == buttonTypeNo ) {
-                System.out.println("Canceled.");
+                JavaFXMLApplication.dialogBox("info","Process Canceled","Reservation deletion canceled.");
             }
         });
     }
