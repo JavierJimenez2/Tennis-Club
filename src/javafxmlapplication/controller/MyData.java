@@ -229,9 +229,10 @@ public class MyData implements Initializable {
         }
 
 
-        if(selectedFile != null){
-            JavaFXMLApplication.getCurrentMember().setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
-        }
+        //if(selectedFile != null){
+            JavaFXMLApplication.getCurrentMember().setImage(profileImage.getImage());
+            //new javafx.scene.image.Image(selectedFile.toURI().toString())
+        //}
 
     }
 
@@ -248,11 +249,11 @@ public class MyData implements Initializable {
 
         alert.showAndWait().ifPresent(buttonType -> {
             if(buttonType == buttonTypeYes) {
-                System.out.println("Confirmed!");
+
                check = true;
 
             } else if(buttonType == buttonTypeNo){
-                System.out.println("Canceled.");
+
                 check = false;
             }
         });

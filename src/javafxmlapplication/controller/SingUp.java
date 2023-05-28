@@ -212,6 +212,7 @@ public class SingUp implements Initializable {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Telephone Number Field. Remember to write just numbers.");
             this.telephone.setText("");
             this.telephone.requestFocus();
+            correctFormat = false;
         }
 
         /////////////////////username checkings///////////////////////////////////////////////////////////
