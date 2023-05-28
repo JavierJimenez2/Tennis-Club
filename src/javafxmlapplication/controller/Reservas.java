@@ -1,6 +1,7 @@
 package javafxmlapplication.controller;
 
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,8 +52,9 @@ public class Reservas implements Initializable {
     @FXML
     public ScrollPane scrollPane;
     ///////////////////parte de MisReservas//////////////////////////////////////////////////////////////////////////////////////////
-    public Button deleteButton;
-    public ListView<Booking> listView;
+    public Button deleteButtonMR;
+    private static final int MAX_ITEMS = 10;
+    public ListView<Booking> listViewMR;
     public Button returnButton;
     @FXML
     private DatePicker DatePicker;
@@ -148,8 +150,10 @@ public class Reservas implements Initializable {
         if ( guest ) logout.setText("Log In");
 
         if ( guest ) {
+            choice.getItems().removeAll(choice.getItems());
             choice.getItems().addAll(logout);
         } else {
+            choice.getItems().removeAll(choice.getItems());
             choice.getItems().addAll(profile, logout);
         }
 
@@ -172,6 +176,8 @@ public class Reservas implements Initializable {
                         member = JavaFXMLApplication.getCurrentMember();
                         JavaFXMLApplication.setCurrentMember((Member) null);
                         changeScene("Login.fxml");
+                    }else {
+                        initialize(url, resourceBundle);
                     }
                 } else {
                     changeScene("Login.fxml");
@@ -209,20 +215,32 @@ public class Reservas implements Initializable {
 
     private void myReservationsTab() {
         List<Booking> bookingData = JavaFXMLApplication.getCurrentClub().getUserBookings(JavaFXMLApplication.getCurrentMember().getNickName());
-
+        listViewMR.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //create observable list using FXCollections
         myObservableBookingList = FXCollections.observableArrayList(bookingData);
 
         //link the booking observable list with listView
-        listView.setItems(myObservableBookingList);
+        listViewMR.setItems(myObservableBookingList);
 
         //Modify cell factory to display object Booking
-        listView.setCellFactory(c -> new bookingListCell());
+        listViewMR.setCellFactory(c -> new bookingListCell());
 
         //in case of nothing selected disable delete
-//        deleteButton.disableProperty().bind(
-//                Bindings.equal(-1,
-//                        listView.getSelectionModel().selectedIndexProperty()));
+        deleteButtonMR.disableProperty().bind(
+               Bindings.equal(-1,
+                        listViewMR.getSelectionModel().selectedIndexProperty()));
+
+        /*listViewMR.focusedProperty().addListener((a, b, c) -> {
+            if (listViewMR.isFocused()) {
+                deleteButtonMR.setDisable(false);
+            }else{
+                deleteButtonMR.setDisable(true);
+            }
+        });*/
+        if (myObservableBookingList.size() > MAX_ITEMS) {
+            myObservableBookingList.remove(0, myObservableBookingList.size() - MAX_ITEMS);
+        }
+        listViewMR.setPrefHeight(10 * 25);
     }
 
     //////////parte reservas///////////////////////////////////////////////////////////////////////////////////////////////
@@ -509,35 +527,39 @@ public class Reservas implements Initializable {
 
     ////////////////////////////parte mis reservas///////////////////////////////////////////////////////////////////////
     public void deleteAction(ActionEvent actionEvent) {
-        long daysDifference = ChronoUnit.DAYS.between(listView.getSelectionModel().getSelectedItem().getMadeForDay(), LocalDate.now());
+        long daysDifference = ChronoUnit.DAYS.between(LocalDate.now(),listViewMR.getSelectionModel().getSelectedItem().getMadeForDay());
         //
-        if ( LocalDate.now().isAfter(listView.getSelectionModel().getSelectedItem().getMadeForDay()) || (LocalDate.now().isEqual(listView.getSelectionModel().getSelectedItem().getMadeForDay()) && (!listView.getSelectionModel().getSelectedItem().getFromTime().isAfter(LocalTime.now()) || !listView.getSelectionModel().getSelectedItem().getFromTime().plusHours(1).isAfter(LocalTime.now()))) ) {   //checks if booking was of a previous day
-            JavaFXMLApplication.dialogBox("error", "Cancel Error", "Court was already used. Can't cancel reservation.");
-            //return;
-            //check if canceled reservation is in less than 24h
-            //listView.getSelectionModel().getSelectedItem().getBookingDate(), LocalDateTime.now()
-        } else if ( (daysDifference == 1 && listView.getSelectionModel().getSelectedItem().getFromTime().isBefore(LocalTime.now())) || daysDifference < 1 ) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText("Are you sure you want to continue?");
-            alert.setContentText("A 10$ fee will be charged due to your reservation being in less than 24h.");
+        if(LocalDate.now().getYear() == listViewMR.getSelectionModel().getSelectedItem().getMadeForDay().getYear()) {
+            if (LocalDate.now().isAfter(listViewMR.getSelectionModel().getSelectedItem().getMadeForDay()) || (LocalDate.now().isEqual(listViewMR.getSelectionModel().getSelectedItem().getMadeForDay()) && (!listViewMR.getSelectionModel().getSelectedItem().getFromTime().isAfter(LocalTime.now()) || !listViewMR.getSelectionModel().getSelectedItem().getFromTime().plusHours(1).isAfter(LocalTime.now())))) {   //checks if booking was of a previous day
+                JavaFXMLApplication.dialogBox("error", "Cancel Error", "Court was already used. Can't cancel reservation.");
+                //return;
+                //check if canceled reservation is in less than 24h
+                //listView.getSelectionModel().getSelectedItem().getBookingDate(), LocalDateTime.now()
+            } else if ((daysDifference == 1 && listViewMR.getSelectionModel().getSelectedItem().getFromTime().isBefore(LocalTime.now())) || daysDifference < 1) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setHeaderText("Are you sure you want to continue?");
+                alert.setContentText("A 10$ fee will be charged due to your reservation being in less than 24h.");
 
-            ButtonType buttonTypeYes = new ButtonType("Yes");
-            ButtonType buttonTypeNo = new ButtonType("No");
+                ButtonType buttonTypeYes = new ButtonType("Yes");
+                ButtonType buttonTypeNo = new ButtonType("No");
 
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
-            alert.showAndWait().ifPresent(buttonType -> {
-                if ( buttonType == buttonTypeYes ) {
-                    showConfirmationWindow();
-                } else if ( buttonType == buttonTypeNo ) {
-                    JavaFXMLApplication.dialogBox("info", "Process Canceled", "Reservation deletion canceled.");
+                alert.showAndWait().ifPresent(buttonType -> {
+                    if (buttonType == buttonTypeYes) {
+                        showConfirmationWindow();
+                    } else if (buttonType == buttonTypeNo) {
+                        JavaFXMLApplication.dialogBox("info", "Process Canceled", "Reservation deletion canceled.");
 
                     }
                 });
             } else {
                 showConfirmationWindow();
             }
+        } else {
+            showConfirmationWindow();
+        }
 
 
         }
@@ -557,8 +579,8 @@ public class Reservas implements Initializable {
                 if ( buttonType == buttonTypeYes ) {
 
                     try {
-                        JavaFXMLApplication.getCurrentClub().removeBooking(listView.getSelectionModel().getSelectedItem());  //removes booking from database
-                        myObservableBookingList.remove(listView.getSelectionModel().getSelectedItem());  //removes booking from listView
+                        JavaFXMLApplication.getCurrentClub().removeBooking(listViewMR.getSelectionModel().getSelectedItem());  //removes booking from database
+                        myObservableBookingList.remove(listViewMR.getSelectionModel().getSelectedItem());  //removes booking from listView
                         JavaFXMLApplication.dialogBox("success", "Succes", "Booking removed successfully.");
                     } catch (ClubDAOException e) {
                         JavaFXMLApplication.dialogBox("error", "Error removing booking", "Error trying to cancel booking.");
@@ -581,13 +603,14 @@ public class Reservas implements Initializable {
             @Override
             protected void updateItem(Booking booking, boolean empty) {
                 super.updateItem(booking, empty);
-                if ( empty || booking == null ) {
+                if ( empty || booking == null || getIndex() >= 10) {
                     setText(null);
+                    setGraphic(null);
                 } else {
-                    setText(booking.getMadeForDay() + "          " + booking.getCourt().getName() + "          " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "          " + booking.getPaid());
+                    setText("           " + booking.getMadeForDay() + "                                  " + booking.getCourt().getName() + "                                    " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "                                    " + booking.getPaid());
+
 
             }
-
         }
     }
 

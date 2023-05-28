@@ -212,6 +212,7 @@ public class SingUp implements Initializable {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Telephone Number Field. Remember to write just numbers.");
             this.telephone.setText("");
             this.telephone.requestFocus();
+            correctFormat = false;
         }
 
         /////////////////////username checkings///////////////////////////////////////////////////////////
@@ -223,6 +224,15 @@ public class SingUp implements Initializable {
         }
         if ( username.matches(".*\\s.*") ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Remember it can't contain spaces.");
+            this.username.setText("");
+            this.username.requestFocus();
+            correctFormat = false;
+        }
+
+//        if  username has more than 10 characters
+        if ( username.length() > 6 ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Remember it can't contain more " +
+                    "than 6 characters.");
             this.username.setText("");
             this.username.requestFocus();
             correctFormat = false;

@@ -686,3 +686,27 @@ deleteButtonMR:pressed {
 #circleAvatar{
 
 }
+
+#dateLabel{
+ -fx-font-family: "Calibri";
+ -fx-font-style: italic;
+ -fx-text-fill: white;
+}
+
+#paidLabel{
+-fx-font-family: "Calibri";
+ -fx-font-style: italic;
+ -fx-text-fill: white;
+}
+
+#startLabel{
+-fx-font-family: "Calibri";
+ -fx-font-style: italic;
+ -fx-text-fill: white;
+}
+
+#courtLabel{
+-fx-font-family: "Calibri";
+ -fx-font-style: italic;
+ -fx-text-fill: white;
+}
