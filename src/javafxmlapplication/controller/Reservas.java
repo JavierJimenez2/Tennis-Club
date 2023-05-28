@@ -226,13 +226,13 @@ public class Reservas implements Initializable {
                Bindings.equal(-1,
                         listViewMR.getSelectionModel().selectedIndexProperty()));
 
-        listViewMR.focusedProperty().addListener((a, b, c) -> {
+        /*listViewMR.focusedProperty().addListener((a, b, c) -> {
             if (listViewMR.isFocused()) {
                 deleteButtonMR.setDisable(false);
             }else{
                 deleteButtonMR.setDisable(true);
             }
-        });
+        });*/
         if (myObservableBookingList.size() > MAX_ITEMS) {
             myObservableBookingList.remove(0, myObservableBookingList.size() - MAX_ITEMS);
         }
