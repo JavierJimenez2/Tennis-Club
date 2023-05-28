@@ -219,6 +219,7 @@ public class Reservas implements Initializable {
         //create observable list using FXCollections
         myObservableBookingList = FXCollections.observableArrayList(bookingData);
 
+
         //link the booking observable list with listView
         listViewMR.setItems(myObservableBookingList);
 
