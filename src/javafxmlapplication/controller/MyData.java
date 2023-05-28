@@ -56,6 +56,7 @@ public class MyData implements Initializable {
     public TextField username;
     @FXML
     private ComboBox<ImageView> samplesBox;
+    private boolean savedData;
 
 
     @Override
@@ -107,23 +108,48 @@ public class MyData implements Initializable {
 
 
     public void returnAction(ActionEvent actionEvent) {
+        if ( !savedData ){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Dialog");
+            alert.setHeaderText("Are you sure you want to go back? The changes won't be saved.");
+            alert.setContentText("Click OK to confirm.");
+
+            ButtonType buttonTypeYes = new ButtonType("Yes");
+            ButtonType buttonTypeNo = new ButtonType("No");
+
+            alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+
+            alert.showAndWait().ifPresent(buttonType -> {
+                if(buttonType == buttonTypeYes) {
+                    System.out.println("Confirmed!");
+                    JavaFXMLApplication.changeScene("Reservas.fxml");
+                } else if(buttonType == buttonTypeNo){
+                    System.out.println("Canceled.");
+                }
+            });
+        }
         JavaFXMLApplication.changeScene("Reservas.fxml");
     }
 
-    public void selectionButton(ActionEvent actionEvent) {
+    public void selectionButton(ActionEvent event) {
+//        Select an image from the computer
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an image");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-        selectedFile = fileChooser.showOpenDialog((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
-        if (selectedFile != null) {
-            JavaFXMLApplication.copyFile(selectedFile, new File("src/javafxmlapplication/view/css/img/profiles/" + selectedFile.getName()));
-            profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/profiles/" + selectedFile.getName()));
+        File selectedFile = fileChooser.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
+        if ( selectedFile != null ) {
+            String path = "src/javafxmlapplication/view/css/img/profiles/" + selectedFile.getName();
+            JavaFXMLApplication.copyFile(selectedFile, new File(path));
+            profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+        }else {
+            profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon" +
+                    ".png"));
         }
-
     }
 
     public void modifyButton(ActionEvent actionEvent) {
+        savedData = true;
         String name = this.name.getText();
         String lastname = this.lastname.getText();
         String password = this.password.getText();

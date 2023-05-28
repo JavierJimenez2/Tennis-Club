@@ -229,6 +229,15 @@ public class SingUp implements Initializable {
             correctFormat = false;
         }
 
+//        if  username has more than 10 characters
+        if ( username.length() > 6 ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Remember it can't contain more " +
+                    "than 6 characters.");
+            this.username.setText("");
+            this.username.requestFocus();
+            correctFormat = false;
+        }
+
         /////////////////////password checkings///////////////////////////////////////////////////////////
         if ( password.length() < 6 ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Password Field. Remember it should contain at least 6 characters.");

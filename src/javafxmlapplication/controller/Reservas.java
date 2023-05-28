@@ -150,8 +150,10 @@ public class Reservas implements Initializable {
         if ( guest ) logout.setText("Log In");
 
         if ( guest ) {
+            choice.getItems().removeAll(choice.getItems());
             choice.getItems().addAll(logout);
         } else {
+            choice.getItems().removeAll(choice.getItems());
             choice.getItems().addAll(profile, logout);
         }
 
@@ -174,6 +176,8 @@ public class Reservas implements Initializable {
                         member = JavaFXMLApplication.getCurrentMember();
                         JavaFXMLApplication.setCurrentMember((Member) null);
                         changeScene("Login.fxml");
+                    }else {
+                        initialize(url, resourceBundle);
                     }
                 } else {
                     changeScene("Login.fxml");
