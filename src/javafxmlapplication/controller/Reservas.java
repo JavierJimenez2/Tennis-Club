@@ -353,12 +353,12 @@ public class Reservas implements Initializable {
         }
         userLabel.setStyle("-fx-font-size: 14px;");
 
-
+        boolean sameDay = row.getMadeForDay().isBefore(LocalDate.now().plusDays(1)) && row.getMadeForDay().isAfter(LocalDate.now().minusDays(1));
 //  Sets the initial color of the ball depending on the state of the RowReservation object.
         if ( row.isReserved() ) {
             item.getStyleClass().add("reserved");
             circleColor = Color.RED;
-        } else if ( row.getFromTime().isBefore(LocalTime.now()) ) {
+        } else if ( sameDay && row.getFromTime().isBefore(LocalTime.now()) ) {
             item.getStyleClass().add("unavailable");
             circleColor = Color.RED;
         } else {
@@ -381,9 +381,10 @@ public class Reservas implements Initializable {
         right.setAlignment(Pos.CENTER_RIGHT);
         HBox.setHgrow(right, Priority.ALWAYS);
         HBox.setHgrow(left, Priority.NEVER);
+//        comprobar si es el mismo dia que el dia de las reservas
         if ( row.isReserved() ) {
             right.getChildren().add(userLabel);
-        } else if ( row.getFromTime().isBefore(LocalTime.now()) ) {
+        } else if (sameDay && row.getFromTime().isBefore(LocalTime.now()) ) {
             right.getChildren().add(unavailableLabel);
         } else {
             right.getChildren().add(freeLabel);

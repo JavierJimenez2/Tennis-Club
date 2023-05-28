@@ -9,9 +9,11 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -52,12 +54,16 @@ public class MyData implements Initializable {
     public TextField csc;
     public Button modify;
     public TextField username;
+    @FXML
+    private ComboBox<ImageView> samplesBox;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     profileImage.setImage(JavaFXMLApplication.getCurrentMember().getImage());
+     profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
 
+
+     samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
 
 
     name.setText(JavaFXMLApplication.getCurrentMember().getName());
@@ -72,6 +78,7 @@ public class MyData implements Initializable {
         creditcard.setPromptText("Credit Card Number (Optional)");
         csc.setPromptText("Credit Card Number (Optional)");
     }
+    profileImage.setImage(JavaFXMLApplication.getCurrentMember().getImage());
    }
 
 
@@ -110,7 +117,8 @@ public class MyData implements Initializable {
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         selectedFile = fileChooser.showOpenDialog((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
         if (selectedFile != null) {
-            profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+            JavaFXMLApplication.copyFile(selectedFile, new File("src/javafxmlapplication/view/css/img/profiles/" + selectedFile.getName()));
+            profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/profiles/" + selectedFile.getName()));
         }
 
     }
@@ -225,8 +233,6 @@ public class MyData implements Initializable {
             JavaFXMLApplication.getCurrentMember().setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
         }
 
-
-
     }
 
     private void showConfirmationWindowMD(){
@@ -250,5 +256,20 @@ public class MyData implements Initializable {
                 check = false;
             }
         });
+    }
+
+    @FXML
+    void selectSampleAction(ActionEvent event) {
+        profileImage.setImage(samplesBox.getValue().getImage());
+        samplesBox.setPromptText("Avatar selected");
+        int pos = samplesBox.getSelectionModel().getSelectedIndex();
+        samplesBox.getItems().removeAll(samplesBox.getItems());
+        samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
+        samplesBox.getSelectionModel().select(pos);
+        samplesBox.setPromptText("Select an avatar");
+        samplesBox.getCellFactory();
+
+
+
     }
 }

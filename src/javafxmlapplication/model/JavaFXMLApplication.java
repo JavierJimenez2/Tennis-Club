@@ -7,20 +7,24 @@ package javafxmlapplication.model;
 
 import javafx.animation.Animation;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import model.Club;
-import model.Member;
+import model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class JavaFXMLApplication extends Application {
@@ -32,8 +36,14 @@ public class JavaFXMLApplication extends Application {
     private static Member member;
     private static Club club;
 
+    private static ObservableList<ImageView> avatarList;
+
     private static Member guestMember;
     //private static Stack<Scene> sceneStack;    //cambio de pantalla (return)
+
+    public static ObservableList<ImageView> getAvatarList() {
+        return avatarList;
+    }
 
     public static void setRoot(Parent root) {
         scene.setRoot(root);
@@ -117,6 +127,17 @@ public class JavaFXMLApplication extends Application {
 
     }
 
+    public static void addAvatarList(ImageView avatar) {
+        JavaFXMLApplication.avatarList.add(avatar);
+    }
+
+
+
+    public static ObservableList<ImageView> getAvatars() {
+
+        return avatarList;
+    }
+
 
     public void changeScene1(String s) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("javafxmlapplication/view/" + s));
@@ -136,6 +157,29 @@ public class JavaFXMLApplication extends Application {
         club = Club.getInstance();
         club.setName("GreenBall");
 
+
+
+
+//        get the list of avatars that are in the folder lib/tenisClub.jar/avatars/*.png
+
+        avatarList = FXCollections.observableArrayList();
+        File folder = new File("src/javafxmlapplication/view/css/img/avatars");
+        File[] listOfFiles = folder.listFiles();
+        assert listOfFiles != null;
+        for ( File listOfFile : listOfFiles ) {
+            if ( listOfFile.isFile() ) {
+                ImageView img = new ImageView("/avatars/" + listOfFile.getName());
+                img.setFitHeight(40);
+                img.setFitWidth(40);
+                img.setPreserveRatio(true);
+                img.setSmooth(true);
+                img.setCache(true);
+                avatarList.add(img);
+            }
+        }
+
+
+//        recorre todas las imagenes de la carpeta avatars y las añade a la lista
         //ToDo change to main
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
 
@@ -154,6 +198,13 @@ public class JavaFXMLApplication extends Application {
         stage.getIcons().add(new Image("/javafxmlapplication/view/css/img/icons/app-icon.png"));
 //  set the top bar of the application to the color of the background
         stage.show();
+
+
+
+        // get array of images
+
+
+
 
 
         //sceneStack = new Stack<>();   //inisialisation of Stack for saving previous scenes
