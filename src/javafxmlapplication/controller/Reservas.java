@@ -331,7 +331,6 @@ public class Reservas implements Initializable {
 //        Aqui se agregan los items de row reservation
         for ( RowReservation todo : items ) {
             widget.getChildren().add(createItem(todo));
-
         }
         return widget;
     }
@@ -420,7 +419,7 @@ public class Reservas implements Initializable {
                             }
 
                         } else {
-                /////////////// BOOKING CONDITIONS ///////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////// BOOKING CONDITIONS ///////////////////////////////////////////////////////////////////////////////////////////////
 
                         // First, a List containing the reservations of the user is created to compare that the time
                         // to reserve is not consecutive with another previous reservation
@@ -436,12 +435,12 @@ public class Reservas implements Initializable {
                                     if (row.getFromTime().plusHours(1).toString().equals(elementToCompare.getFromTime().toString())
                                             || row.getFromTime().minusHours(1).toString().equals(elementToCompare.getFromTime().toString())
                                             || row.getFromTime().toString().equals(elementToCompare.getFromTime().toString())) {
-                                        JavaFXMLApplication.dialogBox("error", "Error in booking", "Two hours cannot be reserved consecutively.");
+                                        JavaFXMLApplication.dialogBox("error", "Error in booking", "Two hours cannot be reserved consecutively or at the same time.");
                                         return;
                                     }
                                 }
                             }
-                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Confirmation");
@@ -466,6 +465,10 @@ public class Reservas implements Initializable {
                                 LocalDateTime now = LocalDateTime.now();
                                 LocalDate value = DatePicker.getValue();
                                 LocalTime fromTime = row.getFromTime();
+
+                            // Setting paid to true if user included credit card.
+                                row.setPaid(member.checkHasCreditInfo());
+
                                 boolean paid = row.getPaid();
                                 Court court = row.getCourt();
 
