@@ -56,7 +56,7 @@ public class MyData implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
+     profileImage.setImage(JavaFXMLApplication.getCurrentMember().getImage());
 
 
 
@@ -109,6 +109,9 @@ public class MyData implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         selectedFile = fileChooser.showOpenDialog((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
+        if (selectedFile != null) {
+            profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+        }
 
     }
 
@@ -217,9 +220,12 @@ public class MyData implements Initializable {
             }
         }
 
-        if (selectedFile != null) {
-            profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
+
+        if(selectedFile != null){
+            JavaFXMLApplication.getCurrentMember().setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
         }
+
+
 
     }
 
@@ -229,8 +235,8 @@ public class MyData implements Initializable {
         alert.setHeaderText("Are you sure you want to make these changes?");
         alert.setContentText("Click OK to confirm.");
 
-        ButtonType buttonTypeYes = new ButtonType("Yes");
-        ButtonType buttonTypeNo = new ButtonType("No");
+        ButtonType buttonTypeYes = new ButtonType("OK");
+        ButtonType buttonTypeNo = new ButtonType("Cancel");
 
         alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
 
