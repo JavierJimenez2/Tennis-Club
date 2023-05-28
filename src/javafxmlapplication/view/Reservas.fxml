@@ -19,12 +19,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 
 <BorderPane fx:id="pane" prefWidth="836.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Reservas">
    <center>
       <TabPane fx:id="tabPane" prefHeight="554.0" prefWidth="796.0" styleClass="tabPane" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="ReservasTab" text="Reserve">
+          <Tab fx:id="ReservasTab" onSelectionChanged="#reserveAction" text="Reserve">
             <content>
                   <VBox fx:id="vboxTab">
                      <children>
@@ -41,7 +45,7 @@
                   </VBox>
             </content>
           </Tab>
-          <Tab fx:id="MisReservasTab" text="My Reservations">
+          <Tab fx:id="MisReservasTab" onSelectionChanged="#myReservationsAction" text="My Reservations">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -84,17 +88,51 @@
    <top>
       <HBox fx:id="menuBar" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="menu-bar" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="appTitle" styleClass="app-title" text="GreenBall" HBox.hgrow="ALWAYS" />
-            <StackPane fx:id="stackPane" prefHeight="100.0" prefWidth="17.0" HBox.hgrow="SOMETIMES">
+            <Label fx:id="appTitle" styleClass="app-title" text="GreenBall" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets right="20.0" />
+                  <Insets left="20.0" />
+               </HBox.margin></Label>
+            <ImageView fx:id="avatar" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@css/img/icons/avatar_icon.png" />
+               </image>
+            </ImageView>
+            <StackPane fx:id="stackPane" prefHeight="100.0" prefWidth="186.0" HBox.hgrow="SOMETIMES">
+               <HBox.margin>
+                  <Insets right="30.0" />
                </HBox.margin>
                <children>
-                  <ImageView fx:id="avatar" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_RIGHT">
-                     <image>
-                        <Image url="@css/img/icons/avatar_icon.png" />
-                     </image>
-                  </ImageView>
+                  <HBox fx:id="frameTop" alignment="CENTER" fillHeight="false" maxHeight="66.0" maxWidth="190.0" minHeight="50.0" minWidth="50.0" prefHeight="66.0" prefWidth="186.0" StackPane.alignment="CENTER_RIGHT">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="66.0" prefWidth="327.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="userTopLabel" text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="imageBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="NEVER">
+                           <children>
+                              <Circle fx:id="circleAvatar" radius="30.0" stroke="BLACK" strokeType="INSIDE">
+                                 <fill>
+                                    <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="0.2631579041481018" green="0.6315789222717285" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </fill>
+                              </Circle>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
                   <ComboBox fx:id="choice" maxWidth="222.0" onMouseEntered="#ChoiceBoxHover" opacity="0.0" prefHeight="42.0" prefWidth="16.0" styleClass="choice-box" />
                </children>
             </StackPane>

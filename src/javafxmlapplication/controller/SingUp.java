@@ -5,6 +5,7 @@
  */
 package javafxmlapplication.controller;
 
+import com.sun.javafx.iio.*;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -12,10 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -23,12 +22,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import javafxmlapplication.model.JavaFXMLApplication;
-import model.ClubDAOException;
+import model.*;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -79,13 +84,20 @@ public class SingUp implements Initializable {
 
     @FXML
     private VBox fieldsInputs;
+    @FXML
+    private ComboBox<ImageView> samplesBox;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        profileImage.setImage() is in javafxmlapplication/view/css/img/icons/user.png
-        profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
+        profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon.png"));
+
+
+
+
+        samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
 
 
 
@@ -152,14 +164,12 @@ public class SingUp implements Initializable {
     @FXML
     void selectionButton(ActionEvent event) {
 //        Select an image from the computer
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select an image");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
         File selectedFile = fileChooser.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
         if ( selectedFile != null ) {
-//make a copy of the image in the project folder
             String path = "src/javafxmlapplication/view/css/img/profiles/" + selectedFile.getName();
             JavaFXMLApplication.copyFile(selectedFile, new File(path));
             profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
@@ -271,6 +281,21 @@ public class SingUp implements Initializable {
 
         JavaFXMLApplication.dialogBox("success", "Success", "You have been registered successfully");
         JavaFXMLApplication.changeScene("LogIn.fxml");
+
+
+    }
+
+    @FXML
+    void selectSampleAction(ActionEvent event) {
+        profileImage.setImage(samplesBox.getValue().getImage());
+        samplesBox.setPromptText("Avatar selected");
+        int pos = samplesBox.getSelectionModel().getSelectedIndex();
+        samplesBox.getItems().removeAll(samplesBox.getItems());
+        samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
+        samplesBox.getSelectionModel().select(pos);
+        samplesBox.setPromptText("Select an avatar");
+        samplesBox.getCellFactory();
+
 
 
     }

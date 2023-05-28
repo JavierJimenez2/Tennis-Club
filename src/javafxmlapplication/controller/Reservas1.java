@@ -1,10 +1,10 @@
 package javafxmlapplication.controller;
 
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,14 +13,11 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafxmlapplication.model.JavaFXMLApplication;
 import javafxmlapplication.model.layouts.BootstrapColumn;
@@ -29,8 +26,8 @@ import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
 import model.*;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -44,7 +41,7 @@ import java.util.ResourceBundle;
 import static javafxmlapplication.model.JavaFXMLApplication.changeScene;
 
 
-public class Reservas implements Initializable {
+public class Reservas1 implements Initializable {
 
 
     ////////////////////////////////parte de reservas/////////////////////////////////////////////////////////////////////////////
@@ -67,13 +64,7 @@ public class Reservas implements Initializable {
     @FXML
     private ComboBox<Label> choice;
     @FXML
-    private Circle circleAvatar;
-    @FXML
     private TabPane intPane;
-    @FXML
-    private HBox frameTop;
-    @FXML
-    private Label userTopLabel;
     @FXML
     private HBox menuBar;
     @FXML
@@ -82,8 +73,6 @@ public class Reservas implements Initializable {
     private StackPane stackPane;
     @FXML
     private Text textDate;
-    @FXML
-    private HBox imageBox;
     @FXML
     private VBox root;
     @FXML
@@ -99,15 +88,8 @@ public class Reservas implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         /////////////////////////////////parte de reservas///////////////////////////////////////////////////////////////////////////////////
         guest = false;
-        try {
-            club = Club.getInstance();
-        } catch (ClubDAOException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        club = JavaFXMLApplication.getCurrentClub();
 
-        assert club != null;
         member = JavaFXMLApplication.getCurrentMember();
         if ( member == null ) {
             guest = true;
@@ -117,33 +99,17 @@ public class Reservas implements Initializable {
             MisReservasTab.tooltipProperty().set(new Tooltip("For view your bookings you need to Log In"));
         }
 
-//        Circle circle = new Circle(26, 30, 26);
-//        circle.setStroke(Color.WHITE);
-//        circle.setStrokeWidth(2);
-//        circle.setFill(Color.WHITE);
-        circleAvatar.setStroke(Color.WHITE);
-        avatar.setVisible(false);
         if ( guest ) {
-            appTitle.setText("GreenBall");
+            appTitle.setText("Guest");
             avatar.setImage(new javafx.scene.image.Image("/javafxmlapplication/view/css/img/icons/avatar_icon.png"));
-//            avatar.setClip(circle);
-            circleAvatar.setFill(new ImagePattern(new javafx.scene.image.Image("/javafxmlapplication/view/css/img" +
-                    "/icons/avatar_icon.png")));
-            userTopLabel.setText("Guest");
         } else {
-            appTitle.setText("GreenBall");
+            appTitle.setText(member.getName());
+//            avatar.setImage(new javafx.scene.image.Image("/javafxmlapplication/view/css/img/icons/avatar_icon.png"));
             avatar.setImage(member.getImage());
-//            avatar.setDisable(true);
-//            crop the image
-//            avatar.setClip(circle);
-//            crop the image into a square preserving the center and the ratio
-            ImageView imageView = new ImageView(member.getImage());
-            imageView.setPreserveRatio(true);
-            ImagePattern pattern = new ImagePattern(imageView.getImage());
-            circleAvatar.setFill(pattern);
-            userTopLabel.setText(member.getNickName());
+            System.out.println(member.getImage());
         }
         Label profile = new Label("Profile");
+        Label settings = new Label("Settings");
         Label logout = new Label("Logout");
         if ( guest ) logout.setText("Log In");
 
@@ -156,8 +122,10 @@ public class Reservas implements Initializable {
         choice.setOnAction((event) -> {
             if ( choice.getValue() == profile ) {
                 changeScene("MyData.fxml");
+            } else if ( choice.getValue() == settings ) {
+                changeScene("SingUp.fxml");
             } else if ( choice.getValue() == logout ) {
-                if ( !guest ) {
+                if(!guest){
                     Alert alert = new Alert(Alert.AlertType.WARNING);
 //                set graphic in css bi bi-exclamation-circle-fill
 
@@ -173,7 +141,7 @@ public class Reservas implements Initializable {
                         JavaFXMLApplication.setCurrentMember((Member) null);
                         changeScene("Login.fxml");
                     }
-                } else {
+                }else {
                     changeScene("Login.fxml");
                 }
             }
@@ -204,7 +172,7 @@ public class Reservas implements Initializable {
 
         ///////////////////////////////parte de MisReservas////////////////////////////////////////////////////////////////
 
-//        myReservationsTab();
+        myReservationsTab();
     }
 
     private void myReservationsTab() {
@@ -269,7 +237,6 @@ public class Reservas implements Initializable {
 
         BootstrapRow row = new BootstrapRow();
 
-        club = JavaFXMLApplication.getCurrentClub();
         if ( club == null ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -329,7 +296,7 @@ public class Reservas implements Initializable {
 
 //  Free label:
         Label freeLabel = new Label("Free");
-        Label unavailableLabel = new Label("Not Free");
+        Label unavailableLabel = new Label("Not free");
 
 //  User Label:
 
@@ -339,12 +306,13 @@ public class Reservas implements Initializable {
         }
         userLabel.setStyle("-fx-font-size: 14px;");
 
-        boolean sameDay = row.getMadeForDay().isBefore(LocalDate.now().plusDays(1)) && row.getMadeForDay().isAfter(LocalDate.now().minusDays(1));
+
+
 //  Sets the initial color of the ball depending on the state of the RowReservation object.
         if ( row.isReserved() ) {
             item.getStyleClass().add("reserved");
             circleColor = Color.RED;
-        } else if ( sameDay && row.getFromTime().isBefore(LocalTime.now()) ) {
+        } else if ( row.getFromTime().isBefore(LocalTime.now()) ) {
             item.getStyleClass().add("unavailable");
             circleColor = Color.RED;
         } else {
@@ -367,10 +335,9 @@ public class Reservas implements Initializable {
         right.setAlignment(Pos.CENTER_RIGHT);
         HBox.setHgrow(right, Priority.ALWAYS);
         HBox.setHgrow(left, Priority.NEVER);
-//        comprobar si es el mismo dia que el dia de las reservas
         if ( row.isReserved() ) {
             right.getChildren().add(userLabel);
-        } else if (sameDay && row.getFromTime().isBefore(LocalTime.now()) ) {
+        } else if ( row.getFromTime().isBefore(LocalTime.now()) ) {
             right.getChildren().add(unavailableLabel);
         } else {
             right.getChildren().add(freeLabel);
@@ -568,11 +535,11 @@ public class Reservas implements Initializable {
             });
         }
 
-        public void myReservationsAction (Event event){
+        public void myReservationsAction (MouseEvent event){
             myReservationsTab();
         }
 
-        public void reserveAction (Event event){
+        public void reserveAction (MouseEvent event){
             courtView();
         }
 

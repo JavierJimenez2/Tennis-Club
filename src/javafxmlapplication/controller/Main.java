@@ -119,7 +119,7 @@ public class Main implements Initializable {
         rotate(spinner, spinnerBox);
         Thread thread = new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
                 JavaFXMLApplication.changeScene("Reservas.fxml");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -130,7 +130,7 @@ public class Main implements Initializable {
     }
 
     public void goLogIn(ActionEvent event){
-        JavaFXMLApplication.changeScene("Login.fxml");
+        JavaFXMLApplication.changeScene("LogIn.fxml");
     }
 
     public void goSignUp(ActionEvent event){

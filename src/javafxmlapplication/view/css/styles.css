@@ -252,7 +252,12 @@
 }
 
 .reserved {
-    -fx-background-color: gray;
+    -fx-background-color: #f14e4e;
+    -fx-padding: 5px;
+}
+
+.unavailable {
+    -fx-background-color: grey;
     -fx-padding: 5px;
 }
 
@@ -290,13 +295,13 @@
     -fx-border-radius: 10px;
 }
 
-.list-view {
+#choice .list-view {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary-bold;
 }
 
-.list-cell {
+#choice .list-cell {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: transparent;
@@ -305,7 +310,7 @@
     -fx-font-size: 1.2em;
 }
 
-.list-cell:hover {
+#choice .list-cell:hover {
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-background-color: -fx-primary;
@@ -313,6 +318,8 @@
 }
 
 .tabPane {
+    -fx-background-color: transparent;
+}
 
 #scrollPane {
     -fx-background-color: transparent;
@@ -333,12 +340,12 @@
 }
 
 .scroll-pane .scroll-bar {
-    -fx-background-radius: 20px;
     -fx-background-color: white;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     -fx-border-width: 0 0 0 0;
 }
+
 .bootstrap-pane {
     -fx-background-color: transparent;
 }
@@ -500,6 +507,7 @@
     -fx-background-color: #E6EB6C;
 
 }
+
 #submitButton {
     -fx-background-radius: 30;
     -fx-background-color: -fx-primary;
@@ -541,6 +549,8 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 
 }
+
+
 
 .tabPane {
     -fx-border-color: #f6f6f6;
@@ -589,7 +599,10 @@
 
 
 #misResGP {
-#misResGP{
+
+}
+
+#misResGP {
     -fx-background-color: #84B15C;
     -fx-border-color: black;
     /* -fx-border-width: 1px;*/
@@ -607,8 +620,8 @@
     -fx-border-radius: 5px;
 }
 
-#deleteButtonMR: hover{
--fx-background-color: #FF3333;
+#deleteButtonMR:hover {
+    -fx-background-color: #FF3333;
 }
 
 deleteButtonMR:pressed {
@@ -655,3 +668,21 @@ deleteButtonMR:pressed {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 }
 
+#frameTop {
+    -fx-background-color: #f6f6f6;
+    -fx-border-color: #f6f6f6;
+    -fx-border-width: 10px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+#userTopLabel{
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-font-family: "Segoe UI";
+}
+
+#circleAvatar{
+
+}
