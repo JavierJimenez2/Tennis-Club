@@ -386,7 +386,7 @@ public class Reservas implements Initializable {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     if ( !row.isReserved() ) {
-                        //                            alert de informacion que me diga que para reservar debe iniciar sesión
+                        //               alert de informacion que me diga que para reservar debe iniciar sesión
                         if ( guest ) {
                             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
                             alert1.setTitle("Information");
@@ -400,6 +400,7 @@ public class Reservas implements Initializable {
                                 JavaFXMLApplication.setCurrentMember((Member) null);
                                 changeScene("Login.fxml");
                             }
+                            // DONDE VAN LAS CONDICIONES DE RESERVA
                         } else {
 
 
@@ -458,8 +459,8 @@ public class Reservas implements Initializable {
 
                 }
             });
-            return item;
-        }
+        return item;
+    } // end of createItem.
 
     private List<RowReservation> courtSlots(Court court) {
         LocalTime[] hours = new LocalTime[13];
