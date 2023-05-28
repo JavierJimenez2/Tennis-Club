@@ -418,9 +418,30 @@ public class Reservas implements Initializable {
                                 JavaFXMLApplication.setCurrentMember((Member) null);
                                 changeScene("Login.fxml");
                             }
-                            // DONDE VAN LAS CONDICIONES DE RESERVA
-                        } else {
 
+                        } else {
+                /////////////// BOOKING CONDITIONS ///////////////////////////////////////////////////////////////////////////////////////////////
+
+                        // First, a List containing the reservations of the user is created to compare that the time
+                        // to reserve is not consecutive with another previous reservation
+                            List<Booking> listOfReservations = club.getUserBookings(member.getNickName());
+                            Booking elementToCompare;
+                            for(int i = 0; i < listOfReservations.size(); i++) {
+                                elementToCompare = listOfReservations.get(i);
+                                if (elementToCompare.getMadeForDay().toString().equals(row.getMadeForDay().toString())) {
+
+                                // If the day is the same, we compare hours:
+                                // If the getFromTime of both elements is consecutive or equal, the reservation cannot be made:
+
+                                    if (row.getFromTime().plusHours(1).toString().equals(elementToCompare.getFromTime().toString())
+                                            || row.getFromTime().minusHours(1).toString().equals(elementToCompare.getFromTime().toString())
+                                            || row.getFromTime().toString().equals(elementToCompare.getFromTime().toString())) {
+                                        JavaFXMLApplication.dialogBox("error", "Error in booking", "Two hours cannot be reserved consecutively.");
+                                        return;
+                                    }
+                                }
+                            }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Confirmation");
