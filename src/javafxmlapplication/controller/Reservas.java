@@ -602,7 +602,7 @@ public class Reservas implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    setText(booking.getMadeForDay() + "             " + booking.getCourt().getName() + "              " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "              " + booking.getPaid());
+                    setText("           " + booking.getMadeForDay() + "                                  " + booking.getCourt().getName() + "                                    " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "                                    " + booking.getPaid());
 
 
             }
