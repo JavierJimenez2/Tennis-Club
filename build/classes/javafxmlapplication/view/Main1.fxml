@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Main">
+   <children>
+      <SplitPane fx:id="intPane" dividerPositions="0.1445" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="562.0" style="-fx-alignment: center;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="78.0" prefWidth="562.0" style="-fx-background-color: #1f8918;">
+               <children>
+                  <Text id="Slash" fill="WHITE" layoutX="6.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Slash" wrappingWidth="142.13671875" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="2.20166015625">
+                     <font>
+                        <Font name="Courier New Bold" size="43.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+          <AnchorPane id="InferiorVPane" minHeight="0.0" minWidth="0.0" prefHeight="97.0" prefWidth="309.0">
+               <children>
+                  <Label fx:id="infoLabel" layoutX="266.0" layoutY="284.0" prefHeight="50.0" prefWidth="215.0">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="Title" layoutX="81.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Slash!" textAlignment="JUSTIFY">
+                     <font>
+                        <Font size="49.0" />
+                     </font>
+                  </Text>
+                  <GridPane alignment="CENTER" layoutX="55.0" layoutY="85.0" opacity="0.6" prefHeight="200.0" prefWidth="450.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.7999267578125" minWidth="10.0" prefWidth="133.80001220703124" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.20007324218756" minWidth="10.0" prefWidth="134.00002441406247" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="510.20007324218756" minWidth="10.0" prefWidth="138.79997558593755" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="signUpButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goSignUp" onMouseClicked="#goSignUp" prefHeight="80.0" prefWidth="130.0" text="Sign Up" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="logInButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goLogIn" onMouseClicked="#goLogIn" prefHeight="80.0" prefWidth="130.0" text="Log In" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="reservationButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#goReservations" onMouseClicked="#goReservations" prefHeight="80.0" prefWidth="130.0" text="Reservations" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="infoButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#infoClicked" prefHeight="23.0" prefWidth="54.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@css/img/icons/information-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+   </children>
+</Pane>

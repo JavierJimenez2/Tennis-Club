@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="pane" prefWidth="836.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.SingUp">
+   <center>
+      <TabPane fx:id="intPane" prefHeight="554.0" prefWidth="796.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="ReservasTab" text="Reservar">
+            <content>
+                  <VBox>
+                     <children>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <DatePicker fx:id="DatePicker" HBox.hgrow="ALWAYS" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+            </content>
+          </Tab>
+          <Tab fx:id="MisReservasTab" text="Mis Reservas">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+         <BorderPane.margin>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </BorderPane.margin>
+      </TabPane>
+   </center>
+   <top>
+      <HBox fx:id="menuBar" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" styleClass="menu-bar" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="appTitle" styleClass="app-title" text="GreenBall" HBox.hgrow="ALWAYS" />
+            <StackPane fx:id="stackPane" prefHeight="100.0" prefWidth="17.0" HBox.hgrow="SOMETIMES">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <children>
+                  <ImageView fx:id="avatar" fitHeight="60.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_RIGHT">
+                     <image>
+                        <Image url="@css/img/icons/avatar_icon.png" />
+                     </image>
+                  </ImageView>
+                  <ComboBox fx:id="choice" maxWidth="222.0" opacity="0.0" prefHeight="42.0" prefWidth="16.0" styleClass="choice-box" />
+               </children>
+            </StackPane>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </top>
+</BorderPane>
