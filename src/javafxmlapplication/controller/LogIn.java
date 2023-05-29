@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -50,10 +51,16 @@ public class LogIn implements Initializable {
     @FXML
     private TextField username;
     @FXML
-    private Button doneButton;
+    private Button loginButton;
     private boolean correctFormat;
     @FXML
     private VBox fieldsInputs;
+    @FXML
+    private VBox field1;
+    @FXML
+    private VBox field2;
+    @FXML
+    private Label goToSingUpLabel;
 
 
     @Override
@@ -70,6 +77,16 @@ public class LogIn implements Initializable {
         for ( TextField requiredField : requiredFields ) {
             correctFields(requiredField.getPromptText(), requiredField);
         }
+
+        goToSingUpLabel.setOnMouseClicked(mouseEvent -> {
+            JavaFXMLApplication.changeScene("SignUp.fxml");
+        });
+
+        JavaFXMLApplication.getScene().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                loginButton.fire();
+            }
+        });
 
 
     }
@@ -110,6 +127,7 @@ public class LogIn implements Initializable {
                 name.setPromptText("");
 
 //        translate namePane in the border of the text field
+//                if it inside a gridpane,
                 fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
                 namePane.getChildren().addAll(name, nameLabel);
 

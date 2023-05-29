@@ -5,28 +5,23 @@
  */
 package javafxmlapplication.controller;
 
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
-import model.Booking;
-import model.ClubDAOException;
-import model.Member;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -56,36 +51,97 @@ public class MyData implements Initializable {
     public TextField username;
     @FXML
     private ComboBox<ImageView> samplesBox;
+    @FXML
+    private VBox fieldsInputs;
+    @FXML
+    private VBox field1;
+    @FXML
+    private VBox field2;
+    @FXML
+    private VBox field3;
+    @FXML
+    private VBox field4;
+
     private boolean savedData;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-     profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
+        profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
 
 
-     samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
+
+        //part for the prompt text
+        TextField[] textFields = {name, lastname, username, password, creditcard, csc, telephone};
+        for ( TextField textField : textFields ) {
+            extracted(textField.getPromptText(), textField);
+        }
 
 
-    name.setText(JavaFXMLApplication.getCurrentMember().getName());
-    lastname.setText(JavaFXMLApplication.getCurrentMember().getSurname());
-    username.setText(JavaFXMLApplication.getCurrentMember().getNickName());
-    password.setText(JavaFXMLApplication.getCurrentMember().getPassword());
-    telephone.setText(JavaFXMLApplication.getCurrentMember().getTelephone());
-    if(!JavaFXMLApplication.getCurrentMember().getCreditCard().isEmpty() && JavaFXMLApplication.getCurrentMember().getSvc() != 0){
-        creditcard.setText(JavaFXMLApplication.getCurrentMember().getCreditCard());
-        csc.setText(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()));
-    } else{
-        creditcard.setPromptText("Credit Card Number (Optional)");
-        csc.setPromptText("Credit Card Number (Optional)");
+
+
+        samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
+
+
+        name.setText(JavaFXMLApplication.getCurrentMember().getName());
+        lastname.setText(JavaFXMLApplication.getCurrentMember().getSurname());
+        username.setText(JavaFXMLApplication.getCurrentMember().getNickName());
+        password.setText(JavaFXMLApplication.getCurrentMember().getPassword());
+        telephone.setText(JavaFXMLApplication.getCurrentMember().getTelephone());
+        if ( !JavaFXMLApplication.getCurrentMember().getCreditCard().isEmpty() && JavaFXMLApplication.getCurrentMember().getSvc() != 0 ) {
+            creditcard.setText(JavaFXMLApplication.getCurrentMember().getCreditCard());
+            csc.setText(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()));
+        } else {
+            creditcard.setPromptText("Credit Card Number (Optional)");
+            csc.setPromptText("Credit Card Number (Optional)");
+        }
+        profileImage.setImage(JavaFXMLApplication.getCurrentMember().getImage());
     }
-    profileImage.setImage(JavaFXMLApplication.getCurrentMember().getImage());
-   }
+
+
+    private void extracted(String s, TextField textField) {
+        Label fieldLabel = new Label(s);
+        fieldLabel.setVisible(false);
+//        textField.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+//            if ( t1 ) {
+                fieldLabel.setVisible(true);
+                StackPane namePane = new StackPane();
+                StackPane.setAlignment(fieldLabel, Pos.TOP_LEFT);
+                fieldLabel.paddingProperty().setValue(new javafx.geometry.Insets(1));
+                TranslateTransition translateTransition = new TranslateTransition();
+                translateTransition.setDuration(javafx.util.Duration.millis(200));
+                translateTransition.setNode(fieldLabel);
+                translateTransition.setFromX(0);
+                translateTransition.setFromY(0);
+                translateTransition.setToX(0);
+                translateTransition.setToY(-9);
+                translateTransition.play();
+                fieldLabel.getStyleClass().add("inputPane");
+                textField.setPromptText("");
+
+//        translate namePane in the border of the text field
+                if(textField.equals(creditcard)){
+                    field1.getChildren().set(field1.getChildren().indexOf(textField), namePane);
+                } else if ( textField.equals(csc) ) {
+                    field2.getChildren().set(field2.getChildren().indexOf(textField), namePane);
+                } else if ( textField.equals(name) ) {
+                    field3.getChildren().set(field3.getChildren().indexOf(textField), namePane);
+                } else if ( textField.equals(lastname) ) {
+                    field4.getChildren().set(field4.getChildren().indexOf(textField), namePane);
+                } else{
+                    fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(textField), namePane);
+                }
+
+                namePane.getChildren().addAll(textField, fieldLabel);
+//            } else {
+////                nameLabel.setVisible(false);
+//            }
+//        });
+    }
 
 
 
-
-    private void showConfirmationWindow(){
+    private void showConfirmationWindow() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Dialog");
         alert.setHeaderText("Are you sure you want to make this changes?");
@@ -94,13 +150,13 @@ public class MyData implements Initializable {
         ButtonType buttonTypeYes = new ButtonType("Yes");
         ButtonType buttonTypeNo = new ButtonType("No");
 
-        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
         alert.showAndWait().ifPresent(buttonType -> {
-            if(buttonType == buttonTypeYes) {
+            if ( buttonType == buttonTypeYes ) {
                 System.out.println("Confirmed!");
 
-            } else if(buttonType == buttonTypeNo){
+            } else if ( buttonType == buttonTypeNo ) {
                 System.out.println("Canceled.");
             }
         });
@@ -108,7 +164,7 @@ public class MyData implements Initializable {
 
 
     public void returnAction(ActionEvent actionEvent) {
-        if ( !savedData ){
+        if ( !savedData ) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Dialog");
             alert.setHeaderText("Are you sure you want to go back? The changes won't be saved.");
@@ -117,13 +173,13 @@ public class MyData implements Initializable {
             ButtonType buttonTypeYes = new ButtonType("Yes");
             ButtonType buttonTypeNo = new ButtonType("No");
 
-            alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
             alert.showAndWait().ifPresent(buttonType -> {
-                if(buttonType == buttonTypeYes) {
+                if ( buttonType == buttonTypeYes ) {
                     System.out.println("Confirmed!");
                     JavaFXMLApplication.changeScene("Reservas.fxml");
-                } else if(buttonType == buttonTypeNo){
+                } else if ( buttonType == buttonTypeNo ) {
                     System.out.println("Canceled.");
                 }
             });
@@ -142,7 +198,7 @@ public class MyData implements Initializable {
             String path = "src/javafxmlapplication/view/css/img/profiles/" + selectedFile.getName();
             JavaFXMLApplication.copyFile(selectedFile, new File(path));
             profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
-        }else {
+        } else {
             profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon" +
                     ".png"));
         }
@@ -158,111 +214,106 @@ public class MyData implements Initializable {
         String telephone = this.telephone.getText();
 
 
-
-
         ///////////////////name checkings/////////////////////////////////////////////////////////////
-        if(!name.matches("[a-zA-Z ]*") || name.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Name Field. Remember to write just characters.");
+        if ( !name.matches("[a-zA-Z ]*") || name.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Name Field. Remember to write just characters.");
             this.name.setText("");
             correctFormat = false;
         }
 
         ///////////////////lastname checkings/////////////////////////////////////////////////////////////
-        if(!lastname.matches("[a-zA-Z ]*") || lastname.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Last Name Field. Remember to write just characters.");
+        if ( !lastname.matches("[a-zA-Z ]*") || lastname.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Last Name Field. Remember to write just characters.");
             this.lastname.setText("");
             correctFormat = false;
         }
 
         ///////////////////telephone checkings/////////////////////////////////////////////////////////////
-        if(!telephone.matches("^[0-9]+$") || telephone.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Telephone Number Field. Remember to write just numbers.");
+        if ( !telephone.matches("^[0-9]+$") || telephone.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Telephone Number Field. Remember to write just numbers.");
         }
 
         /////////////////////password checkings///////////////////////////////////////////////////////////
-        if(password.length() < 6){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Password Field. Remember it should contain at least 6 characters.");
+        if ( password.length() < 6 ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Password Field. Remember it should contain at least 6 characters.");
             this.password.setText("");
             correctFormat = false;
         }
         /////////////////////credit card checkings///////////////////////////////////////////////////////////
-        if(creditcard.length() != 16 && !creditcard.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember it should contain 16 numb ers.");
+        if ( creditcard.length() != 16 && !creditcard.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Credit Card Field. Remember it should contain 16 numb ers.");
             this.creditcard.setText("");
             correctFormat = false;
         }
-        if(!creditcard.matches("\\d+") && !creditcard.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember it should contain 16 numbers.");
+        if ( !creditcard.matches("\\d+") && !creditcard.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Credit Card Field. Remember it should contain 16 numbers.");
             this.creditcard.setText("");
             correctFormat = false;
         }
 
-        if((Scsc.length() != 3 || !Scsc.matches("^[0-9]+$")) && !Scsc.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember it should contain 3 digits.");
+        if ( (Scsc.length() != 3 || !Scsc.matches("^[0-9]+$")) && !Scsc.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in CSC Field. Remember it should contain 3 digits.");
             this.csc.setText("");
             correctFormat = false;
         }
 
-        if(!creditcard.isEmpty() && Scsc.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in CSC Field. Remember to write the CSC.");
+        if ( !creditcard.isEmpty() && Scsc.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in CSC Field. Remember to write the CSC.");
             correctFormat = false;
         }
-        if(creditcard.isEmpty() && !Scsc.isEmpty()){
-            JavaFXMLApplication.dialogBox("error","Error","Error in Credit Card Field. Remember to write the Credit Card.");
+        if ( creditcard.isEmpty() && !Scsc.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Credit Card Field. Remember to write the Credit Card.");
             correctFormat = false;
         }
 
 
-
-        if(!correctFormat){
+        if ( !correctFormat ) {
             return;
         }
         //confirmation Window
         showConfirmationWindowMD();
-        if(!check){
+        if ( !check ) {
             return;
         }
 
 
-
-
-       //update of the fields
-        if(!name.equals(JavaFXMLApplication.getCurrentMember().getName())){
+        //update of the fields
+        if ( !name.equals(JavaFXMLApplication.getCurrentMember().getName()) ) {
             JavaFXMLApplication.getCurrentMember().setName(name);
         }
-        if(!lastname.equals(JavaFXMLApplication.getCurrentMember().getSurname())){
+        if ( !lastname.equals(JavaFXMLApplication.getCurrentMember().getSurname()) ) {
             JavaFXMLApplication.getCurrentMember().setSurname(lastname);
         }
-        if(!telephone.equals(JavaFXMLApplication.getCurrentMember().getTelephone())){
+        if ( !telephone.equals(JavaFXMLApplication.getCurrentMember().getTelephone()) ) {
             JavaFXMLApplication.getCurrentMember().setTelephone(telephone);
         }
 
-        if(!password.equals(JavaFXMLApplication.getCurrentMember().getPassword())){
+        if ( !password.equals(JavaFXMLApplication.getCurrentMember().getPassword()) ) {
             JavaFXMLApplication.getCurrentMember().setPassword(password);
         }
-        if (!creditcard.equals(JavaFXMLApplication.getCurrentMember().getCreditCard())){
+        if ( !creditcard.equals(JavaFXMLApplication.getCurrentMember().getCreditCard()) ) {
             JavaFXMLApplication.getCurrentMember().setCreditCard(creditcard);
         }
 
-        if(JavaFXMLApplication.getCurrentMember().getSvc() == 0) {
-            if(!Scsc.isEmpty()){
+        if ( JavaFXMLApplication.getCurrentMember().getSvc() == 0 ) {
+            if ( !Scsc.isEmpty() ) {
                 JavaFXMLApplication.getCurrentMember().setSvc(Integer.parseInt(Scsc));
             }
         } else {
-            if (!Scsc.equals(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc()))) {
+            if ( !Scsc.equals(Integer.toString(JavaFXMLApplication.getCurrentMember().getSvc())) ) {
                 JavaFXMLApplication.getCurrentMember().setSvc(Integer.parseInt(Scsc));
             }
         }
 
 
         //if(selectedFile != null){
-            JavaFXMLApplication.getCurrentMember().setImage(profileImage.getImage());
-            //new javafx.scene.image.Image(selectedFile.toURI().toString())
+        JavaFXMLApplication.getCurrentMember().setImage(profileImage.getImage());
+        //new javafx.scene.image.Image(selectedFile.toURI().toString())
         //}
 
     }
 
-    private void showConfirmationWindowMD(){
+    private void showConfirmationWindowMD() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Dialog");
         alert.setHeaderText("Are you sure you want to make these changes?");
@@ -271,14 +322,14 @@ public class MyData implements Initializable {
         ButtonType buttonTypeYes = new ButtonType("OK");
         ButtonType buttonTypeNo = new ButtonType("Cancel");
 
-        alert.getButtonTypes().setAll(buttonTypeYes,buttonTypeNo);
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
         alert.showAndWait().ifPresent(buttonType -> {
-            if(buttonType == buttonTypeYes) {
+            if ( buttonType == buttonTypeYes ) {
 
-               check = true;
+                check = true;
 
-            } else if(buttonType == buttonTypeNo){
+            } else if ( buttonType == buttonTypeNo ) {
 
                 check = false;
             }
@@ -295,7 +346,6 @@ public class MyData implements Initializable {
         samplesBox.getSelectionModel().select(pos);
         samplesBox.setPromptText("Select an avatar");
         samplesBox.getCellFactory();
-
 
 
     }

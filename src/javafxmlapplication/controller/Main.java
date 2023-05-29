@@ -134,7 +134,7 @@ public class Main implements Initializable {
     }
 
     public void goSignUp(ActionEvent event){
-        JavaFXMLApplication.changeScene("SingUp.fxml");
+        JavaFXMLApplication.changeScene("SignUp.fxml");
     }
 
     public void infoClick(MouseEvent mouseEvent) {

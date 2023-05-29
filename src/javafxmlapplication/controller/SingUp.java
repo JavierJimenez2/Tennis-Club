@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -37,6 +38,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
+
 public class SingUp implements Initializable {
 
     //get pc screen size
@@ -45,6 +47,10 @@ public class SingUp implements Initializable {
     private static boolean correctFormat = true;
     public Button returnButton;
     public TextField csc;
+    @FXML
+    public VBox field1;
+    @FXML
+    public VBox field2;
 
     @FXML
     private HBox buttonsZone;
@@ -92,7 +98,7 @@ public class SingUp implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        profileImage.setImage() is in javafxmlapplication/view/css/img/icons/user.png
-        profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon.png"));
+        profileImage.setImage(new Image("javafxmlapplication/view/css/img/icons/avatar_icon.png"));
 
 
 
@@ -112,6 +118,12 @@ public class SingUp implements Initializable {
         for ( TextField requiredField : requiredFields ) {
             correctFields(requiredField.getPromptText(), requiredField);
         }
+
+        JavaFXMLApplication.getScene().setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER) {
+                register.fire();
+            }
+        });
 
 
     }
@@ -138,7 +150,7 @@ public class SingUp implements Initializable {
             if ( t1 ) {
                 nameLabel.setVisible(true);
                 StackPane namePane = new StackPane();
-                namePane.setAlignment(nameLabel, Pos.TOP_LEFT);
+                StackPane.setAlignment(nameLabel, Pos.TOP_LEFT);
                 nameLabel.paddingProperty().setValue(new javafx.geometry.Insets(1));
                 TranslateTransition translateTransition = new TranslateTransition();
                 translateTransition.setDuration(javafx.util.Duration.millis(200));
@@ -152,7 +164,13 @@ public class SingUp implements Initializable {
                 name.setPromptText("");
 
 //        translate namePane in the border of the text field
-                fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
+                if(name.equals(creditcard)){
+                    field1.getChildren().set(field1.getChildren().indexOf(name), namePane);
+                } else if ( name.equals(csc) ) {
+                    field2.getChildren().set(field2.getChildren().indexOf(name), namePane);
+                }else{
+                    fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
+                }
                 namePane.getChildren().addAll(name, nameLabel);
             } else {
 //                nameLabel.setVisible(false);

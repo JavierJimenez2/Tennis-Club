@@ -11,7 +11,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -48,16 +47,11 @@
           </Tab>
           <Tab fx:id="MisReservasTab" onSelectionChanged="#myReservationsAction" text="My Reservations">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <HBox alignment="TOP_CENTER" fillHeight="false">
                      <children>
-                        <AnchorPane id="InferiorVPane" minHeight="0.0" minWidth="0.0" prefHeight="527.0" prefWidth="779.0">
+                        <VBox alignment="CENTER">
                            <children>
-                              <ListView fx:id="listViewMR" focusTraversable="false" layoutX="23.0" layoutY="95.0" prefHeight="400.0" prefWidth="674.0">
-                                 <padding>
-                                    <Insets left="10.0" right="10.0" />
-                                 </padding>
-                              </ListView>
-                              <GridPane fx:id="misResGP" layoutX="23.0" layoutY="33.0" prefHeight="61.0" prefWidth="674.0">
+                              <GridPane fx:id="misResGP" alignment="CENTER" prefHeight="41.0" prefWidth="430.0" VBox.vgrow="SOMETIMES">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -68,28 +62,50 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label fx:id="dateLabel" text="Date" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Label id="tableHeader" fx:id="dateLabel" text="Date" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
-                                          <Font name="Calibri Italic" size="18.0" />
-                                       </font></Label>
-                                    <Label fx:id="courtLabel" prefHeight="27.0" prefWidth="54.0" text="Court" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font></Label>
-                                    <Label fx:id="startLabel" text="Start/End" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                          <Font name="Segoe UI Bold Italic" size="35.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="tableHeader" fx:id="courtLabel" text="Court" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
-                                       </font></Label>
-                                    <Label fx:id="paidLabel" text="Paid" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       </font>
+                                    </Label>
+                                    <Label id="tableHeader" fx:id="startLabel" text="Start/End" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
-                                       </font></Label>
+                                       </font>
+                                    </Label>
+                                    <Label id="tableHeader" fx:id="paidLabel" text="Paid" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
+                                 <opaqueInsets>
+                                    <Insets right="10.0" />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
                               </GridPane>
-                              <Button fx:id="deleteButtonMR" layoutX="714.0" layoutY="311.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
+                              <ListView fx:id="listViewMR" focusTraversable="false" prefHeight="400.0" prefWidth="674.0" VBox.vgrow="ALWAYS" />
+                              <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="755.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Button fx:id="deleteButtonMR" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
                            </children>
-                        </AnchorPane>
-                     </children></AnchorPane>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="65.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
             </content>
           </Tab>
         </tabs>

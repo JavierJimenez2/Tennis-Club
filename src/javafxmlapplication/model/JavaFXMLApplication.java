@@ -132,6 +132,9 @@ public class JavaFXMLApplication extends Application {
     }
 
 
+    public static Scene getScene() {
+        return scene;
+    }
 
     public static ObservableList<ImageView> getAvatars() {
 
@@ -181,7 +184,8 @@ public class JavaFXMLApplication extends Application {
 
 //        recorre todas las imagenes de la carpeta avatars y las añade a la lista
         //ToDo change to main
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
+        member = club.getMemberByCredentials("jl", "1234567");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Reservas.fxml"));
 
         Parent root = loader.load();
 
