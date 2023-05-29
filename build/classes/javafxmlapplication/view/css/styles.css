@@ -152,6 +152,7 @@
 
 
 .menu-bar {
+    /*-fx-background-color: linear-gradient(from 0% 0% to 100% 200%, repeat, lime 0%, green 50%);*/
     -fx-background-color: -fx-primary;
     -fx-background-radius: 0px;
     -fx-background-insets: 0px;
@@ -550,83 +551,16 @@
 
 }
 
-
-
-.tabPane {
-    -fx-border-color: #f6f6f6;
-    -fx-border-width: 10px;
-    -fx-background-color: #f6f6f6;
-    -fx-border-radius: 30px;
-    -fx-background-radius: 30px;
+#goToSingUpLabel {
+    /*    appearance of a link, underline, and cursor point*/
+    -fx-text-fill: blue;
+    -fx-underline: true;
+    -fx-cursor: hand;
 }
 
 
-/*.tabPane .tab{*/
-/*    -fx-background-color:white;*/
-/*    -fx-border-radius: 20px;*/
-/*    -fx-background-radius: 20px;*/
-/*}*/
-
-/*.tabPane .tab:pressed{*/
-/*    -fx-background-color:white;*/
-/*    -fx-border-radius: 20px;*/
-/*    -fx-background-radius: 20px;*/
-/*}*/
-/* cambiar lo que está detras de los tabs*/
-
-.tab-pane {
-    -fx-background-color: #f6f6f6;
-    -fx-border-color: #f6f6f6;
-    -fx-border-width: 10px;
-    -fx-border-radius: 30px;
-    -fx-background-radius: 30px;
-}
-
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #dcdada;
-    -fx-border-color: #dcdada;
-    -fx-border-radius: 30px;
-    -fx-background-radius: 30px;
-}
-
-/*change all the tab config in order to be border radius 10px*/
-.tab-pane .tab:top:selected .tab-container {
-    -fx-background-color: #f6f6f6;
-    -fx-border-color: #f6f6f6;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
 
 
-#misResGP {
-
-}
-
-#misResGP {
-    -fx-background-color: #84B15C;
-    -fx-border-color: black;
-    /* -fx-border-width: 1px;*/
-    -fx-background-radius: 10px 10px 10px 10px;
-    -fx-border-radius: 10px 10px 10px 10px;
-
-
-}
-
-#deleteButtonMR {
-    -fx-background-color: #FF0000;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-weight: bold;
-    -fx-padding: 6px 12px;
-    -fx-border-radius: 5px;
-}
-
-#deleteButtonMR:hover {
-    -fx-background-color: #FF3333;
-}
-
-deleteButtonMR:pressed {
-    -fx-background-color: #CC0000;
-}
 
 .Buttons {
 
@@ -676,61 +610,167 @@ deleteButtonMR:pressed {
     -fx-background-radius: 30px;
 }
 
-#userTopLabel{
+#userTopLabel {
     -fx-font-size: 1.5em;
     -fx-font-weight: bold;
     -fx-text-fill: #000000;
     -fx-font-family: "Segoe UI";
 }
 
-#circleAvatar{
+#circleAvatar {
 
 }
 
-#dateLabel{
- -fx-font-family: "Calibri";
- -fx-font-style: italic;
- -fx-text-fill: white;
+
+
+#misResGP {
+    -fx-background-color: -fx-primary;
+    -fx-border-color: transparent;
+    /* -fx-border-width: 1px;*/
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-border-radius: 10px;
+
+
 }
 
-#paidLabel{
--fx-font-family: "Calibri";
- -fx-font-style: italic;
- -fx-text-fill: white;
+#tableHeader {
+    -fx-font: 20px "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
 }
 
-#startLabel{
--fx-font-family: "Calibri";
- -fx-font-style: italic;
- -fx-text-fill: white;
+
+
+#listViewMR {
+    -fx-background-color: rgba(91, 161, 91, 0.44);
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-border-color: transparent;
+
 }
 
-#courtLabel{
--fx-font-family: "Calibri";
- -fx-font-style: italic;
- -fx-text-fill: white;
-}
-
-#listViewMR{
-    -fx-background-color: #f2f2f2;
-    -fx-font-family: Arial;
+/*hover over cell */
+.list-cell{
+    -fx-text-fill: black;
+    -fx-font-family: "Segoe UI";
     -fx-font-weight: bold;
 }
 
 .list-cell:odd {
-    -fx-background-color: #FFFFFF; /* Set the background color for odd-indexed cells */
+    -fx-background-color: derive(-fx-primary, 100%); /* Set the background color for odd-indexed cells */
+    -fx-background-radius: 10px;
+
 }
 
 .list-cell:even {
-    -fx-background-color: #FCF5F5; /* Set the background color for odd-indexed cells */
+    -fx-background-color: derive(-fx-primary, 70%); /* Set the background color for odd-indexed cells */
+    -fx-background-radius: 10px;
 }
 
-.list-cell:selected:odd {
-    -fx-background-color: #EAE7E7; /* Set the background color for selected odd-indexed cells */
+.list-cell:selected{
+    -fx-background-color: #00851e; /* Set the background color for selected odd-indexed cells */
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 }
 
-.list-cell:selected:even {
-    -fx-background-color: #ECDEDE; /* Set the background color for selected odd-indexed cells */
+.list-cell:pressed{
+    -fx-text-fill: black;
+}
+.list-cell:hover {
+    -fx-background-color: rgba(234, 231, 231, 0.49); /* Set the background color for hovered cells */
+    -fx-text-fill: black;
 }
 
 
+#deleteButtonMR {
+    -fx-background-color: #FF0000;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font: 15px "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-padding: 6px 12px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+}
+
+#deleteButtonMR:hover {
+    -fx-background-color: #FF3333;
+}
+
+deleteButtonMR:pressed {
+    -fx-background-color: #CC0000;
+}
+
+
+
+.tabPane {
+    -fx-border-color: #f6f6f6;
+    -fx-border-width: 10px;
+    -fx-background-color: #f6f6f6;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+
+/*.tabPane .tab{*/
+/*    -fx-background-color:white;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-background-radius: 20px;*/
+/*}*/
+
+/*.tabPane .tab:pressed{*/
+/*    -fx-background-color:white;*/
+/*    -fx-border-radius: 20px;*/
+/*    -fx-background-radius: 20px;*/
+/*}*/
+/* cambiar lo que está detras de los tabs*/
+
+.tab-pane {
+    -fx-background-color: #f6f6f6;
+    -fx-border-color: #f6f6f6;
+    -fx-border-width: 10px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #dcdada;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+
+
+/*quitar el borde azul del tab selecionado*/
+
+
+
+.tab-pane .tab:top .tab-container .tab-label {
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: white;
+}
+
+.tab-pane .tab{
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10px 10px 0 0;
+/*    padding*/
+    -fx-padding: 5px;
+}
+
+.tab-pane .tab:top:selected .tab-container *{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.tab-pane .tab:top:selected{
+    -fx-background-color: #005600;
+    -fx-background-radius: 10px 10px 0 0;
+    /*-fx-border-width: 2px;*/
+    -fx-border-radius: 10px 10px 0 0;
+
+}

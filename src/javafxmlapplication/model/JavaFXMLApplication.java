@@ -183,9 +183,7 @@ public class JavaFXMLApplication extends Application {
 
 
 //        recorre todas las imagenes de la carpeta avatars y las añade a la lista
-        //ToDo change to main
-        member = club.getMemberByCredentials("jl", "1234567");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Reservas.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/Main.fxml"));
 
         Parent root = loader.load();
 
