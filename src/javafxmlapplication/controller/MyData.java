@@ -161,14 +161,14 @@ public class MyData implements Initializable {
 
 
         ///////////////////name checkings/////////////////////////////////////////////////////////////
-        if(!name.matches("[a-zA-Z]*") || name.isEmpty()){
+        if(!name.matches("[a-zA-Z ]*") || name.isEmpty()){
             JavaFXMLApplication.dialogBox("error","Error","Error in Name Field. Remember to write just characters.");
             this.name.setText("");
             correctFormat = false;
         }
 
         ///////////////////lastname checkings/////////////////////////////////////////////////////////////
-        if(!lastname.matches("[a-zA-Z]*") || lastname.isEmpty()){
+        if(!lastname.matches("[a-zA-Z ]*") || lastname.isEmpty()){
             JavaFXMLApplication.dialogBox("error","Error","Error in Last Name Field. Remember to write just characters.");
             this.lastname.setText("");
             correctFormat = false;

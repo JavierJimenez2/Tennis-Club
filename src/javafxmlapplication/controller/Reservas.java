@@ -219,6 +219,7 @@ public class Reservas implements Initializable {
         //create observable list using FXCollections
         myObservableBookingList = FXCollections.observableArrayList(bookingData);
 
+
         //link the booking observable list with listView
         listViewMR.setItems(myObservableBookingList);
 
@@ -331,7 +332,6 @@ public class Reservas implements Initializable {
 //        Aqui se agregan los items de row reservation
         for ( RowReservation todo : items ) {
             widget.getChildren().add(createItem(todo));
-
         }
         return widget;
     }
@@ -404,7 +404,7 @@ public class Reservas implements Initializable {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     if ( !row.isReserved() ) {
-                        //                            alert de informacion que me diga que para reservar debe iniciar sesión
+                        //               alert de informacion que me diga que para reservar debe iniciar sesión
                         if ( guest ) {
                             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
                             alert1.setTitle("Information");
@@ -418,8 +418,30 @@ public class Reservas implements Initializable {
                                 JavaFXMLApplication.setCurrentMember((Member) null);
                                 changeScene("Login.fxml");
                             }
-                        } else {
 
+                        } else {
+//////////////////////// BOOKING CONDITIONS ///////////////////////////////////////////////////////////////////////////////////////////////
+
+                        // First, a List containing the reservations of the user is created to compare that the time
+                        // to reserve is not consecutive with another previous reservation
+                            List<Booking> listOfReservations = club.getUserBookings(member.getNickName());
+                            Booking elementToCompare;
+                            for(int i = 0; i < listOfReservations.size(); i++) {
+                                elementToCompare = listOfReservations.get(i);
+                                if (elementToCompare.getMadeForDay().toString().equals(row.getMadeForDay().toString())) {
+
+                                // If the day is the same, we compare hours:
+                                // If the getFromTime of both elements is consecutive or equal, the reservation cannot be made:
+
+                                    if (row.getFromTime().plusHours(1).toString().equals(elementToCompare.getFromTime().toString())
+                                            || row.getFromTime().minusHours(1).toString().equals(elementToCompare.getFromTime().toString())
+                                            || row.getFromTime().toString().equals(elementToCompare.getFromTime().toString())) {
+                                        JavaFXMLApplication.dialogBox("error", "Error in booking", "Two hours cannot be reserved consecutively or at the same time.");
+                                        return;
+                                    }
+                                }
+                            }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Confirmation");
@@ -444,6 +466,10 @@ public class Reservas implements Initializable {
                                 LocalDateTime now = LocalDateTime.now();
                                 LocalDate value = DatePicker.getValue();
                                 LocalTime fromTime = row.getFromTime();
+
+                            // Setting paid to true if user included credit card.
+                                row.setPaid(member.checkHasCreditInfo());
+
                                 boolean paid = row.getPaid();
                                 Court court = row.getCourt();
 
@@ -476,8 +502,8 @@ public class Reservas implements Initializable {
 
                 }
             });
-            return item;
-        }
+        return item;
+    } // end of createItem.
 
     private List<RowReservation> courtSlots(Court court) {
         LocalTime[] hours = new LocalTime[13];

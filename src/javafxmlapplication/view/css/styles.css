@@ -710,3 +710,27 @@ deleteButtonMR:pressed {
  -fx-font-style: italic;
  -fx-text-fill: white;
 }
+
+#listViewMR{
+    -fx-background-color: #f2f2f2;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+.list-cell:odd {
+    -fx-background-color: #FFFFFF; /* Set the background color for odd-indexed cells */
+}
+
+.list-cell:even {
+    -fx-background-color: #FCF5F5; /* Set the background color for odd-indexed cells */
+}
+
+.list-cell:selected:odd {
+    -fx-background-color: #EAE7E7; /* Set the background color for selected odd-indexed cells */
+}
+
+.list-cell:selected:even {
+    -fx-background-color: #ECDEDE; /* Set the background color for selected odd-indexed cells */
+}
+
+

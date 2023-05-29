@@ -192,7 +192,7 @@ public class SingUp implements Initializable {
 
 
         ///////////////////name checkings/////////////////////////////////////////////////////////////
-        if ( !name.matches("[a-zA-Z]*") || name.isEmpty() ) {
+        if ( !name.matches("[a-zA-Z ]*") || name.isEmpty()) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Name Field. Remember to write just characters.");
             this.name.setText("");
             this.name.requestFocus();
@@ -200,7 +200,7 @@ public class SingUp implements Initializable {
         }
 
         ///////////////////lastname checkings/////////////////////////////////////////////////////////////
-        if ( !lastname.matches("[a-zA-Z]*") || lastname.isEmpty() ) {
+        if ( !lastname.matches("[a-zA-Z ]*") || lastname.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Last Name Field. Remember to write just characters.");
             this.lastname.setText("");
             this.lastname.requestFocus();
