@@ -436,16 +436,41 @@ public class Reservas implements Initializable {
                         // to reserve is not consecutive with another previous reservation
                         List<Booking> listOfReservations = club.getUserBookings(member.getNickName());
                         Booking elementToCompare;
+                        Booking elementToCompare2;
                         for ( int i = 0; i < listOfReservations.size(); i++ ) {
                             elementToCompare = listOfReservations.get(i);
-                            if ( elementToCompare.getMadeForDay().toString().equals(row.getMadeForDay().toString()) ) {
+                            if ( elementToCompare.getMadeForDay().toString().equals(row.getMadeForDay().toString())) {
+                                // If the day and the court are the same, we compare hours:
+                                // There are three cases where it shouldn't let the reservation continue:
+                                //      1st case: when the two previous hours have been reserved by the same user.
+                                //      2nd case: when the two hours after have been reserved by the same user.
+                                //      3rd case: when the previous and the consecutive hour have already been reserved.
 
-                                // If the day is the same, we compare hours:
-                                // If the getFromTime of both elements is consecutive or equal, the reservation cannot be made:
-
-                                if ( row.getFromTime().plusHours(1).toString().equals(elementToCompare.getFromTime().toString()) || row.getFromTime().minusHours(1).toString().equals(elementToCompare.getFromTime().toString()) || row.getFromTime().toString().equals(elementToCompare.getFromTime().toString()) ) {
-                                    JavaFXMLApplication.dialogBox("error", "Error in booking", "Two hours cannot be reserved consecutively or at the same time.");
+                                // In the following comparisons, we check in which case we are and if we pass one of the two first ifs,
+                                // we enter a new for loop in which we traverse the list again searching checking if we are in any of the
+                                // specified cases.
+                                if(row.getFromTime().toString().equals(elementToCompare.getFromTime().toString())) {
+                                    JavaFXMLApplication.dialogBox("error", "Error in booking", "Another court has already been booked at this time.");
                                     return;
+                                }
+                                if ( row.getFromTime().minusHours(1).toString().equals(elementToCompare.getFromTime().toString())) {
+                                    for(int j = 0; j < listOfReservations.size(); j++) {
+                                        elementToCompare2 = listOfReservations.get(j);
+                                        if(row.getFromTime().minusHours(2).toString().equals(elementToCompare2.getFromTime().toString())
+                                        || row.getFromTime().plusHours(1).toString().equals(elementToCompare2.getFromTime().toString())) {
+                                            JavaFXMLApplication.dialogBox("error", "Error in booking", "Three hours cannot be reserved consecutively.");
+                                            return;
+                                        }
+                                    }
+                                } else if (row.getFromTime().plusHours(1).toString().equals(elementToCompare.getFromTime().toString())) {
+                                    for(int j = 0; j < listOfReservations.size(); j++) {
+                                        elementToCompare2 = listOfReservations.get(j);
+                                        if(row.getFromTime().plusHours(2).toString().equals(elementToCompare2.getFromTime().toString())
+                                                || row.getFromTime().minusHours(1).toString().equals(elementToCompare2.getFromTime().toString())) {
+                                            JavaFXMLApplication.dialogBox("error", "Error in booking", "Three hours cannot be reserved consecutively.");
+                                            return;
+                                        }
+                                    }
                                 }
                             }
                         }
