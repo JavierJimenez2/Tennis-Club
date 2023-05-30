@@ -10,6 +10,6 @@
     <orderEntry type="library" name="javafx-sdk-19.0.2" level="project" />
     <orderEntry type="library" name="sqlite-jdbc-3.41.2.1" level="project" />
     <orderEntry type="library" name="tenisClub" level="project" />
-    <orderEntry type="library" name="javafx-swt" level="project" />
+    <orderEntry type="library" name="javafx-sdk-11.0" level="project" />
   </component>
 </module>
