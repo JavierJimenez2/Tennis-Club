@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -15,9 +14,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -49,10 +45,10 @@ public class Reservas implements Initializable {
 
 
     private static final int MAX_ITEMS = 10;
-    ////////////////////////////////parte de reservas/////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////// RESERVAS SECTION /////////////////////////////////////////////////////////////////////////////
     @FXML
     public ScrollPane scrollPane;
-    ///////////////////parte de MisReservas//////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////MisReservas SECTION//////////////////////////////////////////////////////////////////////////////////////////
     public Button deleteButtonMR;
     public ListView<Booking> listViewMR;
     public Button returnButton;
@@ -109,13 +105,13 @@ public class Reservas implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /////////////////////////////////parte de reservas///////////////////////////////////////////////////////////////////////////////////
+
+        /////////////////////////////////   RESERVAS SECTION    ///////////////////////////////////////////////////////////////////////////////////
+
         guest = false;
         try {
             club = Club.getInstance();
-        } catch (ClubDAOException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (ClubDAOException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -129,24 +125,17 @@ public class Reservas implements Initializable {
             MisReservasTab.tooltipProperty().set(new Tooltip("For view your bookings you need to Log In"));
         }
 
-//        Circle circle = new Circle(26, 30, 26);
-//        circle.setStroke(Color.WHITE);
-//        circle.setStrokeWidth(2);
-//        circle.setFill(Color.WHITE);
         circleAvatar.setStroke(Color.WHITE);
         avatar.setVisible(false);
         if ( guest ) {
             appTitle.setText("GreenBall");
             avatar.setImage(new javafx.scene.image.Image("/javafxmlapplication/view/css/img/icons/avatar_icon.png"));
-//            avatar.setClip(circle);
             circleAvatar.setFill(new ImagePattern(new javafx.scene.image.Image("/javafxmlapplication/view/css/img" + "/icons/avatar_icon.png")));
             userTopLabel.setText("Guest");
         } else {
             appTitle.setText("GreenBall");
             avatar.setImage(member.getImage());
-//            avatar.setDisable(true);
-//            crop the image
-//            avatar.setClip(circle);
+
 //            crop the image into a square preserving the center and the ratio
             ImageView imageView = new ImageView(member.getImage());
             imageView.setPreserveRatio(true);
@@ -212,20 +201,20 @@ public class Reservas implements Initializable {
 //        do not show the week numbers
         DatePicker.setShowWeekNumbers(false);
 
-//        set the date format
-//        get the stage
-//        No mostrar el año en el datepicker
+//        Set the date format
+//        Get the stage
+//        Not show the year in the DatePicker
 
 
         courtView();
 
 
-        ///////////////////////////////parte de MisReservas////////////////////////////////////////////////////////////////
+        /////////////////////////////// RESERVATIONS SECTION ////////////////////////////////////////////////////////////////
 
-//        myReservationsTab()
-//        quitar todos los key events
+
     }
 
+    //        quitar todos los key events
     private void myReservationsTab() {
         List<Booking> bookingData = JavaFXMLApplication.getCurrentClub().getUserBookings(JavaFXMLApplication.getCurrentMember().getNickName());
         listViewMR.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -235,26 +224,20 @@ public class Reservas implements Initializable {
 
         //link the booking observable list with listView
         listViewMR.setItems(myObservableBookingList);
-//        tableReservas.setItems(myObservableBookingList);
+
         //Modify cell factory to display object Booking
         listViewMR.setCellFactory(c -> new bookingListCell());
+
         //in case of nothing selected disable delete
         deleteButtonMR.disableProperty().bind(Bindings.equal(-1, listViewMR.getSelectionModel().selectedIndexProperty()));
 
-        /*listViewMR.focusedProperty().addListener((a, b, c) -> {
-            if (listViewMR.isFocused()) {
-                deleteButtonMR.setDisable(false);
-            }else{
-                deleteButtonMR.setDisable(true);
-            }
-        });*/
         if ( myObservableBookingList.size() > MAX_ITEMS ) {
             myObservableBookingList.remove(0, myObservableBookingList.size() - MAX_ITEMS);
         }
         listViewMR.setPrefHeight(10 * 25);
     }
 
-    //////////parte reservas///////////////////////////////////////////////////////////////////////////////////////////////
+    ////////// RESERVATIONS ///////////////////////////////////////////////////////////////////////////////////////////////
     @FXML
     public void ChoiceBoxHover(javafx.scene.input.MouseEvent mouseEvent) {
         choice.show();
@@ -267,11 +250,6 @@ public class Reservas implements Initializable {
 
         vRoot.getChildren().add(makeView());
 
-
-//        scrollPane = new ScrollPane(root);
-//        set root as the content of the scrollpane
-//        scrollPane.setContent(root);
-
 //        click on the button to scroll to the bottom
         scrollPane.setVvalue(0);
         scrollPane.setHvalue(0);
@@ -279,8 +257,8 @@ public class Reservas implements Initializable {
 //        scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-//        give the scroll a style class
 
+//        give the scroll a style class
         scrollPane.setContent(vRoot);
 
 
@@ -289,7 +267,8 @@ public class Reservas implements Initializable {
 
     private BootstrapPane makeView() {
         BootstrapPane bootstrapPane = new BootstrapPane();
-//        give a margin of 10px
+
+//      give a margin of 10px
         bootstrapPane.setId("bootstrapPane");
         bootstrapPane.setPadding(new Insets(10));
         int gap = 20;
@@ -330,8 +309,10 @@ public class Reservas implements Initializable {
 
     private Node createWidget(String title, List<RowReservation> items) {
         VBox widget = new VBox();
-//        set Hgrow
+
+//      set Hgrow
         widget.getStyleClass().add("widget");
+
         HBox titleLabel = new HBox();
         titleLabel.getStyleClass().add("titleWidget");
         titleLabel.setAlignment(Pos.CENTER);
@@ -339,7 +320,7 @@ public class Reservas implements Initializable {
         widget.getChildren().add(titleLabel);
         widget.getChildren().add(new Separator(Orientation.HORIZONTAL));
 
-//        Aqui se agregan los items de row reservation
+    //  Here, items of RowReservation type are added:
         for ( RowReservation todo : items ) {
             widget.getChildren().add(createItem(todo));
         }
@@ -410,126 +391,129 @@ public class Reservas implements Initializable {
 
         item.getChildren().addAll(left, right);
 
-        item.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if ( !row.isReserved() ) {
-                    //               alert de informacion que me diga que para reservar debe iniciar sesión
-                    if ( guest ) {
-                        Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert1.setTitle("Information");
-                        alert1.setHeaderText("You must be logged in to reserve");
-                        alert1.setContentText("Do you want to log in?");
-                        ButtonType buttonTypeOne = new ButtonType("Log in");
-                        ButtonType buttonTypeCancel = new ButtonType("Cancel");
-                        alert1.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-                        Optional<ButtonType> result = alert1.showAndWait();
-                        if ( result.get() == buttonTypeOne ) {
-                            JavaFXMLApplication.setCurrentMember((Member) null);
-                            changeScene("Login.fxml");
-                        }
+        item.setOnMouseClicked(mouseEvent -> {
+            if ( !row.isReserved() ) {
 
-                    } else {
+            //  Compares if the selected slot is before the current hour. If it is before, the reservation cannot take place.
+                if(DatePicker.getValue().isEqual(LocalDate.now()) && !row.getFromTime().isAfter(LocalTime.now()))
+                    return;
+
+            //  Alert that informs the user that he must Log In before making a reservation.
+                if ( guest ) {
+                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.setTitle("Information");
+                    alert1.setHeaderText("You must be logged in to reserve");
+                    alert1.setContentText("Do you want to log in?");
+                    ButtonType buttonTypeOne = new ButtonType("Log in");
+                    ButtonType buttonTypeCancel = new ButtonType("Cancel");
+                    alert1.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+                    Optional<ButtonType> result = alert1.showAndWait();
+                    if ( result.get() == buttonTypeOne ) {
+                        JavaFXMLApplication.setCurrentMember((Member) null);
+                        changeScene("Login.fxml");
+                    }
+
+                } else {
 //////////////////////// BOOKING CONDITIONS ///////////////////////////////////////////////////////////////////////////////////////////////
 
-                        // First, a List containing the reservations of the user is created to compare that the time
-                        // to reserve is not consecutive with another previous reservation
-                        List<Booking> listOfReservations = club.getUserBookings(member.getNickName());
-                        Booking elementToCompare;
-                        Booking elementToCompare2;
-                        for ( int i = 0; i < listOfReservations.size(); i++ ) {
-                            elementToCompare = listOfReservations.get(i);
-                            if ( elementToCompare.getMadeForDay().toString().equals(row.getMadeForDay().toString())) {
-                                // If the day and the court are the same, we compare hours:
-                                // There are three cases where it shouldn't let the reservation continue:
-                                //      1st case: when the two previous hours have been reserved by the same user.
-                                //      2nd case: when the two hours after have been reserved by the same user.
-                                //      3rd case: when the previous and the consecutive hour have already been reserved.
+                    // First, a List containing the reservations of the user is created to compare that the time
+                    // to reserve is not consecutive with another previous reservation
+                    List<Booking> listOfReservations = club.getUserBookings(member.getNickName());
+                    Booking elementToCompare;
+                    Booking elementToCompare2;
+                    for ( int i = 0; i < listOfReservations.size(); i++ ) {
+                        elementToCompare = listOfReservations.get(i);
+                        if ( elementToCompare.getMadeForDay().toString().equals(row.getMadeForDay().toString())) {
+                            // If the day and the court are the same, we compare hours:
+                            // There are three cases where it shouldn't let the reservation continue:
+                            //      1st case: when the two previous hours have been reserved by the same user.
+                            //      2nd case: when the two hours after have been reserved by the same user.
+                            //      3rd case: when the previous and the consecutive hour have already been reserved.
 
-                                // In the following comparisons, we check in which case we are and if we pass one of the two first ifs,
-                                // we enter a new for loop in which we traverse the list again searching checking if we are in any of the
-                                // specified cases.
-                                if(row.getFromTime().toString().equals(elementToCompare.getFromTime().toString())) {
-                                    JavaFXMLApplication.dialogBox("error", "Error in booking", "Another court has already been booked at this time.");
-                                    return;
-                                }
-                                if ( row.getFromTime().minusHours(1).toString().equals(elementToCompare.getFromTime().toString())) {
-                                    for(int j = 0; j < listOfReservations.size(); j++) {
-                                        elementToCompare2 = listOfReservations.get(j);
-                                        if(row.getFromTime().minusHours(2).toString().equals(elementToCompare2.getFromTime().toString())
-                                        || row.getFromTime().plusHours(1).toString().equals(elementToCompare2.getFromTime().toString())) {
-                                            JavaFXMLApplication.dialogBox("error", "Error in booking", "Three hours cannot be reserved consecutively.");
-                                            return;
-                                        }
+                            // In the following comparisons, we check in which case we are and if we pass one of the two first ifs,
+                            // we enter a new for loop in which we traverse the list again searching checking if we are in any of the
+                            // specified cases.
+                            if(row.getFromTime().toString().equals(elementToCompare.getFromTime().toString())) {
+                                JavaFXMLApplication.dialogBox("error", "Error in booking", "Another court has already been booked at this time.");
+                                return;
+                            }
+                            if ( row.getFromTime().minusHours(1).toString().equals(elementToCompare.getFromTime().toString())) {
+                                for(int j = 0; j < listOfReservations.size(); j++) {
+                                    elementToCompare2 = listOfReservations.get(j);
+                                    if(row.getFromTime().minusHours(2).toString().equals(elementToCompare2.getFromTime().toString())
+                                    || row.getFromTime().plusHours(1).toString().equals(elementToCompare2.getFromTime().toString())) {
+                                        JavaFXMLApplication.dialogBox("error", "Error in booking", "Three hours cannot be reserved consecutively.");
+                                        return;
                                     }
-                                } else if (row.getFromTime().plusHours(1).toString().equals(elementToCompare.getFromTime().toString())) {
-                                    for(int j = 0; j < listOfReservations.size(); j++) {
-                                        elementToCompare2 = listOfReservations.get(j);
-                                        if(row.getFromTime().plusHours(2).toString().equals(elementToCompare2.getFromTime().toString())
-                                                || row.getFromTime().minusHours(1).toString().equals(elementToCompare2.getFromTime().toString())) {
-                                            JavaFXMLApplication.dialogBox("error", "Error in booking", "Three hours cannot be reserved consecutively.");
-                                            return;
-                                        }
+                                }
+                            } else if (row.getFromTime().plusHours(1).toString().equals(elementToCompare.getFromTime().toString())) {
+                                for(int j = 0; j < listOfReservations.size(); j++) {
+                                    elementToCompare2 = listOfReservations.get(j);
+                                    if(row.getFromTime().plusHours(2).toString().equals(elementToCompare2.getFromTime().toString())
+                                            || row.getFromTime().minusHours(1).toString().equals(elementToCompare2.getFromTime().toString())) {
+                                        JavaFXMLApplication.dialogBox("error", "Error in booking", "Three hours cannot be reserved consecutively.");
+                                        return;
                                     }
                                 }
                             }
-                        }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Confirmation");
-                        alert.setHeaderText("Are you sure you want to reserve?");
-                        String content = "Date: " + DatePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" + "Time" + ": " + row.getFromTime() + " - " + row.getFromTime().plusHours(1) + "\n" + "Court: " + row.getCourt().getName() + "\n" + "Member: " + row.getMember().getNickName() + "\n";
-                        alert.setContentText(content);
-//                    change the button names
-                        ButtonType buttonTypeOne = new ButtonType("Reserve");
-                        ButtonType buttonTypeCancel = new ButtonType("Cancel");
-                        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if ( result.get() == buttonTypeOne ) {
-
-
-                            try {
-                                assert club != null;
-
-                                LocalDateTime now = LocalDateTime.now();
-                                LocalDate value = DatePicker.getValue();
-                                LocalTime fromTime = row.getFromTime();
-
-                                // Setting paid to true if user included credit card.
-                                row.setPaid(member.checkHasCreditInfo());
-
-                                boolean paid = row.getPaid();
-                                Court court = row.getCourt();
-
-                                club.registerBooking(now, value, fromTime, paid, court, row.getMember());
-                                //
-                                row.setReserved(true);
-                                item.getStyleClass().remove("free");
-                                item.getStyleClass().add("reserved");
-                                right.getChildren().remove(freeLabel);
-                                right.getChildren().add(0, userLabel);
-                                circle.setFill(Color.RED);
-                            } catch (ClubDAOException e) {
-                                alert.close();
-                                Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                                alert2.setTitle("Error");
-                                alert2.setHeaderText("Reservation could not be made");
-                                alert2.setContentText("Please try again later");
-                                alert2.showAndWait();
-                                e.printStackTrace();
-                            }
-
-
-                        } else {
-                            alert.close();
                         }
                     }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setHeaderText("Are you sure you want to reserve?");
+                    String content = "Date: " + DatePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n" + "Time" + ": " + row.getFromTime() + " - " + row.getFromTime().plusHours(1) + "\n" + "Court: " + row.getCourt().getName() + "\n" + "Member: " + row.getMember().getNickName() + "\n";
+                    alert.setContentText(content);
+
+                //  change the button names
+                    ButtonType buttonTypeOne = new ButtonType("Reserve");
+                    ButtonType buttonTypeCancel = new ButtonType("Cancel");
+                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if ( result.get() == buttonTypeOne ) {
+
+
+                        try {
+                            assert club != null;
+
+                            LocalDateTime now = LocalDateTime.now();
+                            LocalDate value = DatePicker.getValue();
+                            LocalTime fromTime = row.getFromTime();
+
+                        // Setting paid to true if user included credit card.
+                            row.setPaid(member.checkHasCreditInfo());
+
+                            boolean paid = row.getPaid();
+                            Court court = row.getCourt();
+
+                            club.registerBooking(now, value, fromTime, paid, court, row.getMember());
+                            //
+                            row.setReserved(true);
+                            item.getStyleClass().remove("free");
+                            item.getStyleClass().add("reserved");
+                            right.getChildren().remove(freeLabel);
+                            right.getChildren().add(0, userLabel);
+                            circle.setFill(Color.RED);
+                        } catch (ClubDAOException e) {
+                            alert.close();
+                            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                            alert2.setTitle("Error");
+                            alert2.setHeaderText("Reservation could not be made");
+                            alert2.setContentText("Please try again later");
+                            alert2.showAndWait();
+                            e.printStackTrace();
+                        }
+
+
+                    } else {
+                        alert.close();
+                    }
                 }
+            }
 //
 
 
-            }
         });
         return item;
     } // end of createItem.
@@ -578,16 +562,15 @@ public class Reservas implements Initializable {
         courtView();
     }
 
-    ////////////////////////////parte mis reservas///////////////////////////////////////////////////////////////////////
+    ////////////////////////////    MY RESERVATIONS    ///////////////////////////////////////////////////////////////////////
     public void deleteAction(ActionEvent actionEvent) {
         long daysDifference = ChronoUnit.DAYS.between(LocalDate.now(), listViewMR.getSelectionModel().getSelectedItem().getMadeForDay());
         //
         if ( LocalDate.now().getYear() == listViewMR.getSelectionModel().getSelectedItem().getMadeForDay().getYear() ) {
             if ( LocalDate.now().isAfter(listViewMR.getSelectionModel().getSelectedItem().getMadeForDay()) || (LocalDate.now().isEqual(listViewMR.getSelectionModel().getSelectedItem().getMadeForDay()) && (!listViewMR.getSelectionModel().getSelectedItem().getFromTime().isAfter(LocalTime.now()) || !listViewMR.getSelectionModel().getSelectedItem().getFromTime().plusHours(1).isAfter(LocalTime.now()))) ) {   //checks if booking was of a previous day
                 JavaFXMLApplication.dialogBox("error", "Cancel Error", "Court was already used. Can't cancel reservation.");
-                //return;
-                //check if canceled reservation is in less than 24h
-                //listView.getSelectionModel().getSelectedItem().getBookingDate(), LocalDateTime.now()
+
+        //  check if canceled reservation is in less than 24h
             } else if ( (daysDifference == 1 && listViewMR.getSelectionModel().getSelectedItem().getFromTime().isBefore(LocalTime.now())) || daysDifference < 1 ) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
@@ -647,7 +630,7 @@ public class Reservas implements Initializable {
     public void myReservationsAction(Event event) {
 
         myReservationsTab();
-//        quita todas las acciones on key pressed de la escena
+        /* removes all actions onKeyPressed of the scene */
 
     }
 
@@ -670,15 +653,12 @@ public class Reservas implements Initializable {
                 String tab2 = "                                         ";
                 String tab3 = "                                      ";
                 String tab4 = "                                             ";
-//                 setText("         " + booking.getMadeForDay() + "                                  " + booking.getCourt().getName() + "                                    " + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + "                                    " + booking.getPaid());
-//                    set the text tab with the column of the grid pane that is avobe
+            //  set the text tab with the column of the grid pane that is above
                 String madeForDay = booking.getMadeForDay().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String courtName = booking.getCourt().getName().replace("Pista","Court");
                 String fromTime = booking.getFromTime() + " - " + booking.getFromTime().plusHours(1);
                 String paid = booking.getPaid()?"✅":"❌";
                 setText(tab1+madeForDay + tab2 + courtName + tab3 + fromTime + tab4 + paid);
-//                setText(tab1+booking.getMadeForDay().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + tab2 + booking.getCourt().getName() + tab3 + booking.getFromTime() + " - " + booking.getFromTime().plusHours(1) + tab4 + booking.getPaid());
-
             }
 
 
