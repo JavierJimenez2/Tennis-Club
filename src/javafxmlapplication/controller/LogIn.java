@@ -150,12 +150,12 @@ public class LogIn implements Initializable {
                 JavaFXMLApplication.setCurrentMember(member);
                 JavaFXMLApplication.changeScene("Reservas.fxml");
             }else {
-                JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
+                JavaFXMLApplication.dialogBox("error", "Error", "Incorrect user or password.");
                 username.setText("");
                 password.setText("");
             }
         } else {
-            JavaFXMLApplication.dialogBox("error", "Error", "Usuario o contraseña incorrectos");
+            JavaFXMLApplication.dialogBox("error", "Error", "Incorrect user or password.");
             username.setText("");
             password.setText("");
         }
