@@ -23,6 +23,7 @@ import model.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,9 +122,11 @@ public class JavaFXMLApplication extends Application {
         FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("/javafxmlapplication/view/" + s));
         try {
             setRoot(loader.load());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.setErr(new PrintStream("NUL"));
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
+
 
     }
 

@@ -26,7 +26,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="182.0" prefWidth="720.0" VBox.vgrow="NEVER">
                            <children>
-                              <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Slash!" textAlignment="CENTER" wrappingWidth="539.8714904785156" HBox.hgrow="ALWAYS">
+                              <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to GreenBall!" textAlignment="CENTER" wrappingWidth="539.8714904785156" HBox.hgrow="ALWAYS">
                                  <font>
                                     <Font name="Segoe UI Black" size="49.0" />
                                  </font>

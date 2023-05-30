@@ -32,7 +32,7 @@
                                     <Font name="Courier New Bold" size="43.0" />
                                  </font>
                               </Text>
-                              <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="Register" textAlignment="CENTER" wrappingWidth="598.7831211090088">
+                              <Text fill="#1f8918" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="Sign Up" textAlignment="CENTER" wrappingWidth="598.7831211090088">
                                  <font>
                                     <Font name="Segoe UI Bold" size="28.0" />
                                  </font>
@@ -86,7 +86,7 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </TextField>
-                                          <GridPane hgap="10.0" vgap="10.0">
+                                          <GridPane fx:id="gridPane" hgap="10.0" vgap="10.0">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -95,16 +95,24 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <TextField id="text-field" fx:id="creditcard" promptText="Credit Card Number">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </TextField>
-                                                <TextField id="text-field" fx:id="csc" promptText="CSC" GridPane.columnIndex="1">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </TextField>
+                                                <VBox fx:id="field1">
+                                                   <children>
+                                                      <TextField id="text-field" fx:id="creditcard" promptText="Credit Card Number">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox fx:id="field2" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <TextField id="text-field" fx:id="csc" promptText="CSC">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
                                              </children>
                                              <VBox.margin>
                                                 <Insets top="5.0" />
