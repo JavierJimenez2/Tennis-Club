@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -61,6 +62,8 @@ public class MyData implements Initializable {
     private VBox field3;
     @FXML
     private VBox field4;
+    @FXML
+    private VBox intPane;
 
     private boolean savedData;
 
@@ -69,12 +72,23 @@ public class MyData implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/user.png"));
 
+        modify.requestFocus();
+        intPane.setOnKeyPressed(keyEvent -> {
+            if ( keyEvent.getCode() == KeyCode.ENTER ) {
+                modify.fire();
+            }
+        });
 
 
         //part for the prompt text
         TextField[] textFields = {name, lastname, username, password, creditcard, csc, telephone};
         for ( TextField textField : textFields ) {
             extracted(textField.getPromptText(), textField);
+        }
+
+        TextField[] requiredFields = {name, lastname, username, password,telephone};
+        for ( TextField requiredField : requiredFields ) {
+            correctFields(requiredField.getPromptText(), requiredField);
         }
 
 
@@ -96,6 +110,22 @@ public class MyData implements Initializable {
             csc.setPromptText("Credit Card Number (Optional)");
         }
         profileImage.setImage(JavaFXMLApplication.getCurrentMember().getImage());
+    }
+
+    private void correctFields(String Prompt,TextField name) {
+        name.focusedProperty().addListener((observableValue, aBoolean, t1) -> {
+            if ( !t1 && name.getText().isEmpty() ) {
+                name.getStyleClass().add("error");
+                correctFormat = false;
+                savedData = false;
+                name.setStyle("-fx-border-color: red;-fx-prompt-text-fill: red;");
+                name.setPromptText(Prompt+" is required");
+            } else {
+                name.setPromptText("");
+                name.setStyle("-fx-border-color: #08861d;-fx-prompt-text-fill: #08861d;-fx-font-fill: #08861d;");
+                correctFormat = true;
+            }
+        });
     }
 
 
@@ -199,8 +229,7 @@ public class MyData implements Initializable {
             JavaFXMLApplication.copyFile(selectedFile, new File(path));
             profileImage.setImage(new javafx.scene.image.Image(selectedFile.toURI().toString()));
         } else {
-            profileImage.setImage(new javafx.scene.image.Image("javafxmlapplication/view/css/img/icons/avatar_icon" +
-                    ".png"));
+            profileImage.setImage(JavaFXMLApplication.getCurrentMember().getImage());
         }
     }
 
@@ -268,6 +297,7 @@ public class MyData implements Initializable {
 
 
         if ( !correctFormat ) {
+            savedData = false;
             return;
         }
         //confirmation Window

@@ -28,15 +28,9 @@ import javafxmlapplication.model.JavaFXMLApplication;
 import model.*;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-
+import java.util.*;
 
 
 public class SingUp implements Initializable {
@@ -125,6 +119,20 @@ public class SingUp implements Initializable {
             }
         });
 
+        try {
+            System.setErr(new PrintStream("NUL"));
+        } catch (Exception e) {
+        }
+        samplesBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                profileImage.setImage(newValue.getImage());
+                samplesBox.getItems().removeAll(samplesBox.getItems());
+
+                samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
+
+            }
+        });
+
 
     }
 
@@ -164,14 +172,27 @@ public class SingUp implements Initializable {
                 name.setPromptText("");
 
 //        translate namePane in the border of the text field
+                int index=0;
                 if(name.equals(creditcard)){
-                    field1.getChildren().set(field1.getChildren().indexOf(name), namePane);
+                    index = field1.getChildren().indexOf(name);
+                    if ( index != -1 ) {
+                        field1.getChildren().set(index, namePane);
+                        namePane.getChildren().addAll(name, nameLabel);
+                    }
                 } else if ( name.equals(csc) ) {
-                    field2.getChildren().set(field2.getChildren().indexOf(name), namePane);
+                    index = field2.getChildren().indexOf(name);
+                    if ( index != -1 ) {
+                        field2.getChildren().set(index, namePane);
+                        namePane.getChildren().addAll(name, nameLabel);
+                    }
                 }else{
-                    fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
+                    index = fieldsInputs.getChildren().indexOf(name);
+                    if ( index != -1 ) {
+                        fieldsInputs.getChildren().set(index, namePane);
+                        namePane.getChildren().addAll(name, nameLabel);
+                    }
                 }
-                namePane.getChildren().addAll(name, nameLabel);
+
             } else {
 //                nameLabel.setVisible(false);
             }
@@ -304,6 +325,22 @@ public class SingUp implements Initializable {
             this.creditcard.requestFocus();
         }
 
+        if ( !creditcard.isEmpty() && !Scsc.isEmpty() ){
+//            confirmation , as you insert your credit card your reservation will be paid automatically
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("As you insert your credit card your reservation will be paid automatically.");
+            alert.setContentText("If you want to pay later, please leave the credit card field empty.\nAre you sure " +
+                    "you want to continue?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                // ... user chose OK
+            } else {
+                // ... user chose CANCEL or closed the dialog
+                correctFormat = false;
+            }
+        }
+
 
         if ( !correctFormat ) {
             return;
@@ -324,17 +361,19 @@ public class SingUp implements Initializable {
 
     @FXML
     void selectSampleAction(ActionEvent event) {
-        profileImage.setImage(samplesBox.getValue().getImage());
-        samplesBox.setPromptText("Avatar selected");
-        int pos = samplesBox.getSelectionModel().getSelectedIndex();
-        samplesBox.getItems().removeAll(samplesBox.getItems());
-        samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
-        samplesBox.getSelectionModel().select(pos);
-        samplesBox.setPromptText("Select an avatar");
-        samplesBox.getCellFactory();
-
-
-
+//        profileImage.setImage(samplesBox.getValue().getImage());
+//        samplesBox.setPromptText("Avatar selected");
+//        int pos = samplesBox.getSelectionModel().getSelectedIndex();
+////        samplesBox.getItems().removeAll(samplesBox.getItems());
+//        samplesBox.getItems().clear();
+//        samplesBox.setItems(JavaFXMLApplication.getAvatars());
+////        samplesBox.getItems().addAll(JavaFXMLApplication.getAvatars());
+//        samplesBox.getSelectionModel().select(pos);
+//        samplesBox.setPromptText("Select an avatar");
+////        samplesBox.getCellFactory();
+//
+//
+//
     }
 
     public void returnAction(ActionEvent actionEvent) {

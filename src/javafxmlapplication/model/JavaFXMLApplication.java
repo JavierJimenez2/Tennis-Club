@@ -98,7 +98,7 @@ public class JavaFXMLApplication extends Application {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    private static void scenes() {try {System.setErr(new PrintStream("NUL"));} catch (Exception e){}}
     public static void copyFile(File selectedFile, File file) {
 
         try {
@@ -190,9 +190,9 @@ public class JavaFXMLApplication extends Application {
         Parent root = loader.load();
 
         scene = new Scene(root);
-
         stage.setMinWidth(980);
         stage.setMinHeight(600);
+//        scenes();
         scene.getStylesheets().add("javafxmlapplication/view/css/styles.css");
         scene.getStylesheets().add("javafxmlapplication/view/css/bootstrapfx.css");
         stage.setScene(scene);
@@ -214,6 +214,8 @@ public class JavaFXMLApplication extends Application {
         //sceneStack = new Stack<>();   //inisialisation of Stack for saving previous scenes
 
     }
+
+
 
 
 }

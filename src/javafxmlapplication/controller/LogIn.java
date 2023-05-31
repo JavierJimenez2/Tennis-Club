@@ -24,7 +24,9 @@ import javafxmlapplication.model.JavaFXMLApplication;
 import model.ClubDAOException;
 import model.Member;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -60,6 +62,7 @@ public class LogIn implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
 
         //        only show above when focus
         TextField[] textFields = {username, password};
@@ -123,8 +126,11 @@ public class LogIn implements Initializable {
 
 //        translate namePane in the border of the text field
 //                if it inside a gridpane,
-                fieldsInputs.getChildren().set(fieldsInputs.getChildren().indexOf(name), namePane);
-                namePane.getChildren().addAll(name, nameLabel);
+                if (fieldsInputs.getChildren().contains(name)) {
+                    int field = fieldsInputs.getChildren().indexOf(name);
+                    fieldsInputs.getChildren().set(field, namePane);
+                    namePane.getChildren().addAll(name, nameLabel);
+                }
 
             } else {
 //                nameLabel.setVisible(false);
