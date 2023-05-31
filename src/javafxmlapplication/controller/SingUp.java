@@ -217,6 +217,8 @@ public class SingUp implements Initializable {
             correctFormat = false;
         }
 
+
+
         ///////////////////lastname checkings/////////////////////////////////////////////////////////////
         if ( !lastname.matches("[a-zA-Z ]*") || lastname.isEmpty() ) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Last Name Field. Remember to write just characters.");
@@ -248,9 +250,16 @@ public class SingUp implements Initializable {
         }
 
 //        if  username has more than 10 characters
-        if ( username.length() > 6 ) {
+        if ( username.length() > 6) {
             JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Remember it can't contain more " +
                     "than 6 characters.");
+            this.username.setText("");
+            this.username.requestFocus();
+            correctFormat = false;
+        }
+
+        if ( username.isEmpty() ) {
+            JavaFXMLApplication.dialogBox("error", "Error", "Error in Username Field. Remember it can't be empty.");
             this.username.setText("");
             this.username.requestFocus();
             correctFormat = false;

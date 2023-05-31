@@ -178,13 +178,13 @@ public class MyData implements Initializable {
             alert.showAndWait().ifPresent(buttonType -> {
                 if ( buttonType == buttonTypeYes ) {
                     System.out.println("Confirmed!");
-                    JavaFXMLApplication.changeScene("Reservas.fxml");
+                    JavaFXMLApplication.changeScene("Reservations.fxml");
                 } else if ( buttonType == buttonTypeNo ) {
                     System.out.println("Canceled.");
                 }
             });
         }
-        JavaFXMLApplication.changeScene("Reservas.fxml");
+        JavaFXMLApplication.changeScene("Reservations.fxml");
     }
 
     public void selectionButton(ActionEvent event) {

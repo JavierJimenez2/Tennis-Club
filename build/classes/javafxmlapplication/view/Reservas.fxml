@@ -24,7 +24,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="pane" prefWidth="836.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Reservas">
+<BorderPane fx:id="pane" prefWidth="836.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.controller.Reservations">
    <center>
       <TabPane fx:id="tabPane" prefHeight="554.0" prefWidth="796.0" styleClass="tabPane" tabClosingPolicy="UNAVAILABLE">
         <tabs>

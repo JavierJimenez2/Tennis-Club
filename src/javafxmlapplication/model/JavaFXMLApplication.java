@@ -21,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.*;
 
+import javax.swing.text.html.StyleSheet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -29,8 +30,6 @@ import java.util.List;
 
 
 public class JavaFXMLApplication extends Application {
-
-    //si no quereis crear usuario --> usuario: mrg, contraseña: marc123
 
 
     private static Scene scene;
@@ -122,7 +121,7 @@ public class JavaFXMLApplication extends Application {
         FXMLLoader loader = new FXMLLoader(JavaFXMLApplication.class.getResource("/javafxmlapplication/view/" + s));
         try {
             setRoot(loader.load());
-            System.setErr(new PrintStream("NUL"));
+//            System.setErr(new PrintStream("NUL"));
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }

@@ -26,7 +26,9 @@ import javafxmlapplication.model.layouts.BootstrapRow;
 import javafxmlapplication.model.layouts.Breakpoint;
 import model.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -41,14 +43,14 @@ import java.util.ResourceBundle;
 import static javafxmlapplication.model.JavaFXMLApplication.changeScene;
 
 
-public class Reservas implements Initializable {
+public class Reservations implements Initializable {
 
 
     private static final int MAX_ITEMS = 10;
     //////////////////////////////// RESERVAS SECTION /////////////////////////////////////////////////////////////////////////////
     @FXML
     public ScrollPane scrollPane;
-    ///////////////////MisReservas SECTION//////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////MyReservations SECTION//////////////////////////////////////////////////////////////////////////////////////////
     public Button deleteButtonMR;
     public ListView<Booking> listViewMR;
     public Button returnButton;
@@ -186,6 +188,9 @@ public class Reservas implements Initializable {
             }
         });
 
+
+
+
 //      Code for disabling the past days.
         DatePicker.setDayCellFactory((DatePicker picker) -> {
             return new DateCell() {
@@ -322,7 +327,7 @@ public class Reservas implements Initializable {
 
     //  Here, items of RowReservation type are added:
         for ( RowReservation todo : items ) {
-            widget.getChildren().add(createItem(todo));
+            if(todo != null) widget.getChildren().add(createItem(todo));
         }
         return widget;
     }
@@ -348,7 +353,18 @@ public class Reservas implements Initializable {
         }
         userLabel.setStyle("-fx-font-size: 14px;");
 
-        boolean sameDay = row.getMadeForDay().isBefore(LocalDate.now().plusDays(1)) && row.getMadeForDay().isAfter(LocalDate.now().minusDays(1));
+        LocalDate today = LocalDate.now();
+        LocalDate dayBefore = today.minusDays(1);
+        LocalDate dayAfter = today.plusDays(1);
+        LocalDate resDay = row.getMadeForDay();
+        if ( resDay == null ) {
+            resDay = today;
+        }
+        boolean sameDay1 = resDay.isBefore(dayAfter);
+        boolean sameDay2 = resDay.isAfter(dayBefore);
+        boolean sameDay = sameDay1 && sameDay2;
+//        boolean sameDay = row.getMadeForDay().isBefore(today.plusDays(1)) && row.getMadeForDay().isAfter(today.minusDays(1));
+//        boolean sameDay = true;
 //  Sets the initial color of the ball depending on the state of the RowReservation object.
         if ( row.isReserved() ) {
             item.getStyleClass().add("reserved");
@@ -499,7 +515,7 @@ public class Reservas implements Initializable {
                             alert.close();
                             Alert alert2 = new Alert(Alert.AlertType.ERROR);
                             alert2.setTitle("Error");
-                            alert2.setHeaderText("Reservation could not be made");
+                            alert2.setHeaderText("Reservations could not be made");
                             alert2.setContentText("Please try again later");
                             alert2.showAndWait();
                             e.printStackTrace();
@@ -586,7 +602,7 @@ public class Reservas implements Initializable {
                     if ( buttonType == buttonTypeYes ) {
                         showConfirmationWindow();
                     } else if ( buttonType == buttonTypeNo ) {
-                        JavaFXMLApplication.dialogBox("info", "Process Canceled", "Reservation deletion canceled.");
+                        JavaFXMLApplication.dialogBox("info", "Process Canceled", "Reservations deletion canceled.");
 
                     }
                 });
@@ -622,7 +638,7 @@ public class Reservas implements Initializable {
                     JavaFXMLApplication.dialogBox("error", "Error removing booking", "Error trying to cancel booking.");
                 }
             } else if ( buttonType == buttonTypeNo ) {
-                JavaFXMLApplication.dialogBox("info", "Process Canceled", "Reservation deletion canceled.");
+                JavaFXMLApplication.dialogBox("info", "Process Canceled", "Reservations deletion canceled.");
             }
         });
     }

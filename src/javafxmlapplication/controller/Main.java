@@ -120,13 +120,13 @@ public class Main implements Initializable {
         Thread thread = new Thread(() -> {
             try {
                 Thread.sleep(100);
-                JavaFXMLApplication.changeScene("Reservas.fxml");
+                JavaFXMLApplication.changeScene("Reservations.fxml");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
         thread.start();
-//        JavaFXMLApplication.changeScene("Reservas.fxml");
+//        JavaFXMLApplication.changeScene("Reservations.fxml");
     }
 
     public void goLogIn(ActionEvent event){

@@ -9,20 +9,13 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafxmlapplication.model.JavaFXMLApplication;
 
-import javafx.beans.binding.Bindings;
-import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -31,19 +24,15 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import model.Booking;
-import model.Club;
 import model.ClubDAOException;
-import model.Member;
 
 
 /**
  * @author svalero
  */
-public class MisReservas implements Initializable {
+public class MyReservations implements Initializable {
 
     //get pc screen size
-    private static final double MAXWIDTH = Screen.getPrimary().getBounds().getWidth();
-    private static final double MAXHEIGHT = Screen.getPrimary().getBounds().getHeight();
     public Button deleteButton;
     public SplitPane intPane;
     public Pane pane;
@@ -146,6 +135,9 @@ public class MisReservas implements Initializable {
                 System.out.println("Canceled.");
             }
         });
+    }
+
+    public void returnAction(ActionEvent actionEvent) {
     }
 
     /*public void returnAction(ActionEvent actionEvent) {

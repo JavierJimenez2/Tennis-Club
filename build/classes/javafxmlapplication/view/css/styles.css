@@ -165,7 +165,7 @@
 .background {
     /*-fx-background-color: linear-gradient(to bottom right, #0f0c29 24%, #302b63 50%, #24243e 74%);*/
     -fx-alignment: center;
-    -fx-background-image: url('/javafxmlapplication/view/css/img/bg.jpg');
+    -fx-background-image: url('/src/javafxmlapplication/view/css/img/bg.jpg');
     -fx-opacity: 0.8;
     -fx-background-position: top;
     -fx-background-repeat: no-repeat;
@@ -773,4 +773,41 @@ deleteButtonMR:pressed {
     /*-fx-border-width: 2px;*/
     -fx-border-radius: 10px 10px 0 0;
 
+}
+
+.alert {
+    -fx-background-color: -fx-primary;
+    -fx-border-color: transparent;
+    -fx-border-width: 10px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+
+}
+
+.alert .dialog-pane .content-label {
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: white;
+}
+
+.alert .alert-header {
+    -fx-background-color: -fx-primary;
+    -fx-border-color: transparent;
+    -fx-border-width: 10px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+.alert .alert-header .header-panel .header {
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: white;
+}
+
+.alert .label {
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: white;
+}
+
+.alert .alert-content {
+    -fx-background-color: #F0F0F0; /* Cambia el color de fondo */
+    -fx-text-fill: #333333; /* Cambia el color de texto */
 }

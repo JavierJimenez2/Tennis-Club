@@ -774,3 +774,40 @@ deleteButtonMR:pressed {
     -fx-border-radius: 10px 10px 0 0;
 
 }
+
+.alert {
+    -fx-background-color: -fx-primary;
+    -fx-border-color: transparent;
+    -fx-border-width: 10px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+
+}
+
+.alert .dialog-pane .content-label {
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: white;
+}
+
+.alert .alert-header {
+    -fx-background-color: -fx-primary;
+    -fx-border-color: transparent;
+    -fx-border-width: 10px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+.alert .alert-header .header-panel .header {
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: white;
+}
+
+.alert .label {
+    -fx-font: 20px "Segoe UI";
+    -fx-text-fill: white;
+}
+
+.alert .alert-content {
+    -fx-background-color: #F0F0F0; /* Cambia el color de fondo */
+    -fx-text-fill: #333333; /* Cambia el color de texto */
+}
